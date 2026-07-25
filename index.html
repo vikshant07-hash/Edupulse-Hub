@@ -451,16 +451,21 @@ function dataURLtoBlob(dataurl) {
   return new Blob([u8arr], { type: mime });
 }
 
-/* Updated PDF Share Function */
+
 async function shareResource(item) {
   const pdfSrc = item.pdfData || item.pdfUrl;
   const tagInfo = item.semester ? item.semester : (item.year || 'N/A');
   const websiteUrl = window.location.origin !== 'null' ? window.location.origin : 'https://edupulsehub.pages.dev';
 
-  // Caption text format
   const shareCaption = `📚 Subject: ${item.subject} | Class: ${tagInfo}\n🌐 Link: ${websiteUrl}`;
 
-  // Clean filename for mobile OS (Avoid invalid characters like '/')
+  // Clipboard me caption copy kar do taaki user WhatsApp par paste kar sake
+  try {
+    await navigator.clipboard.writeText(shareCaption);
+  } catch (e) {
+    console.warn("Clipboard failed", e);
+  }
+
   const cleanTitle = (item.title || 'Material').replace(/[^a-zA-Z0-9 ]/g, "").trim();
   const cleanSubject = (item.subject || 'Subject').replace(/[^a-zA-Z0-9 ]/g, "").trim();
   const fileName = `${cleanTitle}_${cleanSubject}_EduPulseHub.pdf`;
@@ -469,49 +474,27 @@ async function shareResource(item) {
     try {
       let pdfFile = null;
 
-      // 1. Agar Data base64/data:application/pdf format me hai
       if (pdfSrc && pdfSrc.startsWith('data:')) {
         const blob = dataURLtoBlob(pdfSrc);
         pdfFile = new File([blob], fileName, { type: 'application/pdf' });
-      } 
-      // 2. Agar PDF ek online HTTP URL hai
-      else if (pdfSrc && pdfSrc.startsWith('http')) {
+      } else if (pdfSrc && pdfSrc.startsWith('http')) {
         const response = await fetch(pdfSrc);
         const blob = await response.blob();
         pdfFile = new File([blob], fileName, { type: 'application/pdf' });
       }
 
-      // Check if browser supports sharing this File
       if (pdfFile && navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
         await navigator.share({
           files: [pdfFile],
           text: shareCaption
         });
         return;
-      } else {
-        // Direct Text Share fallback if file sharing fails
-        await navigator.share({
-          title: item.title,
-          text: `${shareCaption}\n📄 Link: ${pdfSrc}`
-        });
-        return;
       }
     } catch (err) {
-      if (err.name !== 'AbortError') {
-        console.warn('Share Dialog Error:', err);
-      } else {
-        return; // User canceled the share sheet
-      }
+      if (err.name !== 'AbortError') console.warn(err);
     }
   }
-
-  // Fallback for desktop/unsupported browsers
-  if (navigator.clipboard) {
-    await navigator.clipboard.writeText(`${shareCaption}\n📄 Link: ${pdfSrc}`);
-    alert("📄 Text & Link copied! Paste it in WhatsApp or any app.");
-  }
 }
-
 
 /* ---------- INTERACTIONS ---------- */
 function toggleBookmark(id){
