@@ -13,7 +13,7 @@
     --brass: #c9a227;
     --brass-hi: #e3bf47;
     --maroon-hi: #c65543;
-    --teal: #4f8a8b;
+    --teal: #2dd4bf;
     --text-main: #f2ead9;
     --text-sub: #a99b7c;
     --border: rgba(201,162,39,0.25);
@@ -97,7 +97,7 @@
     position: relative;
   }
 
-  .input-wrapper i {
+  .input-wrapper i.field-icon {
     position: absolute;
     left: 1rem;
     top: 50%;
@@ -111,7 +111,7 @@
     background: rgba(17,23,42,0.6);
     border: 1px solid var(--border);
     border-radius: 9px;
-    padding: 0.75rem 0.8rem 0.75rem 2.6rem;
+    padding: 0.75rem 2.5rem 0.75rem 2.6rem;
     color: var(--text-main);
     font-size: 0.9rem;
     outline: none;
@@ -121,6 +121,17 @@
   .field input:focus {
     border-color: var(--brass-hi);
   }
+
+  .toggle-pwd {
+    position: absolute;
+    right: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-sub);
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  .toggle-pwd:hover { color: var(--text-main); }
 
   /* Captcha Box Styles */
   .captcha-box {
@@ -178,16 +189,38 @@
     filter: brightness(1.1);
   }
 
+  /* Clear Error & Success Messaging */
   .status-msg {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     text-align: center;
     margin-top: 1rem;
-    min-height: 1.2em;
-    font-weight: 500;
+    padding: 0.6rem;
+    border-radius: 8px;
+    display: none;
+    font-weight: 600;
+    line-height: 1.4;
   }
 
-  .status-msg.error { color: var(--maroon-hi); }
-  .status-msg.success { color: var(--teal); }
+  .status-msg.error {
+    display: block;
+    background: rgba(198, 85, 67, 0.15);
+    border: 1px solid var(--maroon-hi);
+    color: #ff8b7b;
+    animation: shake 0.3s ease-in-out;
+  }
+
+  .status-msg.success {
+    display: block;
+    background: rgba(45, 212, 191, 0.15);
+    border: 1px solid var(--teal);
+    color: var(--teal);
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
 </style>
 </head>
 <body>
@@ -200,7 +233,7 @@
       <i class="fa-solid fa-shield-halved"></i>
       <span>EduPulse Admin</span>
     </div>
-    <p class="card-subtitle">Enter correct credentials...</p>
+    <p class="card-subtitle">Enter credentials to unlock vault admin tools</p>
   </div>
 
   <form id="adminLoginForm">
@@ -208,7 +241,7 @@
     <div class="field">
       <label for="username">Admin Username</label>
       <div class="input-wrapper">
-        <i class="fa-solid fa-user"></i>
+        <i class="fa-solid fa-user field-icon"></i>
         <input type="text" id="username" placeholder="Enter username" required autocomplete="off">
       </div>
     </div>
@@ -217,8 +250,9 @@
     <div class="field">
       <label for="password">Password</label>
       <div class="input-wrapper">
-        <i class="fa-solid fa-lock"></i>
+        <i class="fa-solid fa-lock field-icon"></i>
         <input type="password" id="password" placeholder="Enter password" required>
+        <i class="fa-solid fa-eye toggle-pwd" id="togglePwd" title="Show/Hide Password"></i>
       </div>
     </div>
 
@@ -235,8 +269,8 @@
 
     <div class="field">
       <div class="input-wrapper">
-        <i class="fa-solid fa-key"></i>
-        <input type="text" id="captchaInput" placeholder="Type captcha code above" required autocomplete="off">
+        <i class="fa-solid fa-key field-icon"></i>
+        <input type="text" id="captchaInput" placeholder="Type security code here" required autocomplete="off">
       </div>
     </div>
 
@@ -244,33 +278,30 @@
       <i class="fa-solid fa-right-to-bracket"></i> Authenticate
     </button>
 
-    <p class="status-msg" id="statusMsg"></p>
+    <div class="status-msg" id="statusMsg"></div>
   </form>
 </div>
 
 <script>
 let currentCaptcha = "";
 
-/* Generates Coloured Word + Number Captcha using Canvas */
+/* Generates Captcha Canvas */
 function generateColouredCaptcha() {
   const canvas = document.getElementById("captchaCanvas");
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Background Noise
   ctx.fillStyle = "#161d30";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Random Alpha-Numeric Code (Letters + Numbers)
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789";
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   currentCaptcha = "";
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     currentCaptcha += chars.charAt(Math.floor(Math.random() * chars.length));
   }
 
-  // Draw Random Colored Lines (Noise)
-  for (let i = 0; i < 7; i++) {
-    ctx.strokeStyle = `hsl(${Math.random() * 360}, 70%, 50%)`;
+  for (let i = 0; i < 6; i++) {
+    ctx.strokeStyle = `hsl(${Math.random() * 360}, 65%, 50%)`;
     ctx.beginPath();
     ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
     ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
@@ -278,8 +309,7 @@ function generateColouredCaptcha() {
     ctx.stroke();
   }
 
-  // Render Each Character with Random Color & Angle
-  const colors = ["#e3bf47", "#4f8a8b", "#c65543", "#6ba4b8", "#d9a74a", "#a2a8d3"];
+  const colors = ["#e3bf47", "#2dd4bf", "#c65543", "#6ba4b8", "#d9a74a"];
   ctx.font = "bold 22px 'IBM Plex Mono', monospace";
   ctx.textBaseline = "middle";
 
@@ -287,11 +317,9 @@ function generateColouredCaptcha() {
     const char = currentCaptcha[i];
     ctx.save();
     ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-    
-    // Position and Slight Rotation
-    const x = 18 + i * 22;
-    const y = canvas.height / 2 + (Math.random() * 6 - 3);
-    const angle = (Math.random() - 0.5) * 0.4;
+    const x = 20 + i * 26;
+    const y = canvas.height / 2 + (Math.random() * 4 - 2);
+    const angle = (Math.random() - 0.5) * 0.3;
     
     ctx.translate(x, y);
     ctx.rotate(angle);
@@ -299,20 +327,30 @@ function generateColouredCaptcha() {
     ctx.restore();
   }
 
-  // Draw Noise Dots
-  for (let i = 0; i < 30; i++) {
-    ctx.fillStyle = `rgba(242, 234, 217, ${Math.random() * 0.4})`;
+  for (let i = 0; i < 25; i++) {
+    ctx.fillStyle = `rgba(242, 234, 217, ${Math.random() * 0.3})`;
     ctx.beginPath();
     ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 1.2, 0, Math.PI * 2);
     ctx.fill();
   }
 }
 
-/* Event Listeners for Reloading Captcha */
+/* Password View Toggle */
+document.getElementById("togglePwd").addEventListener("click", function() {
+  const pwdInput = document.getElementById("password");
+  if(pwdInput.type === "password"){
+    pwdInput.type = "text";
+    this.classList.replace("fa-eye", "fa-eye-slash");
+  } else {
+    pwdInput.type = "password";
+    this.classList.replace("fa-eye-slash", "fa-eye");
+  }
+});
+
 document.getElementById("captchaCanvas").addEventListener("click", generateColouredCaptcha);
 document.getElementById("refreshCaptchaBtn").addEventListener("click", generateColouredCaptcha);
 
-/* Authentication Handler */
+/* Login Form Submission Handler */
 document.getElementById("adminLoginForm").addEventListener("submit", function(e) {
   e.preventDefault();
   const status = document.getElementById("statusMsg");
@@ -321,50 +359,40 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
   const pass = document.getElementById("password").value;
   const captcha = document.getElementById("captchaInput").value.trim();
 
-  // 1. Verify Captcha (Case-Sensitive)
-  if (captcha !== currentCaptcha) {
+  // Reset status
+  status.className = "status-msg";
+  status.style.display = "none";
+
+  // 1. Verify Captcha (Case-Insensitive)
+  if (captcha.toUpperCase() !== currentCaptcha.toUpperCase()) {
     status.className = "status-msg error";
-    status.textContent = "❌ Invalid Captcha Code. Try again!";
+    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Incorrect Captcha code!`;
     generateColouredCaptcha();
     document.getElementById("captchaInput").value = "";
     return;
   }
 
-  // 2. Default Login Credentials Check (Aap isko apne backend/logic se change kar sakte hain)
+  // 2. Validate Credentials
   if (user === "admin" && pass === "admin123") {
     status.className = "status-msg success";
-    status.textContent = "✓ Authentication successful! Redirecting...";
+    status.innerHTML = `<i class="fa-solid fa-circle-check"></i> Access Granted! Redirecting to Dashboard...`;
     
     // Set Login Session Flag
     sessionStorage.setItem("edupulse_admin_auth", "true");
 
     setTimeout(() => {
-      window.location.href = "admin.html"; // Redirect to your Main Vault/Admin Page
-    }, 1200);
+      window.location.href = "admin.html"; // Redirect to main studio page
+    }, 1000);
   } else {
     status.className = "status-msg error";
-    status.textContent = "❌ Incorrect Username or Password!";
+    status.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Invalid Username or Password!`;
     generateColouredCaptcha();
     document.getElementById("captchaInput").value = "";
   }
 });
 
-// Initialize Captcha on Page Load
+// Initialize Captcha
 generateColouredCaptcha();
-
-  
 </script>
-
-  <script>
-  // Route Guard: Check if the user is logged in
-  (function checkAuth() {
-    const isAuthenticated = sessionStorage.getItem("edupulse_admin_auth");
-    if (isAuthenticated !== "true") {
-      // Redirect unauthenticated user to login page immediately
-      window.location.href = "login.html";
-    }
-  })();
-</script>
-
 </body>
 </html>
