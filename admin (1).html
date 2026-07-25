@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduPulse | Faculty Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --ink:#11172a; --ink-2:#1a2238; --ink-3:#212b47;
+    --brass:#c9a227; --brass-hi:#e3bf47;
+    --maroon:#a8402f; --maroon-hi:#c65543;
+    --teal:#4f8a8b;
+    --text-main:#f2ead9; --text-sub:#a99b7c; --text-faint:#7c7259;
+    --border:rgba(201,162,39,0.22); --border-soft:rgba(242,234,217,0.09);
+    --card-bg:rgba(26,34,56,0.72); --card-bg-solid:#1a2238;
+    --glass:rgba(17,23,42,0.86);
+    --shadow: 0 18px 40px rgba(0,0,0,0.35);
+    --font-display:'Fraunces', serif; --font-body:'Inter', sans-serif; --font-mono:'IBM Plex Mono', monospace;
+  }
+  [data-theme="light"]{
+    --ink:#f6f1e2; --ink-2:#efe6cd; --ink-3:#e6dab8;
+    --text-main:#251a0c; --text-sub:#6d5c3f; --text-faint:#8d7c58;
+    --border:rgba(138,51,36,0.18); --border-soft:rgba(37,26,12,0.09);
+    --card-bg:rgba(255,252,243,0.82); --card-bg-solid:#fffcf3;
+    --glass:rgba(246,241,226,0.9);
+    --shadow: 0 18px 40px rgba(90,70,30,0.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:var(--font-body);}
+  body{background:var(--ink);color:var(--text-main);min-height:100vh;transition:background .35s,color .35s;}
+  ::selection{background:var(--brass);color:#12182b;}
+  *:focus-visible{outline:2px solid var(--brass);outline-offset:2px;}
+
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:-1;
+    background:radial-gradient(circle at 8% 10%, rgba(201,162,39,0.08) 0%, transparent 40%),
+               radial-gradient(circle at 94% 90%, rgba(168,64,47,0.10) 0%, transparent 45%);}
+
+  header{background:var(--glass);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);
+    padding:1.1rem 1.8rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+  .brand{font-family:var(--font-display);font-size:1.25rem;font-weight:700;display:flex;align-items:center;gap:9px;}
+  .brand i{color:var(--brass);}
+  .brand span.tag{font-family:var(--font-mono);font-size:.62rem;letter-spacing:1.5px;color:var(--text-faint);text-transform:uppercase;display:block;margin-top:-2px;font-weight:500;}
+  .header-actions{display:flex;align-items:center;gap:.7rem;}
+  .icon-btn{background:var(--card-bg);border:1px solid var(--border);color:var(--text-main);width:38px;height:38px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;}
+  .link-btn{color:var(--text-sub);text-decoration:none;font-weight:600;font-size:.85rem;display:flex;align-items:center;gap:7px;border:1px solid var(--border);padding:.55rem 1rem;border-radius:9px;}
+  .link-btn:hover{color:var(--brass-hi);border-color:var(--brass);}
+
+  .studio-layout{max-width:1300px;margin:2.2rem auto;padding:0 1.5rem 3rem;display:grid;grid-template-columns:1.7fr 1.1fr;gap:1.6rem;}
+  @media(max-width:900px){.studio-layout{grid-template-columns:1fr;}}
+
+  .panel{background:var(--card-bg);border:1px solid var(--border-soft);border-radius:16px;padding:1.8rem;backdrop-filter:blur(10px);position:relative;overflow:hidden;}
+  .panel::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;
+    background:repeating-linear-gradient(90deg,var(--brass) 0 8px,transparent 8px 16px);opacity:.5;}
+  .panel h2{font-family:var(--font-display);font-size:1.25rem;font-weight:600;margin-bottom:1.3rem;border-bottom:1px dashed var(--border);padding-bottom:.9rem;display:flex;align-items:center;gap:9px;}
+  .panel h2 i{color:var(--brass-hi);}
+
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .full-width{grid-column:span 2;}
+  @media(max-width:560px){.form-grid{grid-template-columns:1fr;}.full-width{grid-column:span 1;}}
+
+  label{display:block;font-size:.78rem;font-weight:600;color:var(--text-sub);margin-bottom:.4rem;}
+  input,select,textarea{width:100%;padding:.72rem .85rem;background:var(--card-bg-solid);border:1px solid var(--border);border-radius:9px;color:var(--text-main);outline:none;font-size:.87rem;font-family:var(--font-body);}
+  input:focus,select:focus,textarea:focus{border-color:var(--brass);}
+  textarea{resize:vertical;}
+
+  .source-toggle{display:flex;gap:.5rem;margin-bottom:.9rem;}
+  .toggle-btn{flex:1;padding:.6rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-sub);font-weight:600;font-size:.82rem;cursor:pointer;font-family:var(--font-body);}
+  .toggle-btn.active{background:var(--brass);color:#1c1508;border-color:var(--brass);}
+
+  .file-upload-box{border:1px dashed var(--border);padding:1.6rem;text-align:center;border-radius:12px;cursor:pointer;background:var(--card-bg-solid);}
+  .file-upload-box:hover{border-color:var(--brass);}
+  .file-upload-box i{font-size:2rem;color:var(--maroon-hi);}
+  .file-upload-box p{margin-top:.5rem;font-weight:600;font-size:.86rem;color:var(--text-sub);}
+  .file-size-note{font-size:.72rem;color:var(--text-faint);margin-top:.5rem;}
+
+  .btn-pub{width:100%;background:linear-gradient(135deg,var(--maroon),var(--maroon-hi));color:#fff8ec;border:none;padding:.9rem;border-radius:10px;font-weight:700;cursor:pointer;font-size:.92rem;margin-top:1rem;font-family:var(--font-body);display:flex;align-items:center;justify-content:center;gap:8px;}
+  .btn-pub:disabled{opacity:.55;cursor:not-allowed;}
+
+  .manage-row{display:flex;justify-content:space-between;align-items:center;gap:.8rem;background:var(--card-bg-solid);border:1px solid var(--border-soft);padding:.9rem 1rem;border-radius:10px;margin-bottom:.7rem;border-left:3px solid var(--brass);}
+  .manage-row .row-title{font-weight:700;font-size:.88rem;font-family:var(--font-display);}
+  .manage-row .row-meta{font-size:.74rem;color:var(--text-sub);margin-top:3px;font-family:var(--font-mono);}
+  .del-btn{color:var(--maroon-hi);background:rgba(168,64,47,0.12);border:none;padding:.5rem .75rem;border-radius:7px;cursor:pointer;flex-shrink:0;}
+  .del-btn:hover{background:var(--maroon-hi);color:#fff8ec;}
+
+  .empty-note{color:var(--text-sub);text-align:center;padding:2.5rem 0;font-size:.88rem;}
+  .empty-note i{display:block;font-size:1.6rem;margin-bottom:.7rem;color:var(--text-faint);}
+
+  .stat-strip{display:flex;gap:.8rem;margin-bottom:1.3rem;flex-wrap:wrap;}
+  .stat-chip{flex:1;min-width:100px;background:var(--card-bg-solid);border:1px solid var(--border-soft);border-radius:10px;padding:.8rem;text-align:center;}
+  .stat-chip .num{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--brass-hi);}
+  .stat-chip .lbl{font-size:.68rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:1px;font-family:var(--font-mono);}
+
+  #toast{position:fixed;bottom:1.6rem;right:1.6rem;background:var(--maroon);color:#fff8ec;padding:.85rem 1.4rem;border-radius:9px;font-weight:700;display:none;z-index:3000;box-shadow:var(--shadow);font-size:.86rem;}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header>
+  <div class="brand"><i class="fa-solid fa-stamp"></i><span>Faculty Studio<span class="tag">EduPulse Cataloguing Desk</span></span></div>
+  <div class="header-actions">
+    <button class="icon-btn" id="themeBtn" title="Toggle theme"><i class="fa-solid fa-sun"></i></button>
+    <a href="edupulse.html" class="link-btn"><i class="fa-solid fa-globe"></i> View Live Hub</a>
+  </div>
+</header>
+
+<div class="studio-layout">
+  <section class="panel">
+    <h2><i class="fa-solid fa-file-circle-plus"></i> Catalogue a New Resource</h2>
+    <div class="form-grid">
+      <div class="full-width"><label>Resource Title</label><input type="text" id="title" placeholder="e.g. Database Systems — Complete Handwritten Notes"></div>
+
+      <div><label>Category</label>
+        <select id="type"><option value="Syllabus">Syllabus</option><option value="Notes">Lecture Notes</option><option value="PYQ">PYQ Paper</option><option value="Model Paper">Model Paper</option><option value="Other">Other Reference</option></select>
+      </div>
+      <div><label>Faculty / Admin Name</label><input type="text" id="adminName" placeholder="e.g. Dr. A. P. Singh"></div>
+
+      <div><label>Subject Name / Code</label><input type="text" id="subject" placeholder="e.g. CS-501 DBMS"></div>
+      <div><label>Branch / Department</label><input type="text" id="branch" placeholder="e.g. Computer Science"></div>
+
+      <div><label>Academic Year</label>
+        <select id="year"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select>
+      </div>
+      <div><label>Semester</label>
+        <select id="semester"><option>Sem 1</option><option>Sem 2</option><option>Sem 3</option><option>Sem 4</option><option>Sem 5</option><option>Sem 6</option><option>Sem 7</option><option>Sem 8</option></select>
+      </div>
+
+      <div class="full-width"><label>Description / Details</label><textarea id="desc" rows="3" placeholder="Overview of modules covered, key topics..."></textarea></div>
+
+      <div class="full-width">
+        <label>PDF Source</label>
+        <div class="source-toggle">
+          <button type="button" class="toggle-btn active" id="tabLink"><i class="fa-solid fa-link"></i> Paste Link</button>
+          <button type="button" class="toggle-btn" id="tabUpload"><i class="fa-solid fa-upload"></i> Upload File</button>
+        </div>
+        <div id="linkField"><input type="url" id="pdfLink" placeholder="https://... link to the hosted PDF"></div>
+        <div id="uploadField" style="display:none;">
+          <div class="file-upload-box" id="dropBox">
+            <i class="fa-solid fa-file-pdf"></i>
+            <p id="fileNameText">Click to select a PDF from your device</p>
+            <input type="file" id="fileInput" accept="application/pdf" style="display:none;">
+          </div>
+          <p class="file-size-note">Keep uploads small (well under 4MB) — the file is embedded directly into the shared catalogue.</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-pub" id="publishBtn"><i class="fa-solid fa-cloud-arrow-up"></i> Publish to Student Hub</button>
+  </section>
+
+  <section class="panel">
+    <h2><i class="fa-solid fa-list-check"></i> Manage Catalogue</h2>
+    <div class="stat-strip">
+      <div class="stat-chip"><div class="num" id="statTotal">–</div><div class="lbl">Total Docs</div></div>
+      <div class="stat-chip"><div class="num" id="statSubjects">–</div><div class="lbl">Subjects</div></div>
+    </div>
+    <div id="pubList"><div class="empty-note"><i class="fa-solid fa-spinner fa-spin"></i>Loading catalogue…</div></div>
+  </section>
+</div>
+
+<div id="toast">Action complete</div>
+
+<script>
+let allMaterials = [];
+let pdfBase64 = "";
+let sourceMode = 'link';
+
+async function loadMaterials(){
+  try{ const res = await window.storage.get('materials', true); return res && res.value ? JSON.parse(res.value) : []; }
+  catch(e){ return []; }
+}
+async function saveMaterials(list){
+  try{ await window.storage.set('materials', JSON.stringify(list), true); return true; }
+  catch(e){ return false; }
+}
+
+function showToast(msg, isError){
+  const t = document.getElementById('toast');
+  t.style.background = isError ? 'var(--maroon)' : 'var(--teal)';
+  t.innerText = msg; t.style.display = 'block';
+  setTimeout(()=> t.style.display='none', 3000);
+}
+
+document.getElementById('themeBtn').addEventListener('click', ()=>{
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme', isDark?'light':'dark');
+  document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+});
+
+document.getElementById('tabLink').addEventListener('click', ()=>{
+  sourceMode = 'link';
+  document.getElementById('tabLink').classList.add('active');
+  document.getElementById('tabUpload').classList.remove('active');
+  document.getElementById('linkField').style.display = 'block';
+  document.getElementById('uploadField').style.display = 'none';
+});
+document.getElementById('tabUpload').addEventListener('click', ()=>{
+  sourceMode = 'upload';
+  document.getElementById('tabUpload').classList.add('active');
+  document.getElementById('tabLink').classList.remove('active');
+  document.getElementById('uploadField').style.display = 'block';
+  document.getElementById('linkField').style.display = 'none';
+});
+
+document.getElementById('dropBox').addEventListener('click', ()=> document.getElementById('fileInput').click());
+document.getElementById('fileInput').addEventListener('change', e=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  if(file.type !== 'application/pdf'){ showToast('Please select a valid PDF file.', true); return; }
+  if(file.size > 4*1024*1024){ showToast('File too large — please keep it under 4MB, or use a link instead.', true); return; }
+  document.getElementById('fileNameText').innerText = `Selected: ${file.name}`;
+  const reader = new FileReader();
+  reader.onload = evt => { pdfBase64 = evt.target.result; };
+  reader.readAsDataURL(file);
+});
+
+document.getElementById('publishBtn').addEventListener('click', async ()=>{
+  const title = document.getElementById('title').value.trim();
+  const type = document.getElementById('type').value;
+  const adminName = document.getElementById('adminName').value.trim();
+  const subject = document.getElementById('subject').value.trim();
+  const branch = document.getElementById('branch').value.trim();
+  const year = document.getElementById('year').value;
+  const semester = document.getElementById('semester').value;
+  const desc = document.getElementById('desc').value.trim();
+  const pdfUrl = sourceMode === 'link' ? document.getElementById('pdfLink').value.trim() : pdfBase64;
+
+  if(!title || !adminName || !subject || !branch || !pdfUrl){
+    showToast('Please fill all mandatory fields and add a PDF source!', true);
+    return;
+  }
+
+  const btn = document.getElementById('publishBtn');
+  btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Publishing…';
+
+  const material = { id: Date.now(), title, type, adminName, subject, branch, year, semester, desc, pdfUrl, timestamp: Date.now() };
+  allMaterials = [material, ...allMaterials];
+  const ok = await saveMaterials(allMaterials);
+
+  btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Publish to Student Hub';
+
+  if(ok){
+    document.getElementById('title').value = '';
+    document.getElementById('desc').value = '';
+    document.getElementById('pdfLink').value = '';
+    document.getElementById('fileNameText').innerText = 'Click to select a PDF from your device';
+    pdfBase64 = "";
+    renderList();
+    showToast('Document published to the student hub!');
+  }else{
+    allMaterials = allMaterials.filter(m=>m.id!==material.id);
+    showToast('Could not save — please try again.', true);
+  }
+});
+
+function renderList(){
+  const list = document.getElementById('pubList');
+  document.getElementById('statTotal').innerText = allMaterials.length;
+  document.getElementById('statSubjects').innerText = new Set(allMaterials.map(m=>m.subject)).size;
+
+  if(!allMaterials.length){
+    list.innerHTML = `<div class="empty-note"><i class="fa-solid fa-box-archive"></i>No documents uploaded yet.</div>`;
+    return;
+  }
+  list.innerHTML = '';
+  allMaterials.forEach(p=>{
+    const row = document.createElement('div');
+    row.className = 'manage-row';
+    row.innerHTML = `
+      <div>
+        <div class="row-title">${escHtml(p.title)}</div>
+        <div class="row-meta">${escHtml(p.type)} · ${escHtml(p.year)} (${escHtml(p.semester)}) · ${escHtml(p.adminName)}</div>
+      </div>
+      <button class="del-btn" data-id="${p.id}"><i class="fa-solid fa-trash"></i></button>`;
+    list.appendChild(row);
+  });
+}
+function escHtml(s){ return String(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+document.getElementById('pubList').addEventListener('click', async e=>{
+  const btn = e.target.closest('.del-btn');
+  if(!btn) return;
+  const id = Number(btn.dataset.id);
+  const prev = allMaterials;
+  allMaterials = allMaterials.filter(p=>p.id!==id);
+  renderList();
+  const ok = await saveMaterials(allMaterials);
+  if(ok) showToast('Material deleted.');
+  else { allMaterials = prev; renderList(); showToast('Could not delete — please try again.', true); }
+});
+
+(async function init(){
+  allMaterials = await loadMaterials();
+  renderList();
+})();
+</script>
+</body>
+</html>
