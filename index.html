@@ -217,15 +217,16 @@
     <button class="tab-btn" data-type="Model Paper">Model Papers</button>
   </div>
   <div class="dropdown-filters">
+    <!-- Filter mutually exclusive choices -->
     <select id="yearFilter" class="select-filter">
-      <option value="All">All Academic Years</option>
+      <option value="All">Select Academic Year</option>
       <option value="1st Year">1st Year</option>
       <option value="2nd Year">2nd Year</option>
       <option value="3rd Year">3rd Year</option>
       <option value="4th Year">4th Year (Final)</option>
     </select>
     <select id="semFilter" class="select-filter">
-      <option value="All">All Semesters</option>
+      <option value="All">Select Semester</option>
       <option value="Sem 1">Semester 1</option><option value="Sem 2">Semester 2</option>
       <option value="Sem 3">Semester 3</option><option value="Sem 4">Semester 4</option>
       <option value="Sem 5">Semester 5</option><option value="Sem 6">Semester 6</option>
@@ -260,18 +261,33 @@
           </div>
           <div class="field"><label>Subject</label><input type="text" id="f_subject" required placeholder="e.g. Data Structures"></div>
           <div class="field"><label>Branch / Department</label><input type="text" id="f_branch" required placeholder="e.g. CSE"></div>
+          
+          <!-- Select either Year OR Semester in Form -->
           <div class="field"><label>Academic Year</label>
-            <select id="f_year"><option value="1st Year">1st Year</option><option value="2nd Year">2nd Year</option><option value="3rd Year">3rd Year</option><option value="4th Year">4th Year</option></select>
+            <select id="f_year">
+              <option value="">Select Year</option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+            </select>
           </div>
           <div class="field"><label>Semester</label>
-            <select id="f_sem"><option value="Sem 1">Sem 1</option><option value="Sem 2">Sem 2</option><option value="Sem 3">Sem 3</option><option value="Sem 4">Sem 4</option><option value="Sem 5">Sem 5</option><option value="Sem 6">Sem 6</option><option value="Sem 7">Sem 7</option><option value="Sem 8">Sem 8</option></select>
+            <select id="f_sem">
+              <option value="">Select Semester</option>
+              <option value="Sem 1">Sem 1</option><option value="Sem 2">Sem 2</option>
+              <option value="Sem 3">Sem 3</option><option value="Sem 4">Sem 4</option>
+              <option value="Sem 5">Sem 5</option><option value="Sem 6">Sem 6</option>
+              <option value="Sem 7">Sem 7</option><option value="Sem 8">Sem 8</option>
+            </select>
           </div>
-          <div class="field"><label>Your Name</label><input type="text" id="f_admin" required placeholder="Faculty name"></div>
+
+          <div class="field full"><label>Your Name</label><input type="text" id="f_admin" required placeholder="Faculty name"></div>
           <div class="field full"><label>PDF Link (URL)</label><input type="url" id="f_pdf" placeholder="https://... link to hosted PDF (Optional)"></div>
         </div>
         <button type="submit" class="form-submit"><i class="fa-solid fa-plus"></i> Publish to Vault</button>
         <p class="form-status" id="formStatus"></p>
-        <p class="form-note"><i class="fa-solid fa-circle-info"></i> This uploads to the shared vault — every visitor to this page will be able to see and open it.</p>
+        <p class="form-note"><i class="fa-solid fa-circle-info"></i> Year aur Semester me se kisi 1 ko chunein.</p>
       </form>
     </div>
   </div>
@@ -323,48 +339,38 @@ let showOnlySaved = false;
 let allMaterials = [];
 let bookmarks = [];
 
-/* ---------- FIXED STORAGE HELPERS ---------- */
+/* ---------- STORAGE HELPERS ---------- */
 function loadMaterials(){
   try {
     const data = localStorage.getItem('edupulse_db');
     return data ? JSON.parse(data) : [];
-  } catch(e){
-    return [];
-  }
+  } catch(e){ return []; }
 }
 
 function saveMaterials(list){
   try {
     localStorage.setItem('edupulse_db', JSON.stringify(list));
     return true;
-  } catch(e){
-    return false;
-  }
+  } catch(e){ return false; }
 }
 
 function loadBookmarks(){
   try {
     const data = localStorage.getItem('edupulse_bookmarks');
     return data ? JSON.parse(data) : [];
-  } catch(e){
-    return [];
-  }
+  } catch(e){ return []; }
 }
 
 function saveBookmarks(list){
   try {
     localStorage.setItem('edupulse_bookmarks', JSON.stringify(list));
     return true;
-  } catch(e){
-    return false;
-  }
+  } catch(e){ return false; }
 }
 
 const seedData = () => ([
-  {id:1001,type:'Syllabus',title:'B.Tech CSE — Full Syllabus (2026 Batch)',desc:'Complete semester-wise curriculum with credit structure and evaluation scheme.',subject:'Curriculum',branch:'CSE',year:'1st Year',semester:'Sem 1',adminName:'Dept. Office',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-3600000},
-  {id:1002,type:'Notes',title:'Data Structures — Trees & Graphs',desc:'Lecture notes covering binary trees, BST, AVL trees and graph traversal.',subject:'Data Structures',branch:'CSE',year:'2nd Year',semester:'Sem 3',adminName:'Prof. R. Sharma',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-86400000},
-  {id:1003,type:'PYQ',title:'Operating Systems — 2025 End-Sem Paper',desc:'Previous year question paper with marking distribution.',subject:'Operating Systems',branch:'IT',year:'3rd Year',semester:'Sem 5',adminName:'Exam Cell',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-172800000},
-  {id:1004,type:'Model Paper',title:'Digital Electronics — Model Paper Set A',desc:'Practice paper matching the latest exam pattern.',subject:'Digital Electronics',branch:'ECE',year:'2nd Year',semester:'Sem 4',adminName:'Prof. K. Iyer',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-259200000}
+  {id:1001,type:'Syllabus',title:'B.Tech CSE — Full Syllabus (2026 Batch)',desc:'Complete semester-wise curriculum with credit structure and evaluation scheme.',subject:'Curriculum',branch:'CSE',year:'1st Year',semester:'',adminName:'Dept. Office',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-3600000},
+  {id:1002,type:'Notes',title:'Data Structures — Trees & Graphs',desc:'Lecture notes covering binary trees, BST, AVL trees and graph traversal.',subject:'Data Structures',branch:'CSE',year:'',semester:'Sem 3',adminName:'Prof. R. Sharma',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-86400000}
 ]);
 
 /* ---------- RENDERING ---------- */
@@ -402,7 +408,8 @@ function renderData(){
 
   matches.forEach(item=>{
     const isBookmarked = bookmarks.includes(item.id);
-    const callNo = (item.branch||'GEN').slice(0,3).toUpperCase() + '·' + (item.semester||'').replace('Sem ','S');
+    const badgeTag = item.semester ? item.semester : (item.year || 'N/A');
+    const callNo = (item.branch||'GEN').slice(0,3).toUpperCase() + '·' + badgeTag;
     const pdfSrc = item.pdfData || item.pdfUrl || '#';
 
     const card = document.createElement('div');
@@ -419,7 +426,7 @@ function renderData(){
           <span class="meta-pill">${esc(item.type)}</span>
           <span class="meta-pill">${esc(item.subject)}</span>
           <span class="meta-pill">${esc(item.branch)}</span>
-          <span class="meta-pill">${esc(item.semester)}</span>
+          <span class="meta-pill">${esc(badgeTag)}</span>
         </div>
       </div>
       <div class="card-admin-tag"><span>Added by <b>${esc(item.adminName)}</b></span><span><i class="fa-regular fa-clock"></i> ${timeAgo(item.timestamp)}</span></div>
@@ -431,6 +438,35 @@ function renderData(){
       </div>`;
     grid.appendChild(card);
   });
+}
+
+/* ---------- IMPROVED SHARE FUNCTION ---------- */
+async function shareResource(item){
+  const pdfSrc = item.pdfData || item.pdfUrl || window.location.href;
+  const shareText = `📚 *${item.title}*\n📖 Subject: ${item.subject}\n🔗 Link: ${pdfSrc}`;
+
+  if(navigator.share && pdfSrc.startsWith('http')) {
+    try {
+      await navigator.share({
+        title: item.title,
+        text: `Study Material: ${item.title}`,
+        url: pdfSrc
+      });
+      return;
+    } catch(err) { /* fallback if share canceled */ }
+  }
+
+  // Fallback: Clipboard me link copy karo
+  if(navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(pdfSrc);
+      alert("📋 PDF Link successfully copied to Clipboard!\nAap isko Kahin bhi Share kar sakte hain.");
+    } catch(e) {
+      alert("Link: " + pdfSrc);
+    }
+  } else {
+    alert(shareText);
+  }
 }
 
 /* ---------- INTERACTIONS ---------- */
@@ -457,16 +493,6 @@ function closePdfModal(){
   document.getElementById('pdfFrame').src = '';
 }
 
-function shareResource(item){
-  const text = `Study Material: ${item.title} (${item.subject})`;
-  const pdfSrc = item.pdfData || item.pdfUrl;
-  if(navigator.share && pdfSrc.startsWith('http')){ 
-    navigator.share({title:item.title, text, url:pdfSrc}).catch(()=>{}); 
-  } else { 
-    alert(`Material: ${item.title} (${item.subject})`); 
-  }
-}
-
 function setActiveType(type){
   selectedType = type;
   document.querySelectorAll('[data-type]').forEach(el=>{
@@ -475,10 +501,36 @@ function setActiveType(type){
   renderData();
 }
 
+/* ---------- FILTER MUTUAL EXCLUSION (YEAR OR SEMESTER) ---------- */
+document.getElementById('yearFilter').addEventListener('change', (e)=>{
+  if(e.target.value !== 'All'){
+    document.getElementById('semFilter').value = 'All'; // Auto-reset semester
+  }
+  renderData();
+});
+
+document.getElementById('semFilter').addEventListener('change', (e)=>{
+  if(e.target.value !== 'All'){
+    document.getElementById('yearFilter').value = 'All'; // Auto-reset year
+  }
+  renderData();
+});
+
+/* ---------- FORM MUTUAL EXCLUSION (YEAR OR SEMESTER) ---------- */
+document.getElementById('f_year').addEventListener('change', (e)=>{
+  if(e.target.value !== ""){
+    document.getElementById('f_sem').value = ""; // Auto-clear semester
+  }
+});
+
+document.getElementById('f_sem').addEventListener('change', (e)=>{
+  if(e.target.value !== ""){
+    document.getElementById('f_year').value = ""; // Auto-clear year
+  }
+});
+
 /* ---------- EVENT LISTENERS ---------- */
 document.getElementById('searchInput').addEventListener('input', renderData);
-document.getElementById('yearFilter').addEventListener('change', renderData);
-document.getElementById('semFilter').addEventListener('change', renderData);
 
 document.querySelectorAll('[data-type]').forEach(el=>{
   el.addEventListener('click', e=>{ e.preventDefault(); setActiveType(el.dataset.type); });
@@ -528,6 +580,15 @@ document.getElementById('materialForm').addEventListener('submit', e=>{
   e.preventDefault();
   const status = document.getElementById('formStatus');
   
+  const yr = document.getElementById('f_year').value;
+  const sm = document.getElementById('f_sem').value;
+
+  if(!yr && !sm){
+    status.className = 'form-status error';
+    status.textContent = 'Please choose either Academic Year or Semester!';
+    return;
+  }
+
   let pUrl = document.getElementById('f_pdf').value.trim();
   if(!pUrl){
     pUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
@@ -540,8 +601,8 @@ document.getElementById('materialForm').addEventListener('submit', e=>{
     type: document.getElementById('f_type').value,
     subject: document.getElementById('f_subject').value.trim(),
     branch: document.getElementById('f_branch').value.trim(),
-    year: document.getElementById('f_year').value,
-    semester: document.getElementById('f_sem').value,
+    year: yr,
+    semester: sm,
     adminName: document.getElementById('f_admin').value.trim(),
     pdfData: pUrl,
     timestamp: Date.now()
@@ -555,7 +616,7 @@ document.getElementById('materialForm').addEventListener('submit', e=>{
   
   if(ok){
     status.className = 'form-status ok';
-    status.textContent = 'Published to the vault successfully!';
+    status.textContent = 'Published successfully!';
     renderData();
     e.target.reset();
     setTimeout(closeAdmin, 900);
