@@ -91,7 +91,7 @@
   .stat-chip .num{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--brass-hi);}
   .stat-chip .lbl{font-size:.68rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:1px;font-family:var(--font-mono);}
 
-  #toast{position:fixed;bottom:1.6rem;right:1.6rem;background:var(--maroon);color:#fff8ec;padding:.85rem 1.4rem;border-radius:9px;font-weight:700;display:none;z-index:3000;box-shadow:var(--shadow);font-size:.86rem;}
+  #toast{position:fixed;bottom:1.6rem;right:1.6rem;background:var(--maroon);color:#fff8ec;padding:.85rem 1.4rem;border-radius:99px;font-weight:700;display:none;z-index:3000;box-shadow:var(--shadow);font-size:.86rem;}
 </style>
 </head>
 <body>
@@ -120,10 +120,22 @@
       <div><label>Branch / Department</label><input type="text" id="branch" placeholder="e.g. Computer Science"></div>
 
       <div><label>Academic Year</label>
-        <select id="year"><option value="1st Year">1st Year</option><option value="2nd Year">2nd Year</option><option value="3rd Year">3rd Year</option><option value="4th Year">4th Year</option></select>
+        <select id="year">
+          <option value="">Select Year (Optional)</option>
+          <option value="1st Year">1st Year</option>
+          <option value="2nd Year">2nd Year</option>
+          <option value="3rd Year">3rd Year</option>
+          <option value="4th Year">4th Year</option>
+        </select>
       </div>
       <div><label>Semester</label>
-        <select id="semester"><option value="Sem 1">Sem 1</option><option value="Sem 2">Sem 2</option><option value="Sem 3">Sem 3</option><option value="Sem 4">Sem 4</option><option value="Sem 5">Sem 5</option><option value="Sem 6">Sem 6</option><option value="Sem 7">Sem 7</option><option value="Sem 8">Sem 8</option></select>
+        <select id="semester">
+          <option value="">Select Semester (Optional)</option>
+          <option value="Sem 1">Sem 1</option><option value="Sem 2">Sem 2</option>
+          <option value="Sem 3">Sem 3</option><option value="Sem 4">Sem 4</option>
+          <option value="Sem 5">Sem 5</option><option value="Sem 6">Sem 6</option>
+          <option value="Sem 7">Sem 7</option><option value="Sem 8">Sem 8</option>
+        </select>
       </div>
 
       <div class="full-width"><label>Description / Details</label><textarea id="desc" rows="3" placeholder="Overview of modules covered, key topics..."></textarea></div>
@@ -141,7 +153,7 @@
             <p id="fileNameText">Click to select a PDF from your device</p>
             <input type="file" id="fileInput" accept="application/pdf" style="display:none;">
           </div>
-          <p class="file-size-note">Keep uploads small (under 3MB) — the file is embedded directly into browser storage.</p>
+          <p class="file-size-note">Keep uploads small (under 3MB) — heavy files will exceed browser storage limit.</p>
         </div>
       </div>
     </div>
@@ -166,7 +178,6 @@ let allMaterials = [];
 let pdfBase64 = "";
 let sourceMode = 'link';
 
-// FIXED STORAGE ENGINE (Using Standard localStorage)
 function loadMaterials(){
   try {
     const data = localStorage.getItem('edupulse_db');
@@ -183,7 +194,7 @@ function saveMaterials(list){
     return true;
   } catch(e) {
     console.error(e);
-    alert("Storage limit exceeded! Try using a URL link instead of heavy file upload.");
+    alert("Storage limit exceeded! File base64 text is too large. Please use a direct PDF URL Link instead.");
     return false;
   }
 }
@@ -200,6 +211,19 @@ document.getElementById('themeBtn').addEventListener('click', ()=>{
   const isDark = html.getAttribute('data-theme')==='dark';
   html.setAttribute('data-theme', isDark?'light':'dark');
   document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+});
+
+/* Year & Semester Mutual Exclusion */
+document.getElementById('year').addEventListener('change', (e)=>{
+  if(e.target.value !== ""){
+    document.getElementById('semester').value = "";
+  }
+});
+
+document.getElementById('semester').addEventListener('change', (e)=>{
+  if(e.target.value !== ""){
+    document.getElementById('year').value = "";
+  }
 });
 
 document.getElementById('tabLink').addEventListener('click', ()=>{
@@ -223,7 +247,7 @@ document.getElementById('fileInput').addEventListener('change', e=>{
   const file = e.target.files[0];
   if(!file) return;
   if(file.type !== 'application/pdf'){ showToast('Please select a valid PDF file.', true); return; }
-  if(file.size > 3*1024*1024){ showToast('File too large — please keep it under 3MB, or use a link instead.', true); return; }
+  if(file.size > 2.5*1024*1024){ showToast('File too large — keep under 2.5MB, or use a PDF Link.', true); return; }
   document.getElementById('fileNameText').innerText = `Selected: ${file.name}`;
   const reader = new FileReader();
   reader.onload = evt => { pdfBase64 = evt.target.result; };
@@ -240,9 +264,13 @@ document.getElementById('publishBtn').addEventListener('click', ()=>{
   const semester = document.getElementById('semester').value;
   const desc = document.getElementById('desc').value.trim();
   
+  if(!year && !semester){
+    showToast('Please select either Academic Year OR Semester!', true);
+    return;
+  }
+
   let pdfUrl = sourceMode === 'link' ? document.getElementById('pdfLink').value.trim() : pdfBase64;
 
-  // Fallback PDF generation if empty
   if(!pdfUrl) {
     pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
   }
@@ -274,6 +302,8 @@ document.getElementById('publishBtn').addEventListener('click', ()=>{
     document.getElementById('adminName').value = '';
     document.getElementById('subject').value = '';
     document.getElementById('branch').value = '';
+    document.getElementById('year').value = '';
+    document.getElementById('semester').value = '';
     document.getElementById('fileNameText').innerText = 'Click to select a PDF from your device';
     pdfBase64 = "";
     renderList();
@@ -295,12 +325,13 @@ function renderList(){
   }
   list.innerHTML = '';
   allMaterials.forEach(p=>{
+    const tagInfo = p.semester ? p.semester : (p.year || 'N/A');
     const row = document.createElement('div');
     row.className = 'manage-row';
     row.innerHTML = `
       <div>
         <div class="row-title">${escHtml(p.title)}</div>
-        <div class="row-meta">${escHtml(p.type)} · ${escHtml(p.year)} (${escHtml(p.semester)}) · ${escHtml(p.adminName)}</div>
+        <div class="row-meta">${escHtml(p.type)} · ${escHtml(tagInfo)} · ${escHtml(p.adminName)}</div>
       </div>
       <button class="del-btn" data-id="${p.id}"><i class="fa-solid fa-trash"></i></button>`;
     list.appendChild(row);
