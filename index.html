@@ -438,56 +438,59 @@ function renderData(){
   });
 }
 
-/* ---------- PDF FILE + CUSTOM CAPTION SHARE ---------- */
-async function shareResource(item){
-  const pdfSrc = item.pdfData || item.pdfUrl || window.location.href;
-  const tagInfo = item.semester ? `Semester: ${item.semester}` : `Year: ${item.year || 'N/A'}`;
-  
-  const shareText = `📚 *${item.title}*\n📖 Subject: ${item.subject}\n🎓 ${tagInfo}\n\n🔗 View/Download: ${pdfSrc}\n🌐 Website: ${window.location.origin}`;
+/* ---------- CUSTOM SHARE WITH RENAMED FILE + CAPTION ---------- */
+async function shareResource(item) {
+  const pdfSrc = item.pdfData || item.pdfUrl;
+  const tagInfo = item.semester ? item.semester : (item.year || 'N/A');
+  const websiteUrl = window.location.origin !== 'null' ? window.location.origin : 'https://edupulsehub.com';
+
+  // Format Caption: Subject | Class | Website Link
+  const shareCaption = `📚 Subject: ${item.subject} | Class: ${tagInfo}\n🌐 Link: ${websiteUrl}`;
+
+  // Custom File Naming Format: [Title] [Subject Name]/edupulsehub.pdf
+  const cleanTitle = (item.title || 'Material').replace(/[^a-zA-Z0-9 ]/g, "").trim();
+  const cleanSubject = (item.subject || 'Subject').replace(/[^a-zA-Z0-9 ]/g, "").trim();
+  const customFileName = `${cleanTitle} ${cleanSubject}/edupulsehub.pdf`;
 
   if (navigator.share) {
     try {
-      if (pdfSrc.startsWith('http')) {
+      if (pdfSrc && pdfSrc.startsWith('http')) {
         const response = await fetch(pdfSrc);
         const blob = await response.blob();
         
-        const fileName = (item.title.replace(/[^a-zA-Z0-9]/g, "_") || "document") + ".pdf";
-        const file = new File([blob], fileName, { type: 'application/pdf' });
+        // Convert Blob into a File object with custom name
+        const file = new File([blob], customFileName, { type: 'application/pdf' });
 
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({
             files: [file],
-            title: item.title,
-            text: shareText
+            text: shareCaption
           });
           return;
         }
       }
 
+      // Fallback: If File share isn't supported, trigger share dialog with URL link & Caption
       await navigator.share({
         title: item.title,
-        text: shareText,
-        url: pdfSrc.startsWith('http') ? pdfSrc : window.location.href
+        text: shareCaption + `\n📄 File Link: ${pdfSrc || websiteUrl}`
       });
       return;
     } catch (err) {
       if (err.name !== 'AbortError') {
-        console.warn('Share Dialog closed or failed, falling back to Clipboard.', err);
+        console.warn('Share Dialog failed, fallback to direct option.', err);
       } else {
         return;
       }
     }
   }
 
+  // Fallback for browsers that don't support Web Share API
   if (navigator.clipboard) {
-    try {
-      await navigator.clipboard.writeText(shareText);
-      alert("📋 Great! Your PDF details and link are safely copied to your clipboard. You can now paste and share them across any app like WhatsApp, Slack, or Email.");
-    } catch(e) {
-      alert(shareText);
-    }
+    await navigator.clipboard.writeText(shareCaption + `\n📄 File Link: ${pdfSrc || websiteUrl}`);
+    alert("📄 Details & Link Copied! You can now paste and share it in any app.");
   } else {
-    alert(shareText);
+    alert(shareCaption);
   }
 }
 
