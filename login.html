@@ -35,7 +35,7 @@
     --radius-lg: 18px;
     --radius-xl: 24px;
     
-    --shadow-main: 0 12px 32px -8px rgba(0, 0, 0, 0.5);
+    --shadow-main: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
     --font-sans: 'Plus Jakarta Sans', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
   }
@@ -62,10 +62,11 @@
     --border-subtle: rgba(15, 23, 42, 0.08);
     --border-active: rgba(79, 70, 229, 0.25);
     --border-error: rgba(225, 29, 72, 0.5);
-    --shadow-main: 0 12px 32px -8px rgba(15, 23, 42, 0.08);
+    --shadow-main: 0 16px 40px -10px rgba(15, 23, 42, 0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans); }
+  
   body {
     background-color: var(--bg-base);
     color: var(--text-main);
@@ -73,7 +74,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.25rem;
+    padding: 1rem;
     position: relative;
     overflow-x: hidden;
     transition: background-color .3s ease, color .3s ease;
@@ -89,39 +90,58 @@
       radial-gradient(circle at 85% 85%, var(--accent-teal-glow) 0%, transparent 45%);
   }
 
-  .theme-toggle-top {
+  /* Top Actions Bar (Back & Theme Toggle) */
+  .top-actions {
     position: absolute;
     top: 1.25rem;
+    left: 1.25rem;
     right: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+  }
+
+  .action-btn {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
     color: var(--text-sub);
-    width: 40px;
+    padding: 0.5rem 0.9rem;
     height: 40px;
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: .95rem;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
     cursor: pointer;
+    text-decoration: none;
     transition: all .2s ease;
   }
-  .theme-toggle-top:hover { color: var(--text-main); border-color: var(--border-active); }
+  .action-btn:hover { color: var(--text-main); border-color: var(--border-active); background: var(--bg-surface-elevated); }
+
+  .theme-toggle-top {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+  }
 
   .login-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
     width: 100%;
-    max-width: 420px;
-    padding: 2.2rem 1.8rem;
+    max-width: 440px;
+    padding: 2.5rem 2rem;
     box-shadow: var(--shadow-main);
     position: relative;
     z-index: 10;
+    margin-top: 2rem;
   }
 
   @media (max-width: 480px) {
-    .login-card { padding: 1.6rem 1.2rem; border-radius: var(--radius-lg); }
+    .login-card { padding: 1.8rem 1.2rem; border-radius: var(--radius-lg); }
   }
 
   .card-header {
@@ -136,19 +156,19 @@
     margin-bottom: .5rem;
   }
   .brand-logo i {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     color: #fff;
     background: linear-gradient(135deg, var(--primary), var(--accent-teal));
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 12px var(--primary-glow);
   }
-  .brand-name { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; text-align: left; }
-  .brand-tag { font-family: var(--font-mono); font-size: .6rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-align: left; }
+  .brand-name { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px; text-align: left; }
+  .brand-tag { font-family: var(--font-mono); font-size: .65rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-align: left; }
 
   .card-subtitle {
     font-size: 0.85rem;
@@ -199,8 +219,8 @@
   }
 
   .field input.error-input {
-    border-color: var(--accent-rose);
-    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.15);
+    border-color: var(--accent-rose) !important;
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.2) !important;
   }
 
   .toggle-pwd {
@@ -228,7 +248,7 @@
     border-radius: var(--radius-md);
     cursor: pointer;
     width: 100%;
-    max-width: 160px;
+    max-width: 170px;
     height: 42px;
   }
 
@@ -269,23 +289,23 @@
   .login-btn:hover { transform: translateY(-1px); opacity: 0.95; }
   .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-  /* ALERT STATUS MESSAGES */
+  /* ERROR/STATUS MESSAGE BOX (Below Login Button) */
   .status-msg {
-    font-size: 0.83rem;
+    font-size: 0.85rem;
     text-align: left;
     margin-top: 1rem;
-    padding: 0.75rem 0.9rem;
+    padding: 0.8rem 1rem;
     border-radius: var(--radius-md);
     display: none;
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 1.45;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
   }
   .status-msg.error {
     display: flex;
     background: rgba(244, 63, 94, 0.12);
-    border: 1px solid rgba(244, 63, 94, 0.3);
+    border: 1px solid var(--border-error);
     color: var(--accent-rose);
     animation: shake 0.35s ease-in-out;
   }
@@ -328,9 +348,15 @@
 
 <div class="bg-glow-layer"></div>
 
-<button class="theme-toggle-top" id="themeBtn" title="Toggle Theme">
-  <i class="fa-solid fa-sun"></i>
-</button>
+<!-- Top Bar containing Back Button and Theme Toggle -->
+<div class="top-actions">
+  <a href="index.html" class="action-btn" title="Return to Home">
+    <i class="fa-solid fa-arrow-left"></i> Home
+  </a>
+  <button class="action-btn theme-toggle-top" id="themeBtn" title="Toggle Theme">
+    <i class="fa-solid fa-sun"></i>
+  </button>
+</div>
 
 <div class="login-card">
   <div class="card-header">
@@ -368,7 +394,7 @@
     <div class="field">
       <label>Security Verification</label>
       <div class="captcha-box">
-        <canvas id="captchaCanvas" width="160" height="42" title="Click to reload Captcha"></canvas>
+        <canvas id="captchaCanvas" width="170" height="42" title="Click to reload Captcha"></canvas>
         <button type="button" class="refresh-btn" id="refreshCaptchaBtn" title="Reload Captcha">
           <i class="fa-solid fa-rotate-right"></i>
         </button>
@@ -386,7 +412,7 @@
       <i class="fa-solid fa-right-to-bracket"></i> Authenticate
     </button>
 
-    <!-- Error/Success Status Message -->
+    <!-- Error/Success Complete Status Box -->
     <div class="status-msg" id="statusMsg"></div>
 
     <!-- 3-Second Redirection Loader -->
@@ -433,7 +459,7 @@ function generateColouredCaptcha() {
     const char = currentCaptcha[i];
     ctx.save();
     ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-    const x = 16 + i * 26;
+    const x = 18 + i * 28;
     const y = canvas.height / 2 + (Math.random() * 4 - 2);
     const angle = (Math.random() - 0.5) * 0.3;
     
@@ -466,7 +492,7 @@ document.getElementById("togglePwd").addEventListener("click", function() {
 document.getElementById("captchaCanvas").addEventListener("click", generateColouredCaptcha);
 document.getElementById("refreshCaptchaBtn").addEventListener("click", generateColouredCaptcha);
 
-/* CLEAR ERROR HIGHLIGHTS ON TYPING */
+/* REMOVE ERROR HIGHLIGHTS DYNAMICALLY UPON TYPING */
 ['username', 'password', 'captchaInput'].forEach(id => {
   document.getElementById(id).addEventListener('input', () => {
     document.getElementById(id).classList.remove('error-input');
@@ -488,7 +514,7 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
   const pass = passInput.value;
   const captcha = captchaInput.value.trim();
 
-  // Reset Error States
+  // Reset Previous Status & Error Classes
   status.className = "status-msg";
   status.style.display = "none";
   loaderBox.style.display = "none";
@@ -497,11 +523,11 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
   passInput.classList.remove('error-input');
   captchaInput.classList.remove('error-input');
 
-  // 1. Comprehensive Validation Checks with Specific Error Handling
+  // 1. Comprehensive Validation Checks
   if (!user) {
     userInput.classList.add('error-input');
     status.className = "status-msg error";
-    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Please enter your admin username.`;
+    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Validation Error:</strong> Please provide your admin username to proceed.`;
     userInput.focus();
     return;
   }
@@ -509,7 +535,7 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
   if (!pass) {
     passInput.classList.add('error-input');
     status.className = "status-msg error";
-    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Please enter your password.`;
+    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Validation Error:</strong> Password field cannot be left blank.`;
     passInput.focus();
     return;
   }
@@ -517,26 +543,26 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
   if (!captcha) {
     captchaInput.classList.add('error-input');
     status.className = "status-msg error";
-    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Please fill in the security captcha code.`;
+    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Validation Error:</strong> Please input the security verification code.`;
     captchaInput.focus();
     return;
   }
 
-  // 2. Verify Captcha
+  // 2. Verify Captcha Validation
   if (captcha.toUpperCase() !== currentCaptcha.toUpperCase()) {
     captchaInput.classList.add('error-input');
     status.className = "status-msg error";
-    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Invalid security captcha code! Please try again.`;
+    status.innerHTML = `<i class="fa-solid fa-shield-halved"></i> <strong>Security Failure:</strong> Invalid security captcha code entered. Please try again!`;
     generateColouredCaptcha();
     captchaInput.value = "";
     captchaInput.focus();
     return;
   }
 
-  // 3. Verify Credentials (Username: admin, Password: admin123)
+  // 3. Credential Verification (Default: admin / admin123)
   if (user === "admin" && pass === "admin123") {
     status.className = "status-msg success";
-    status.innerHTML = `<i class="fa-solid fa-circle-check"></i> Access Granted! Redirecting to Studio...`;
+    status.innerHTML = `<i class="fa-solid fa-circle-check"></i> <strong>Access Granted!</strong> Redirecting securely to Admin Studio...`;
     
     sessionStorage.setItem("edupulse_admin_auth", "true");
     submitBtn.disabled = true;
@@ -552,7 +578,7 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
     userInput.classList.add('error-input');
     passInput.classList.add('error-input');
     status.className = "status-msg error";
-    status.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Incorrect Username or Password!`;
+    status.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <strong>Authentication Failed:</strong> Incorrect username or password combination. Access denied.`;
     generateColouredCaptcha();
     captchaInput.value = "";
     passInput.value = "";
