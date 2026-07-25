@@ -690,7 +690,8 @@ function renderData(){
   matches.forEach(item=>{
     const isBookmarked = bookmarks.includes(item.id);
     const badgeTag = item.semester ? item.semester : (item.year || 'General');
-    const callNo = (item.branch||'GEN').slice(0,3).toUpperCase() + ' • ' + badgeTag;
+    const callNo = (item.branch||'GEN') + ' • ' + badgeTag;
+
     const pdfSrc = item.pdfData || item.pdfUrl || '#';
 
     const card = document.createElement('div');
