@@ -28,6 +28,7 @@
     
     --border-subtle: rgba(255, 255, 255, 0.08);
     --border-active: rgba(99, 102, 241, 0.35);
+    --border-error: rgba(244, 63, 94, 0.6);
     
     --radius-sm: 8px;
     --radius-md: 12px;
@@ -60,6 +61,7 @@
     
     --border-subtle: rgba(15, 23, 42, 0.08);
     --border-active: rgba(79, 70, 229, 0.25);
+    --border-error: rgba(225, 29, 72, 0.5);
     --shadow-main: 0 12px 32px -8px rgba(15, 23, 42, 0.08);
   }
 
@@ -71,13 +73,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
+    padding: 1.25rem;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
     transition: background-color .3s ease, color .3s ease;
   }
 
-  /* Ambient Glow Canvas */
   .bg-glow-layer {
     position: fixed;
     inset: 0;
@@ -90,18 +91,18 @@
 
   .theme-toggle-top {
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
+    top: 1.25rem;
+    right: 1.25rem;
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
     color: var(--text-sub);
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: .95rem;
     cursor: pointer;
     transition: all .2s ease;
   }
@@ -113,54 +114,58 @@
     border-radius: var(--radius-xl);
     width: 100%;
     max-width: 420px;
-    padding: 2.5rem 2rem;
+    padding: 2.2rem 1.8rem;
     box-shadow: var(--shadow-main);
     position: relative;
     z-index: 10;
   }
 
+  @media (max-width: 480px) {
+    .login-card { padding: 1.6rem 1.2rem; border-radius: var(--radius-lg); }
+  }
+
   .card-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem;
   }
 
   .brand-logo {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: .6rem;
+    margin-bottom: .5rem;
   }
   .brand-logo i {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     color: #fff;
     background: linear-gradient(135deg, var(--primary), var(--accent-teal));
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 12px var(--primary-glow);
   }
-  .brand-name { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.5px; text-align: left;}
-  .brand-tag { font-family: var(--font-mono); font-size: .62rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-align: left; }
+  .brand-name { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; text-align: left; }
+  .brand-tag { font-family: var(--font-mono); font-size: .6rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-align: left; }
 
   .card-subtitle {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: var(--text-sub);
-    margin-top: .4rem;
+    margin-top: .3rem;
   }
 
   .field {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.1rem;
   }
 
   .field label {
     display: block;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--text-sub);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
   }
 
   .input-wrapper {
@@ -169,11 +174,11 @@
 
   .input-wrapper i.field-icon {
     position: absolute;
-    left: 1.1rem;
+    left: 1rem;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .field input {
@@ -181,9 +186,9 @@
     background: var(--bg-surface-elevated);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
-    padding: 0.8rem 2.5rem 0.8rem 2.8rem;
+    padding: 0.75rem 2.4rem 0.75rem 2.6rem;
     color: var(--text-main);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     outline: none;
     transition: all 0.2s ease;
   }
@@ -193,14 +198,19 @@
     box-shadow: 0 0 0 3px var(--primary-glow);
   }
 
+  .field input.error-input {
+    border-color: var(--accent-rose);
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.15);
+  }
+
   .toggle-pwd {
     position: absolute;
-    right: 1rem;
+    right: 0.9rem;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     transition: color 0.2s;
   }
   .toggle-pwd:hover { color: var(--text-main); }
@@ -209,7 +219,7 @@
   .captcha-box {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
 
   #captchaCanvas {
@@ -218,40 +228,37 @@
     border-radius: var(--radius-md);
     cursor: pointer;
     width: 100%;
-    max-width: 170px;
-    height: 44px;
+    max-width: 160px;
+    height: 42px;
   }
 
   .refresh-btn {
     background: var(--bg-surface-elevated);
     border: 1px solid var(--border-subtle);
     color: var(--text-sub);
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border-radius: var(--radius-md);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     transition: all 0.2s;
   }
-
-  .refresh-btn:hover {
-    color: var(--primary);
-    border-color: var(--primary);
-  }
+  .refresh-btn:hover { color: var(--primary); border-color: var(--primary); }
 
   .login-btn {
     width: 100%;
     background: linear-gradient(135deg, var(--primary), var(--primary-hover));
     color: #fff;
     border: none;
-    padding: 0.9rem;
+    padding: 0.88rem;
     border-radius: var(--radius-md);
     font-weight: 700;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     cursor: pointer;
-    margin-top: 0.8rem;
+    margin-top: 0.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -259,31 +266,22 @@
     box-shadow: 0 6px 16px var(--primary-glow);
     transition: all 0.2s ease;
   }
-
-  .login-btn:hover {
-    transform: translateY(-1px);
-    opacity: 0.95;
-  }
-  .login-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-  }
+  .login-btn:hover { transform: translateY(-1px); opacity: 0.95; }
+  .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
   /* ALERT STATUS MESSAGES */
   .status-msg {
-    font-size: 0.85rem;
+    font-size: 0.83rem;
     text-align: left;
-    margin-top: 1.2rem;
-    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+    padding: 0.75rem 0.9rem;
     border-radius: var(--radius-md);
     display: none;
     font-weight: 600;
     line-height: 1.4;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
-
   .status-msg.error {
     display: flex;
     background: rgba(244, 63, 94, 0.12);
@@ -291,7 +289,6 @@
     color: var(--accent-rose);
     animation: shake 0.35s ease-in-out;
   }
-
   .status-msg.success {
     display: flex;
     background: rgba(20, 184, 166, 0.12);
@@ -299,22 +296,20 @@
     color: var(--accent-teal);
   }
 
-  /* LOADER BAR & SPINNER FOR 3-SEC REDIRECT */
+  /* LOADER CONTAINER */
   .loader-container {
     display: none;
-    margin-top: 1rem;
+    margin-top: 0.9rem;
     text-align: center;
   }
-
   .loader-bar-bg {
     width: 100%;
-    height: 6px;
+    height: 5px;
     background: var(--bg-surface-elevated);
     border-radius: 10px;
     overflow: hidden;
-    margin-top: .6rem;
+    margin-top: .5rem;
   }
-
   .loader-bar-fill {
     height: 100%;
     width: 0%;
@@ -324,8 +319,8 @@
 
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-6px); }
-    40%, 80% { transform: translateX(6px); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
   }
 </style>
 </head>
@@ -355,7 +350,7 @@
       <label for="username">Admin Username</label>
       <div class="input-wrapper">
         <i class="fa-solid fa-user field-icon"></i>
-        <input type="text" id="username" placeholder="Enter username" required autocomplete="off">
+        <input type="text" id="username" placeholder="Enter username" autocomplete="off">
       </div>
     </div>
 
@@ -364,7 +359,7 @@
       <label for="password">Password</label>
       <div class="input-wrapper">
         <i class="fa-solid fa-lock field-icon"></i>
-        <input type="password" id="password" placeholder="Enter password" required>
+        <input type="password" id="password" placeholder="Enter password">
         <i class="fa-solid fa-eye toggle-pwd" id="togglePwd" title="Show/Hide Password"></i>
       </div>
     </div>
@@ -373,7 +368,7 @@
     <div class="field">
       <label>Security Verification</label>
       <div class="captcha-box">
-        <canvas id="captchaCanvas" width="170" height="44" title="Click to reload Captcha"></canvas>
+        <canvas id="captchaCanvas" width="160" height="42" title="Click to reload Captcha"></canvas>
         <button type="button" class="refresh-btn" id="refreshCaptchaBtn" title="Reload Captcha">
           <i class="fa-solid fa-rotate-right"></i>
         </button>
@@ -383,7 +378,7 @@
     <div class="field">
       <div class="input-wrapper">
         <i class="fa-solid fa-key field-icon"></i>
-        <input type="text" id="captchaInput" placeholder="Type security code here" required autocomplete="off">
+        <input type="text" id="captchaInput" placeholder="Type security code here" autocomplete="off">
       </div>
     </div>
 
@@ -406,7 +401,6 @@
 <script>
 let currentCaptcha = "";
 
-/* COLORFUL CAPTCHA GENERATOR */
 function generateColouredCaptcha() {
   const canvas = document.getElementById("captchaCanvas");
   const ctx = canvas.getContext("2d");
@@ -422,27 +416,26 @@ function generateColouredCaptcha() {
     currentCaptcha += chars.charAt(Math.floor(Math.random() * chars.length));
   }
 
-  // Draw background random lines
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 4; i++) {
     ctx.strokeStyle = `hsl(${Math.random() * 360}, 70%, 55%)`;
     ctx.beginPath();
     ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
     ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = 1.2;
     ctx.stroke();
   }
 
   const colors = ["#6366f1", "#14b8a6", "#f59e0b", "#f43f5e", "#a855f7"];
-  ctx.font = "bold 22px 'JetBrains Mono', monospace";
+  ctx.font = "bold 20px 'JetBrains Mono', monospace";
   ctx.textBaseline = "middle";
 
   for (let i = 0; i < currentCaptcha.length; i++) {
     const char = currentCaptcha[i];
     ctx.save();
     ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-    const x = 20 + i * 28;
+    const x = 16 + i * 26;
     const y = canvas.height / 2 + (Math.random() * 4 - 2);
-    const angle = (Math.random() - 0.5) * 0.35;
+    const angle = (Math.random() - 0.5) * 0.3;
     
     ctx.translate(x, y);
     ctx.rotate(angle);
@@ -451,7 +444,6 @@ function generateColouredCaptcha() {
   }
 }
 
-/* THEME TOGGLE */
 document.getElementById('themeBtn').addEventListener('click', ()=>{
   const html = document.documentElement;
   const isDark = html.getAttribute('data-theme') === 'dark';
@@ -460,7 +452,6 @@ document.getElementById('themeBtn').addEventListener('click', ()=>{
   generateColouredCaptcha();
 });
 
-/* PASSWORD VISIBILITY TOGGLE */
 document.getElementById("togglePwd").addEventListener("click", function() {
   const pwdInput = document.getElementById("password");
   if(pwdInput.type === "password"){
@@ -475,7 +466,13 @@ document.getElementById("togglePwd").addEventListener("click", function() {
 document.getElementById("captchaCanvas").addEventListener("click", generateColouredCaptcha);
 document.getElementById("refreshCaptchaBtn").addEventListener("click", generateColouredCaptcha);
 
-/* FORM SUBMISSION WITH 3-SECOND LOADER */
+/* CLEAR ERROR HIGHLIGHTS ON TYPING */
+['username', 'password', 'captchaInput'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    document.getElementById(id).classList.remove('error-input');
+  });
+});
+
 document.getElementById("adminLoginForm").addEventListener("submit", function(e) {
   e.preventDefault();
   const status = document.getElementById("statusMsg");
@@ -483,56 +480,86 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
   const loaderFill = document.getElementById("loaderFill");
   const submitBtn = document.getElementById("submitBtn");
 
-  const user = document.getElementById("username").value.trim();
-  const pass = document.getElementById("password").value;
-  const captcha = document.getElementById("captchaInput").value.trim();
+  const userInput = document.getElementById("username");
+  const passInput = document.getElementById("password");
+  const captchaInput = document.getElementById("captchaInput");
 
-  // Reset Display
+  const user = userInput.value.trim();
+  const pass = passInput.value;
+  const captcha = captchaInput.value.trim();
+
+  // Reset Error States
   status.className = "status-msg";
   status.style.display = "none";
   loaderBox.style.display = "none";
   loaderFill.style.width = "0%";
+  userInput.classList.remove('error-input');
+  passInput.classList.remove('error-input');
+  captchaInput.classList.remove('error-input');
 
-  // 1. Verify Captcha
-  if (captcha.toUpperCase() !== currentCaptcha.toUpperCase()) {
+  // 1. Comprehensive Validation Checks with Specific Error Handling
+  if (!user) {
+    userInput.classList.add('error-input');
     status.className = "status-msg error";
-    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Invalid Captcha code! Please try again.`;
-    generateColouredCaptcha();
-    document.getElementById("captchaInput").value = "";
+    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Please enter your admin username.`;
+    userInput.focus();
     return;
   }
 
-  // 2. Validate Credentials
+  if (!pass) {
+    passInput.classList.add('error-input');
+    status.className = "status-msg error";
+    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Please enter your password.`;
+    passInput.focus();
+    return;
+  }
+
+  if (!captcha) {
+    captchaInput.classList.add('error-input');
+    status.className = "status-msg error";
+    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Please fill in the security captcha code.`;
+    captchaInput.focus();
+    return;
+  }
+
+  // 2. Verify Captcha
+  if (captcha.toUpperCase() !== currentCaptcha.toUpperCase()) {
+    captchaInput.classList.add('error-input');
+    status.className = "status-msg error";
+    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Invalid security captcha code! Please try again.`;
+    generateColouredCaptcha();
+    captchaInput.value = "";
+    captchaInput.focus();
+    return;
+  }
+
+  // 3. Verify Credentials (Username: admin, Password: admin123)
   if (user === "admin" && pass === "admin123") {
-    // Show Success Message
     status.className = "status-msg success";
-    status.innerHTML = `<i class="fa-solid fa-circle-check"></i> Access Granted! Redirecting in 3 seconds...`;
+    status.innerHTML = `<i class="fa-solid fa-circle-check"></i> Access Granted! Redirecting to Studio...`;
     
-    // Save Auth State
     sessionStorage.setItem("edupulse_admin_auth", "true");
     submitBtn.disabled = true;
 
-    // Trigger Animated 3-second Loader
     loaderBox.style.display = "block";
-    setTimeout(() => {
-      loaderFill.style.width = "100%";
-    }, 50);
+    setTimeout(() => { loaderFill.style.width = "100%"; }, 50);
 
-    // Redirect exactly after 3 seconds
     setTimeout(() => {
       window.location.href = "admin.html";
     }, 3000);
 
   } else {
-    // Clear & Direct Error Messaging
+    userInput.classList.add('error-input');
+    passInput.classList.add('error-input');
     status.className = "status-msg error";
     status.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Incorrect Username or Password!`;
     generateColouredCaptcha();
-    document.getElementById("captchaInput").value = "";
+    captchaInput.value = "";
+    passInput.value = "";
+    passInput.focus();
   }
 });
 
-// Initialize on Load
 generateColouredCaptcha();
 </script>
 </body>
