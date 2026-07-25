@@ -437,27 +437,23 @@ function renderData(){
     grid.appendChild(card);
   });
 }
+
 /* ---------- PDF FILE + CUSTOM CAPTION SHARE ---------- */
 async function shareResource(item){
   const pdfSrc = item.pdfData || item.pdfUrl || window.location.href;
   const tagInfo = item.semester ? `Semester: ${item.semester}` : `Year: ${item.year || 'N/A'}`;
   
-  // Custom caption format
   const shareText = `📚 *${item.title}*\n📖 Subject: ${item.subject}\n🎓 ${tagInfo}\n\n🔗 View/Download: ${pdfSrc}\n🌐 Website: ${window.location.origin}`;
 
-  // 1. Check if Native Web Share is available
   if (navigator.share) {
     try {
-      // Direct HTTP PDF URL check & File conversion
       if (pdfSrc.startsWith('http')) {
         const response = await fetch(pdfSrc);
         const blob = await response.blob();
         
-        // Sanitize file name
         const fileName = (item.title.replace(/[^a-zA-Z0-9]/g, "_") || "document") + ".pdf";
         const file = new File([blob], fileName, { type: 'application/pdf' });
 
-        // Check if browser allows PDF file sharing
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({
             files: [file],
@@ -468,7 +464,6 @@ async function shareResource(item){
         }
       }
 
-      // Fallback: Share Text & URL if file attachment is restricted
       await navigator.share({
         title: item.title,
         text: shareText,
@@ -479,12 +474,11 @@ async function shareResource(item){
       if (err.name !== 'AbortError') {
         console.warn('Share Dialog closed or failed, falling back to Clipboard.', err);
       } else {
-        return; // User canceled share sheet
+        return;
       }
     }
   }
 
-  // 2. Fallback: Copy Caption & Link to Clipboard
   if (navigator.clipboard) {
     try {
       await navigator.clipboard.writeText(shareText);
@@ -496,8 +490,6 @@ async function shareResource(item){
     alert(shareText);
   }
 }
-
-
 
 /* ---------- INTERACTIONS ---------- */
 function toggleBookmark(id){
