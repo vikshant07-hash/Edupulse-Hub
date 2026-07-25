@@ -28,13 +28,14 @@
     
     --border-subtle: rgba(255, 255, 255, 0.08);
     --border-active: rgba(99, 102, 241, 0.35);
+    --border-error: rgba(244, 63, 94, 0.6);
     
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 18px;
     --radius-xl: 24px;
     
-    --shadow-main: 0 12px 32px -8px rgba(0, 0, 0, 0.5);
+    --shadow-main: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
     --font-sans: 'Plus Jakarta Sans', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
   }
@@ -60,7 +61,8 @@
     
     --border-subtle: rgba(15, 23, 42, 0.08);
     --border-active: rgba(79, 70, 229, 0.25);
-    --shadow-main: 0 12px 32px -8px rgba(15, 23, 42, 0.08);
+    --border-error: rgba(225, 29, 72, 0.5);
+    --shadow-main: 0 16px 40px -10px rgba(15, 23, 42, 0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans); }
@@ -82,6 +84,7 @@
       radial-gradient(circle at 90% 90%, var(--accent-teal-glow) 0%, transparent 45%);
   }
 
+  /* Responsive Clean Navbar */
   header {
     background: var(--bg-glass);
     backdrop-filter: blur(16px);
@@ -93,6 +96,9 @@
     position: sticky;
     top: 0;
     z-index: 100;
+  }
+  @media(max-width: 640px) {
+    header { padding: 0.8rem 1rem; flex-direction: column; gap: 0.8rem; align-items: stretch; }
   }
 
   .brand {
@@ -115,7 +121,10 @@
   .brand-title { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.5px; }
   .brand-tag { font-family: var(--font-mono); font-size: .62rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-  .header-actions { display: flex; align-items: center; gap: .75rem; }
+  .header-actions { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+  @media(max-width: 640px) {
+    .header-actions { justify-content: space-between; width: 100%; }
+  }
   
   .icon-btn {
     background: var(--bg-surface);
@@ -133,19 +142,21 @@
   }
   .icon-btn:hover { color: var(--text-main); border-color: var(--border-active); }
 
-  .link-btn {
-    color: var(--text-sub);
+  .link-btn, .logout-btn {
     text-decoration: none;
     font-weight: 600;
     font-size: .85rem;
     display: flex;
     align-items: center;
     gap: 8px;
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
     padding: .55rem 1.1rem;
     border-radius: var(--radius-md);
     transition: all .2s ease;
+  }
+  .link-btn {
+    color: var(--text-sub);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
   }
   .link-btn:hover { color: var(--primary); border-color: var(--primary); }
 
@@ -153,21 +164,12 @@
     background: rgba(244, 63, 94, 0.12);
     border: 1px solid rgba(244, 63, 94, 0.25);
     color: var(--accent-rose);
-    font-weight: 700;
-    font-size: .85rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: .55rem 1.1rem;
-    border-radius: var(--radius-md);
     cursor: pointer;
-    transition: all .2s ease;
+    font-weight: 700;
   }
-  .logout-btn:hover {
-    background: var(--accent-rose);
-    color: #fff;
-  }
+  .logout-btn:hover { background: var(--accent-rose); color: #fff; }
 
+  /* Layout */
   .studio-layout {
     max-width: 1280px;
     margin: 2.2rem auto;
@@ -176,7 +178,7 @@
     grid-template-columns: 1.7fr 1.1fr;
     gap: 1.8rem;
   }
-  @media(max-width:960px){ .studio-layout { grid-template-columns: 1fr; } }
+  @media(max-width: 960px){ .studio-layout { grid-template-columns: 1fr; padding: 0 1rem 2rem; } }
 
   .panel {
     background: var(--bg-surface);
@@ -186,6 +188,7 @@
     box-shadow: var(--shadow-main);
     position: relative;
   }
+  @media(max-width: 480px) { .panel { padding: 1.2rem; } }
 
   .panel h2 {
     font-size: 1.15rem;
@@ -202,7 +205,7 @@
 
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
   .full-width { grid-column: span 2; }
-  @media(max-width:560px){ .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
+  @media(max-width: 560px){ .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
 
   label { display: block; font-size: .8rem; font-weight: 600; color: var(--text-sub); margin-bottom: .45rem; }
   
@@ -220,6 +223,10 @@
   input:focus, select:focus, textarea:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px var(--primary-glow);
+  }
+  input.error-input, select.error-input {
+    border-color: var(--accent-rose) !important;
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.2) !important;
   }
   textarea { resize: vertical; }
 
@@ -320,6 +327,7 @@
   .stat-chip .num { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
   .stat-chip .lbl { font-size: .68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-mono); font-weight: 600; margin-top: 2px;}
 
+  /* Toast Notification Message */
   #toast {
     position: fixed;
     bottom: 1.8rem;
@@ -333,6 +341,11 @@
     z-index: 3000;
     box-shadow: var(--shadow-main);
     font-size: .88rem;
+    animation: fadeIn 0.25s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 </style>
 </head>
@@ -349,7 +362,7 @@
   </div>
   <div class="header-actions">
     <button class="icon-btn" id="themeBtn" title="Toggle theme"><i class="fa-solid fa-sun"></i></button>
-    <a href="index.html" class="link-btn"><i class="fa-solid fa-globe"></i> View Student Hub</a>
+    <a href="index.html" class="link-btn"><i class="fa-solid fa-globe"></i> Student Hub</a>
     <button class="logout-btn" id="logoutBtn" title="Logout Session"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
   </div>
 </header>
@@ -360,38 +373,38 @@
     <h2><i class="fa-solid fa-file-circle-plus"></i> Catalogue a New Resource</h2>
     <div class="form-grid">
       <div class="full-width">
-        <label>Resource Title</label>
-        <input type="text" id="title" placeholder="e.g. Database Systems — Complete Handwritten Notes">
+        <label for="title">Resource Title *</label>
+        <input type="text" id="title" placeholder="e.g. Database Systems — Complete Handwritten Notes" autocomplete="off">
       </div>
 
       <div>
-        <label>Category</label>
+        <label for="type">Category Type</label>
         <select id="type">
           <option value="Syllabus">Syllabus</option>
-          <option value="Notes">Lecture Notes</option>
+          <option value="Notes" selected>Lecture Notes</option>
           <option value="PYQ">PYQ Paper</option>
           <option value="Model Paper">Model Paper</option>
           <option value="Other">Other Reference</option>
         </select>
       </div>
       <div>
-        <label>Faculty / Admin Name</label>
-        <input type="text" id="adminName" placeholder="e.g. Dr. A. P. Singh">
+        <label for="adminName">Faculty / Admin Name *</label>
+        <input type="text" id="adminName" placeholder="e.g. Dr. A. P. Singh" autocomplete="off">
       </div>
 
       <div>
-        <label>Subject Name / Code</label>
-        <input type="text" id="subject" placeholder="e.g. CS-501 DBMS">
+        <label for="subject">Subject Name / Code *</label>
+        <input type="text" id="subject" placeholder="e.g. CS-501 DBMS" autocomplete="off">
       </div>
       <div>
-        <label>Branch / Department</label>
-        <input type="text" id="branch" placeholder="e.g. Computer Science">
+        <label for="branch">Branch / Department *</label>
+        <input type="text" id="branch" placeholder="e.g. Computer Science" autocomplete="off">
       </div>
 
       <div>
-        <label>Academic Year</label>
+        <label for="year">Academic Year (Optional)</label>
         <select id="year">
-          <option value="">Select Year (Optional)</option>
+          <option value="">Select Year</option>
           <option value="1st Year">1st Year</option>
           <option value="2nd Year">2nd Year</option>
           <option value="3rd Year">3rd Year</option>
@@ -399,9 +412,9 @@
         </select>
       </div>
       <div>
-        <label>Semester</label>
+        <label for="semester">Semester (Optional)</label>
         <select id="semester">
-          <option value="">Select Semester (Optional)</option>
+          <option value="">Select Semester</option>
           <option value="Sem 1">Sem 1</option><option value="Sem 2">Sem 2</option>
           <option value="Sem 3">Sem 3</option><option value="Sem 4">Sem 4</option>
           <option value="Sem 5">Sem 5</option><option value="Sem 6">Sem 6</option>
@@ -410,24 +423,26 @@
       </div>
 
       <div class="full-width">
-        <label>Description / Details</label>
-        <textarea id="desc" rows="3" placeholder="Overview of modules covered, key topics..."></textarea>
+        <label for="desc">Description / Details</label>
+        <textarea id="desc" rows="3" placeholder="Overview of modules covered, units, key topics..."></textarea>
       </div>
 
       <div class="full-width">
-        <label>PDF Source</label>
+        <label>PDF Source Verification</label>
         <div class="source-toggle">
           <button type="button" class="toggle-btn active" id="tabLink"><i class="fa-solid fa-link"></i> Paste Link</button>
           <button type="button" class="toggle-btn" id="tabUpload"><i class="fa-solid fa-upload"></i> Upload File</button>
         </div>
-        <div id="linkField"><input type="url" id="pdfLink" placeholder="https://... link to the hosted PDF"></div>
+        <div id="linkField">
+          <input type="url" id="pdfLink" placeholder="https://... secure direct link to hosted PDF">
+        </div>
         <div id="uploadField" style="display:none;">
           <div class="file-upload-box" id="dropBox">
             <i class="fa-solid fa-file-pdf"></i>
-            <p id="fileNameText">Click to select a PDF from your device</p>
+            <p id="fileNameText">Click to select a PDF from your local device</p>
             <input type="file" id="fileInput" accept="application/pdf" style="display:none;">
           </div>
-          <p class="file-size-note">Keep uploads small (under 2.5MB) — heavy files will exceed browser storage limit.</p>
+          <p class="file-size-note">Keep uploads compact (under 2.5MB) — oversized files exceed standard browser storage constraints.</p>
         </div>
       </div>
     </div>
@@ -442,7 +457,9 @@
       <div class="stat-chip"><div class="num" id="statTotal">0</div><div class="lbl">Total Docs</div></div>
       <div class="stat-chip"><div class="num" id="statSubjects">0</div><div class="lbl">Subjects</div></div>
     </div>
-    <div id="pubList"><div class="empty-note"><i class="fa-solid fa-box-archive"></i>No documents uploaded yet.</div></div>
+    <div id="pubList">
+      <div class="empty-note"><i class="fa-solid fa-box-archive"></i>No documents uploaded yet.</div>
+    </div>
   </section>
 </div>
 
@@ -452,25 +469,22 @@
 /* =========================================================
    1. SESSION AUTHENTICATION & 2-HOUR LOGOUT GUARD
    ========================================================= */
-const TWO_HOURS_MS = 2 * 60 * 60 * 1000; // 2 Hours in milliseconds
+const TWO_HOURS_MS = 2 * 60 * 60 * 1000;
 
 function checkSessionAuth() {
   const isAuth = sessionStorage.getItem("edupulse_admin_auth");
   const loginTime = sessionStorage.getItem("edupulse_login_timestamp");
 
   if (!isAuth || isAuth !== "true") {
-    // Not logged in -> Redirect to Login Page
     window.location.href = "login.html";
     return false;
   }
 
-  // If login time doesn't exist, set it now
   if (!loginTime) {
     sessionStorage.setItem("edupulse_login_timestamp", Date.now().toString());
   } else {
     const elapsed = Date.now() - parseInt(loginTime, 10);
     if (elapsed > TWO_HOURS_MS) {
-      // Session Expired
       alert("Session Expired! For security reasons, please login again.");
       triggerLogout();
       return false;
@@ -485,20 +499,18 @@ function triggerLogout() {
   window.location.href = "login.html";
 }
 
-// Check session immediately upon loading script
 if (checkSessionAuth()) {
-  // Periodically check session expiry every minute
   setInterval(checkSessionAuth, 60000);
 }
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
-  if (confirm("Are you sure you want to log out?")) {
+  if (confirm("Are you sure you want to securely log out?")) {
     triggerLogout();
   }
 });
 
 /* =========================================================
-   2. MAIN CATALOGUE APP JS
+   2. MAIN CATALOGUE APP LOGIC & ERROR HANDLING
    ========================================================= */
 let allMaterials = [];
 let pdfBase64 = "";
@@ -520,7 +532,7 @@ function saveMaterials(list){
     return true;
   } catch(e) {
     console.error(e);
-    alert("Storage limit exceeded! File base64 text is too large. Please use a direct PDF URL Link instead.");
+    showToast("Storage limit exceeded! File size too large. Please use a direct PDF URL Link.", true);
     return false;
   }
 }
@@ -528,8 +540,9 @@ function saveMaterials(list){
 function showToast(msg, isError){
   const t = document.getElementById('toast');
   t.style.background = isError ? 'var(--accent-rose)' : 'var(--accent-teal)';
-  t.innerText = msg; t.style.display = 'block';
-  setTimeout(()=> t.style.display='none', 3000);
+  t.innerHTML = isError ? `<i class="fa-solid fa-circle-exclamation"></i> ${msg}` : `<i class="fa-solid fa-circle-check"></i> ${msg}`;
+  t.style.display = 'block';
+  setTimeout(()=> t.style.display='none', 3500);
 }
 
 document.getElementById('themeBtn').addEventListener('click', ()=>{
@@ -537,6 +550,13 @@ document.getElementById('themeBtn').addEventListener('click', ()=>{
   const isDark = html.getAttribute('data-theme')==='dark';
   html.setAttribute('data-theme', isDark?'light':'dark');
   document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+});
+
+/* Remove error state on input typing */
+['title', 'adminName', 'subject', 'branch', 'pdfLink'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    document.getElementById(id).classList.remove('error-input');
+  });
 });
 
 /* Year & Semester Mutual Exclusion */
@@ -572,8 +592,8 @@ document.getElementById('dropBox').addEventListener('click', ()=> document.getEl
 document.getElementById('fileInput').addEventListener('change', e=>{
   const file = e.target.files[0];
   if(!file) return;
-  if(file.type !== 'application/pdf'){ showToast('Please select a valid PDF file.', true); return; }
-  if(file.size > 2.5*1024*1024){ showToast('File too large — keep under 2.5MB, or use a PDF Link.', true); return; }
+  if(file.type !== 'application/pdf'){ showToast('Please select a valid PDF file format.', true); return; }
+  if(file.size > 2.5*1024*1024){ showToast('File too large (Max 2.5MB). Please use a PDF link.', true); return; }
   document.getElementById('fileNameText').innerText = `Selected: ${file.name}`;
   const reader = new FileReader();
   reader.onload = evt => { pdfBase64 = evt.target.result; };
@@ -581,29 +601,52 @@ document.getElementById('fileInput').addEventListener('change', e=>{
 });
 
 document.getElementById('publishBtn').addEventListener('click', ()=>{
-  const title = document.getElementById('title').value.trim();
+  const titleInput = document.getElementById('title');
+  const adminInput = document.getElementById('adminName');
+  const subjectInput = document.getElementById('subject');
+  const branchInput = document.getElementById('branch');
+  const linkInput = document.getElementById('pdfLink');
+
+  const title = titleInput.value.trim();
   const type = document.getElementById('type').value;
-  const adminName = document.getElementById('adminName').value.trim();
-  const subject = document.getElementById('subject').value.trim();
-  const branch = document.getElementById('branch').value.trim();
+  const adminName = adminInput.value.trim();
+  const subject = subjectInput.value.trim();
+  const branch = branchInput.value.trim();
   const year = document.getElementById('year').value;
   const semester = document.getElementById('semester').value;
   const desc = document.getElementById('desc').value.trim();
+
+  // Field validations with error highlighting
+  if(!title){
+    titleInput.classList.add('error-input');
+    showToast('Please enter a valid resource title.', true);
+    titleInput.focus(); return;
+  }
+  if(!adminName){
+    adminInput.classList.add('error-input');
+    showToast('Please specify the Faculty or Admin name.', true);
+    adminInput.focus(); return;
+  }
+  if(!subject){
+    subjectInput.classList.add('error-input');
+    showToast('Please provide the Subject Name or Code.', true);
+    subjectInput.focus(); return;
+  }
+  if(!branch){
+    branchInput.classList.add('error-input');
+    showToast('Please specify the Branch / Department.', true);
+    branchInput.focus(); return;
+  }
   
   if(!year && !semester){
-    showToast('Please select either Academic Year OR Semester!', true);
+    showToast('Please choose either Academic Year OR Semester filter!', true);
     return;
   }
 
-  let pdfUrl = sourceMode === 'link' ? document.getElementById('pdfLink').value.trim() : pdfBase64;
+  let pdfUrl = sourceMode === 'link' ? linkInput.value.trim() : pdfBase64;
 
   if(!pdfUrl) {
     pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
-  }
-
-  if(!title || !adminName || !subject || !branch){
-    showToast('Please fill all mandatory fields (Title, Admin, Subject, Branch)!', true);
-    return;
   }
 
   const btn = document.getElementById('publishBtn');
@@ -622,21 +665,20 @@ document.getElementById('publishBtn').addEventListener('click', ()=>{
   btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Publish to Student Hub';
 
   if(ok){
-    document.getElementById('title').value = '';
+    titleInput.value = '';
     document.getElementById('desc').value = '';
-    document.getElementById('pdfLink').value = '';
-    document.getElementById('adminName').value = '';
-    document.getElementById('subject').value = '';
-    document.getElementById('branch').value = '';
+    linkInput.value = '';
+    adminInput.value = '';
+    subjectInput.value = '';
+    branchInput.value = '';
     document.getElementById('year').value = '';
     document.getElementById('semester').value = '';
-    document.getElementById('fileNameText').innerText = 'Click to select a PDF from your device';
+    document.getElementById('fileNameText').innerText = 'Click to select a PDF from your local device';
     pdfBase64 = "";
     renderList();
     showToast('Document published to student hub successfully!');
   } else {
     allMaterials = allMaterials.filter(m => m.id !== material.id);
-    showToast('Could not save document.', true);
   }
 });
 
@@ -659,7 +701,7 @@ function renderList(){
         <div class="row-title">${escHtml(p.title)}</div>
         <div class="row-meta">${escHtml(p.type)} · ${escHtml(tagInfo)} · ${escHtml(p.adminName)}</div>
       </div>
-      <button class="del-btn" data-id="${p.id}"><i class="fa-solid fa-trash"></i></button>`;
+      <button class="del-btn" data-id="${p.id}" title="Delete Resource"><i class="fa-solid fa-trash"></i></button>`;
     list.appendChild(row);
   });
 }
@@ -669,14 +711,16 @@ function escHtml(s){ return String(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt
 document.getElementById('pubList').addEventListener('click', e=>{
   const btn = e.target.closest('.del-btn');
   if(!btn) return;
-  const id = Number(btn.dataset.id);
-  allMaterials = allMaterials.filter(p=>p.id!==id);
-  saveMaterials(allMaterials);
-  renderList();
-  showToast('Material deleted.');
+  if(confirm("Are you sure you want to remove this resource from the student hub?")){
+    const id = Number(btn.dataset.id);
+    allMaterials = allMaterials.filter(p=>p.id!==id);
+    saveMaterials(allMaterials);
+    renderList();
+    showToast('Material deleted successfully.');
+  }
 });
 
-// Initialize List on Page Load
+// Initialize on Load
 allMaterials = loadMaterials();
 renderList();
 </script>
