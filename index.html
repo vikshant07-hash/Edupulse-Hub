@@ -217,7 +217,6 @@
     <button class="tab-btn" data-type="Model Paper">Model Papers</button>
   </div>
   <div class="dropdown-filters">
-    <!-- Filter mutually exclusive choices -->
     <select id="yearFilter" class="select-filter">
       <option value="All">Select Academic Year</option>
       <option value="1st Year">1st Year</option>
@@ -262,7 +261,6 @@
           <div class="field"><label>Subject</label><input type="text" id="f_subject" required placeholder="e.g. Data Structures"></div>
           <div class="field"><label>Branch / Department</label><input type="text" id="f_branch" required placeholder="e.g. CSE"></div>
           
-          <!-- Select either Year OR Semester in Form -->
           <div class="field"><label>Academic Year</label>
             <select id="f_year">
               <option value="">Select Year</option>
@@ -329,7 +327,7 @@
   <div class="footer-bottom">
     <p>© 2026 EduPulse Academic Vault</p>
     <p><i class="fa-solid fa-shield-halved"></i> Verified Study Materials</p>
-    <p> <i class="fa-solid fa-user-gear"></i> Designed & Developed by Vikshant</p>
+    <p><i class="fa-solid fa-user-gear"></i> Designed & Developed by Vikshant</p>
   </div>
 </footer>
 
@@ -440,32 +438,43 @@ function renderData(){
   });
 }
 
-/* ---------- IMPROVED SHARE FUNCTION ---------- */
+/* ---------- NATIVE SYSTEM APPS SHARE FUNCTION ---------- */
 async function shareResource(item){
-  const pdfSrc = item.pdfData || item.pdfUrl || window.location.href;
-  const shareText = `📚 *${item.title}*\n📖 Subject: ${item.subject}\n🔗 Link: ${pdfSrc}`;
+  let targetUrl = item.pdfData || item.pdfUrl || window.location.href;
 
-  if(navigator.share && pdfSrc.startsWith('http')) {
-    try {
-      await navigator.share({
-        title: item.title,
-        text: `Study Material: ${item.title}`,
-        url: pdfSrc
-      });
-      return;
-    } catch(err) { /* fallback if share canceled */ }
+  // Non-http links (like dummy local links) native dialogs me share nahi ho sakti, fallback set
+  if(!targetUrl.startsWith('http')){
+    targetUrl = window.location.href;
   }
 
-  // Fallback: Clipboard me link copy karo
-  if(navigator.clipboard) {
+  const shareData = {
+    title: item.title,
+    text: `📚 *${item.title}*\n📖 Subject: ${item.subject}\nCheck this out on EduPulse Hub!`,
+    url: targetUrl
+  };
+
+  // Browser level App Picker trigger (WhatsApp, Telegram, etc.)
+  if (navigator.share) {
     try {
-      await navigator.clipboard.writeText(pdfSrc);
-      alert("📋 PDF Link successfully copied to Clipboard!\nAap isko Kahin bhi Share kar sakte hain.");
+      await navigator.share(shareData);
+      return;
+    } catch (err) {
+      if(err.name !== 'AbortError'){
+        console.log('Share error:', err);
+      }
+    }
+  }
+
+  // Fallback Clipboard logic agar Native share block ya unsupported ho
+  if (navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(`${shareData.text}\n${targetUrl}`);
+      alert("📋 Content link copied to clipboard!\nAap ise direct WhatsApp ya kisi bhi app me paste kar sakte hain.");
     } catch(e) {
-      alert("Link: " + pdfSrc);
+      alert("Link: " + targetUrl);
     }
   } else {
-    alert(shareText);
+    alert(`Share text:\n${shareData.text}\n${targetUrl}`);
   }
 }
 
@@ -501,31 +510,31 @@ function setActiveType(type){
   renderData();
 }
 
-/* ---------- FILTER MUTUAL EXCLUSION (YEAR OR SEMESTER) ---------- */
+/* ---------- FILTER MUTUAL EXCLUSION ---------- */
 document.getElementById('yearFilter').addEventListener('change', (e)=>{
   if(e.target.value !== 'All'){
-    document.getElementById('semFilter').value = 'All'; // Auto-reset semester
+    document.getElementById('semFilter').value = 'All';
   }
   renderData();
 });
 
 document.getElementById('semFilter').addEventListener('change', (e)=>{
   if(e.target.value !== 'All'){
-    document.getElementById('yearFilter').value = 'All'; // Auto-reset year
+    document.getElementById('yearFilter').value = 'All';
   }
   renderData();
 });
 
-/* ---------- FORM MUTUAL EXCLUSION (YEAR OR SEMESTER) ---------- */
+/* ---------- FORM MUTUAL EXCLUSION ---------- */
 document.getElementById('f_year').addEventListener('change', (e)=>{
   if(e.target.value !== ""){
-    document.getElementById('f_sem').value = ""; // Auto-clear semester
+    document.getElementById('f_sem').value = "";
   }
 });
 
 document.getElementById('f_sem').addEventListener('change', (e)=>{
   if(e.target.value !== ""){
-    document.getElementById('f_year').value = ""; // Auto-clear year
+    document.getElementById('f_year').value = "";
   }
 });
 
