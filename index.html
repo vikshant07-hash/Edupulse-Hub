@@ -4,95 +4,106 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EduPulse Hub | Academic Resource Vault</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root {
-    --ink: #080c14;
-    --ink-2: #101726;
-    --ink-3: #182238;
-    --brass: #c9a227;
-    --brass-hi: #f3ca3e;
-    --brass-glow: rgba(243, 202, 62, 0.15);
-    --maroon: #a8402f;
-    --maroon-hi: #d95843;
-    --teal: #2dd4bf;
-    --teal-dim: rgba(45, 212, 191, 0.12);
-    --text-main: #f8f4e6;
-    --text-sub: #a39b8b;
-    --text-faint: #6e6758;
-    --border: rgba(243, 202, 62, 0.22);
-    --border-soft: rgba(255, 255, 255, 0.08);
-    --card-bg: rgba(16, 23, 38, 0.7);
-    --card-bg-solid: #101726;
-    --glass: rgba(8, 12, 20, 0.75);
-    --shadow: 0 20px 40px rgba(0,0,0,0.5);
-    --nav-h: 72px;
-    --radius: 14px;
-    --font-display: 'Fraunces', serif;
-    --font-body: 'Inter', sans-serif;
-    --font-mono: 'IBM Plex Mono', monospace;
+    --bg-base: #080b11;
+    --bg-surface: #0f1523;
+    --bg-surface-elevated: #161e31;
+    --bg-glass: rgba(15, 21, 35, 0.75);
+    
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --primary-glow: rgba(99, 102, 241, 0.18);
+    
+    --accent-teal: #14b8a6;
+    --accent-teal-glow: rgba(20, 184, 166, 0.15);
+    --accent-gold: #f59e0b;
+    --accent-rose: #f43f5e;
+    
+    --text-main: #f3f4f6;
+    --text-sub: #9ca3af;
+    --text-muted: #6b7280;
+    
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-active: rgba(99, 102, 241, 0.35);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    
+    --shadow-main: 0 12px 32px -8px rgba(0, 0, 0, 0.5);
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --nav-h: 74px;
   }
 
   [data-theme="light"] {
-    --ink: #f7f5f0;
-    --ink-2: #ede8dc;
-    --ink-3: #e0d8c5;
-    --text-main: #18140e;
-    --text-sub: #5c5243;
-    --text-faint: #8c806d;
-    --border: rgba(168, 64, 47, 0.22);
-    --border-soft: rgba(24, 20, 14, 0.08);
-    --card-bg: rgba(255, 253, 247, 0.85);
-    --card-bg-solid: #ffffff;
-    --glass: rgba(247, 245, 240, 0.85);
-    --shadow: 0 16px 35px rgba(90, 70, 30, 0.08);
+    --bg-base: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #f1f5f9;
+    --bg-glass: rgba(255, 255, 255, 0.82);
+    
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --primary-glow: rgba(79, 70, 229, 0.12);
+    
+    --accent-teal: #0d9488;
+    --accent-teal-glow: rgba(13, 148, 136, 0.12);
+    --accent-gold: #d97706;
+    --accent-rose: #e11d48;
+    
+    --text-main: #0f172a;
+    --text-sub: #475569;
+    --text-muted: #94a3b8;
+    
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --border-active: rgba(79, 70, 229, 0.25);
+    --shadow-main: 0 12px 32px -8px rgba(15, 23, 42, 0.08);
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-body); }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans); }
   html { scroll-behavior: smooth; }
   body {
-    background: var(--ink);
+    background-color: var(--bg-base);
     color: var(--text-main);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    transition: background .3s ease, color .3s ease;
+    transition: background-color .3s ease, color .3s ease;
   }
 
   a { color: inherit; text-decoration: none; }
   button { border: none; outline: none; background: transparent; cursor: pointer; }
-  ::selection { background: var(--brass-hi); color: #080c14; }
 
-  /* Background Glow Layer */
-  .grain {
+  /* Background Glow Canvas */
+  .bg-glow-layer {
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: -1;
     background: 
-      radial-gradient(circle at 10% 10%, rgba(243, 202, 62, 0.06) 0%, transparent 40%),
-      radial-gradient(circle at 90% 90%, rgba(168, 64, 47, 0.08) 0%, transparent 45%);
+      radial-gradient(circle at 15% 15%, var(--primary-glow) 0%, transparent 45%),
+      radial-gradient(circle at 85% 85%, var(--accent-teal-glow) 0%, transparent 45%);
   }
 
-  /* MODERN CLEAN NAVBAR */
+  /* NAVBAR */
   .navbar {
     height: var(--nav-h);
-    background: var(--glass);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border-soft);
+    background: var(--bg-glass);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border-subtle);
     position: sticky;
     top: 0;
     z-index: 1000;
-    display: flex;
-    align-items: center;
-    transition: all .3s ease;
   }
   .nav-container {
-    width: 100%;
     max-width: 1320px;
+    height: 100%;
     margin: 0 auto;
     padding: 0 1.5rem;
     display: flex;
@@ -104,110 +115,97 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    color: var(--text-main);
   }
   .brand-logo i {
-    font-size: 1.4rem;
-    color: var(--brass-hi);
-    background: var(--brass-glow);
-    padding: 10px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    transition: transform .3s ease;
+    font-size: 1.25rem;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px var(--primary-glow);
   }
-  .brand-logo:hover i { transform: rotate(-8deg) scale(1.05); }
-  .brand-text { display: flex; flex-direction: column; }
-  .brand-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.3px; line-height: 1.1; }
-  .brand-tag { font-family: var(--font-mono); font-size: .62rem; letter-spacing: 1.5px; color: var(--text-faint); text-transform: uppercase; margin-top: 2px; }
+  .brand-name { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; }
+  .brand-tag { font-family: var(--font-mono); font-size: .62rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-  /* Navigation Links */
-  .nav-links { display: flex; gap: .4rem; align-items: center; list-style: none; }
+  .nav-links { display: flex; gap: .3rem; align-items: center; list-style: none; }
   .nav-links a {
     color: var(--text-sub);
     font-weight: 600;
-    font-size: .85rem;
+    font-size: .88rem;
+    padding: .55rem 1rem;
+    border-radius: var(--radius-md);
+    transition: all .2s ease;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: .55rem 1rem;
-    border-radius: 10px;
-    transition: all .2s ease;
   }
-  .nav-links a:hover {
-    color: var(--text-main);
-    background: var(--border-soft);
-  }
-  .nav-links a.active {
-    color: var(--brass-hi);
-    background: var(--brass-glow);
-    border: 1px solid var(--border);
-  }
+  .nav-links a:hover { color: var(--text-main); background: var(--border-subtle); }
+  .nav-links a.active { color: #fff; background: var(--primary); }
 
-  /* Nav Actions */
   .nav-actions { display: flex; align-items: center; gap: .6rem; }
   .icon-btn {
-    background: var(--card-bg-solid);
-    border: 1px solid var(--border-soft);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
     color: var(--text-sub);
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: .95rem;
     transition: all .2s ease;
   }
-  .icon-btn:hover { color: var(--text-main); border-color: var(--border); transform: translateY(-1px); }
-  .icon-btn.active { color: var(--brass-hi); background: var(--brass-glow); border-color: var(--brass-hi); }
+  .icon-btn:hover { color: var(--text-main); border-color: var(--border-active); }
+  .icon-btn.active { color: var(--accent-gold); border-color: var(--accent-gold); background: rgba(245, 158, 11, 0.1); }
   
   .login-link-btn {
-    background: linear-gradient(135deg, var(--maroon), var(--maroon-hi));
-    color: #ffffff;
-    padding: .6rem 1.25rem;
-    border-radius: 10px;
+    background: var(--text-main);
+    color: var(--bg-base);
+    padding: .55rem 1.1rem;
+    border-radius: var(--radius-md);
     font-weight: 700;
-    font-size: .82rem;
+    font-size: .85rem;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 4px 14px rgba(168, 64, 47, 0.3);
     transition: all .2s ease;
   }
-  .login-link-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(168, 64, 47, 0.45); filter: brightness(1.08); }
-  .login-link-btn:active { transform: translateY(0); }
+  .login-link-btn:hover { opacity: 0.9; transform: translateY(-1px); }
   
-  .mobile-menu-btn { display: none; color: var(--text-main); font-size: 1.25rem; width: 42px; height: 42px; border-radius: 10px; background: var(--card-bg-solid); border: 1px solid var(--border-soft); }
+  .mobile-menu-btn { display: none; }
 
-  /* HERO & TYPEWRITER */
-  .hero { padding: 4rem 1.5rem 1.5rem; text-align: center; max-width: 820px; margin: 0 auto; }
+  /* HERO SECTION */
+  .hero { padding: 4.5rem 1.5rem 2rem; text-align: center; max-width: 850px; margin: 0 auto; }
   .hero-badge {
-    font-family: var(--font-mono);
-    background: var(--brass-glow);
-    border: 1px solid var(--border);
-    color: var(--brass-hi);
-    padding: .35rem 1.1rem;
-    border-radius: 30px;
-    font-size: .68rem;
-    font-weight: 600;
+    background: var(--accent-teal-glow);
+    border: 1px solid rgba(20, 184, 166, 0.3);
+    color: var(--accent-teal);
+    padding: .35rem 1rem;
+    border-radius: 50px;
+    font-size: .75rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 1.2rem;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
     display: inline-block;
   }
   .hero-title {
-    font-family: var(--font-display);
-    font-size: 2.8rem;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
-    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -1px;
+    margin-bottom: 1.2rem;
   }
 
-  /* CLEAN TYPEWRITER WRAPPER WITH DIRECT BLINK CURSOR */
   .typewriter-wrapper {
-    color: var(--brass-hi);
-    border-bottom: 2px solid var(--brass-hi);
+    background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: inline-flex;
     align-items: center;
   }
@@ -215,161 +213,142 @@
     display: inline-block;
     width: 3px;
     height: 1em;
-    background-color: var(--brass-hi);
+    background-color: var(--primary);
     margin-left: 4px;
-    vertical-align: middle;
     animation: blink 0.75s infinite;
   }
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-  .hero-sub { color: var(--text-sub); font-size: 1rem; margin-bottom: 2rem; line-height: 1.6; }
+  .hero-sub { color: var(--text-sub); font-size: 1.05rem; margin-bottom: 2.2rem; line-height: 1.6; }
 
   /* SEARCH BAR */
-  .search-container { max-width: 600px; margin: 0 auto; position: relative; }
+  .search-container { max-width: 620px; margin: 0 auto; position: relative; }
   .search-input {
     width: 100%;
-    padding: 1rem 1.2rem 1rem 3.2rem;
-    background: var(--card-bg-solid);
-    border: 1px solid var(--border-soft);
-    border-radius: 14px;
+    padding: 1.1rem 1.2rem 1.1rem 3.4rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
     color: var(--text-main);
-    font-size: .95rem;
+    font-size: .98rem;
     outline: none;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-main);
     transition: all .25s ease;
   }
-  .search-input:focus { border-color: var(--brass-hi); box-shadow: 0 0 0 4px var(--brass-glow); }
-  .search-input::placeholder { color: var(--text-faint); }
-  .search-icon { position: absolute; left: 1.2rem; top: 50%; transform: translateY(-50%); color: var(--text-faint); font-size: 1rem; transition: color .2s; }
-  .search-input:focus + .search-icon { color: var(--brass-hi); }
+  .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-glow); }
+  .search-input::placeholder { color: var(--text-muted); }
+  .search-icon { position: absolute; left: 1.3rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; }
 
-  /* FILTER BAR */
-  .filter-section { max-width: 1320px; margin: 2.2rem auto 1rem; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .tabs-container { display: flex; gap: .4rem; flex-wrap: wrap; background: var(--card-bg-solid); padding: .35rem; border-radius: 12px; border: 1px solid var(--border-soft); }
+  /* FILTER SECTION */
+  .filter-section { max-width: 1320px; margin: 3rem auto 1.5rem; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .tabs-container { display: flex; gap: .4rem; background: var(--bg-surface); padding: .35rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); }
   .tab-btn {
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     color: var(--text-sub);
     padding: .5rem 1rem;
     font-weight: 600;
-    font-size: .82rem;
+    font-size: .84rem;
     transition: all .2s ease;
   }
-  .tab-btn.active { color: var(--brass-hi); background: var(--brass-glow); }
-  .tab-btn:hover:not(.active) { color: var(--text-main); background: var(--border-soft); }
+  .tab-btn.active { color: #fff; background: var(--primary); }
+  .tab-btn:hover:not(.active) { color: var(--text-main); }
 
   .dropdown-filters { display: flex; gap: .75rem; flex-wrap: wrap; }
   .select-filter {
-    background: var(--card-bg-solid);
-    border: 1px solid var(--border-soft);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
     color: var(--text-main);
     padding: .6rem 1rem;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     outline: none;
     font-weight: 500;
-    font-size: .82rem;
+    font-size: .84rem;
     cursor: pointer;
     min-width: 160px;
-    transition: border-color .2s;
   }
-  .select-filter:focus { border-color: var(--brass-hi); }
+  .select-filter:focus { border-color: var(--primary); }
 
-  /* GRID & CARDS */
-  .main-layout { max-width: 1320px; margin: 1rem auto 0; padding: 0 1.5rem 4rem; flex: 1; width: 100%; }
-  .materials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-  .state-msg { grid-column: 1/-1; text-align: center; color: var(--text-sub); padding: 4rem 0; font-size: .95rem; }
-  .state-msg i { display: block; font-size: 2.2rem; margin-bottom: .8rem; color: var(--text-faint); }
+  /* MAIN CONTENT & CARDS */
+  .main-layout { max-width: 1320px; margin: 0 auto; padding: 0 1.5rem 4rem; flex: 1; width: 100%; }
+  .materials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1.5rem; }
+  .state-msg { grid-column: 1/-1; text-align: center; color: var(--text-sub); padding: 5rem 0; font-size: 1rem; }
+  .state-msg i { display: block; font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-muted); }
 
   .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-soft);
-    border-radius: var(--radius);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
     display: flex;
     flex-direction: column;
-    position: relative;
     overflow: hidden;
-    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    transition: all .25s ease;
   }
-  .card:hover { transform: translateY(-4px); border-color: var(--border); box-shadow: var(--shadow); }
-  .card::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--brass-hi), var(--maroon-hi));
-    opacity: .8;
-  }
+  .card:hover { transform: translateY(-4px); border-color: var(--border-active); box-shadow: var(--shadow-main); }
 
-  .card-body { padding: 1.4rem 1.4rem 0; flex: 1; }
-  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; gap: .6rem; }
+  .card-body { padding: 1.5rem; flex: 1; }
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.9rem; }
   .call-number {
     font-family: var(--font-mono);
-    font-size: .65rem;
-    color: var(--brass-hi);
-    background: var(--brass-glow);
-    border: 1px solid var(--border);
-    padding: .2rem .55rem;
-    border-radius: 6px;
-    white-space: nowrap;
-  }
-  .bookmark-icon { cursor: pointer; color: var(--text-faint); font-size: 1.15rem; transition: color .2s, transform .2s; }
-  .bookmark-icon:hover { transform: scale(1.15); }
-  .bookmark-icon.active { color: var(--brass-hi); }
-
-  .card-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; margin-bottom: .45rem; line-height: 1.35; color: var(--text-main); }
-  .card-desc { color: var(--text-sub); font-size: .85rem; line-height: 1.5; margin-bottom: 1.1rem; }
-
-  .card-meta { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.1rem; }
-  .meta-pill {
-    background: var(--ink-3);
-    border: 1px solid var(--border-soft);
-    padding: .25rem .6rem;
-    border-radius: 6px;
     font-size: .7rem;
+    font-weight: 600;
+    color: var(--accent-teal);
+    background: var(--accent-teal-glow);
+    padding: .25rem .6rem;
+    border-radius: var(--radius-sm);
+  }
+  .bookmark-icon { cursor: pointer; color: var(--text-muted); font-size: 1.1rem; transition: all .2s; }
+  .bookmark-icon:hover { transform: scale(1.15); color: var(--text-main); }
+  .bookmark-icon.active { color: var(--accent-gold); }
+
+  .card-title { font-size: 1.15rem; font-weight: 700; margin-bottom: .5rem; line-height: 1.4; }
+  .card-desc { color: var(--text-sub); font-size: .88rem; line-height: 1.5; margin-bottom: 1.2rem; }
+
+  .card-meta { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .meta-pill {
+    background: var(--bg-surface-elevated);
+    padding: .25rem .65rem;
+    border-radius: var(--radius-sm);
+    font-size: .72rem;
     color: var(--text-sub);
-    font-family: var(--font-mono);
+    font-weight: 500;
   }
 
-  .card-admin-tag {
-    font-size: .74rem;
-    color: var(--text-faint);
-    padding: .75rem 1.4rem;
-    border-top: 1px dashed var(--border-soft);
+  .card-footer {
+    padding: .85rem 1.5rem;
+    background: var(--bg-surface-elevated);
+    border-top: 1px solid var(--border-subtle);
+    font-size: .75rem;
+    color: var(--text-muted);
     display: flex;
     justify-content: space-between;
-    align-items: center;
   }
-  .card-admin-tag b { color: var(--brass-hi); font-weight: 600; }
+  .card-footer b { color: var(--text-sub); }
 
-  .card-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--border-soft); }
+  .card-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--border-subtle); }
   .action-btn {
-    border: none;
-    padding: .8rem .3rem;
+    padding: .85rem .3rem;
     font-weight: 700;
-    font-size: .78rem;
-    cursor: pointer;
+    font-size: .8rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    background: transparent;
     color: var(--text-sub);
-    border-right: 1px solid var(--border-soft);
-    transition: background .2s, color .2s;
+    border-right: 1px solid var(--border-subtle);
+    transition: all .2s;
   }
   .action-btn:last-child { border-right: none; }
-  .btn-view:hover { color: var(--teal); background: var(--teal-dim); }
-  .btn-share:hover { color: var(--brass-hi); background: var(--brass-glow); }
-  .btn-dl { color: var(--maroon-hi); }
-  .btn-dl:hover { background: rgba(168, 64, 47, 0.12); }
+  .btn-view:hover { color: var(--primary); background: var(--primary-glow); }
+  .btn-share:hover { color: var(--accent-teal); background: var(--accent-teal-glow); }
+  .btn-dl { color: var(--accent-rose); }
+  .btn-dl:hover { background: rgba(244, 63, 94, 0.1); }
 
   /* PDF MODAL */
   .modal {
     position: fixed;
     inset: 0;
-    background: rgba(8, 12, 20, 0.82);
-    backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(10px);
     z-index: 2000;
     display: none;
     justify-content: center;
@@ -377,58 +356,55 @@
     padding: 1.5rem;
   }
   .modal-content {
-    background: var(--ink-2);
-    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
     width: 100%;
     max-width: 960px;
     height: 85vh;
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-main);
   }
   .modal-header {
-    padding: 1rem 1.4rem;
-    background: var(--card-bg-solid);
-    border-bottom: 1px solid var(--border-soft);
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .modal-header h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; }
-  .modal-close { background: none; border: none; color: var(--text-sub); font-size: 1.25rem; cursor: pointer; transition: color .2s; }
-  .modal-close:hover { color: var(--maroon-hi); }
+  .modal-close { color: var(--text-sub); font-size: 1.2rem; }
+  .modal-close:hover { color: var(--accent-rose); }
   .pdf-iframe { width: 100%; height: 100%; border: none; background: #fff; }
 
   /* FOOTER */
-  footer { background: var(--glass); border-top: 1px solid var(--border-soft); padding: 3.5rem 1.5rem 2rem; margin-top: auto; }
+  footer { background: var(--bg-surface); border-top: 1px solid var(--border-subtle); padding: 3.5rem 1.5rem 2rem; margin-top: auto; }
   .footer-grid { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 2.5rem; margin-bottom: 2.5rem; }
-  .footer-col h4 { font-family: var(--font-display); font-size: 1rem; margin-bottom: 1rem; font-weight: 600; color: var(--text-main); }
-  .footer-col p { color: var(--text-sub); font-size: .85rem; line-height: 1.6; }
+  .footer-col h4 { font-size: .95rem; margin-bottom: 1.2rem; font-weight: 700; color: var(--text-main); }
+  .footer-col p { color: var(--text-sub); font-size: .88rem; line-height: 1.6; }
   .footer-links { list-style: none; }
-  .footer-links li { margin-bottom: .55rem; }
-  .footer-links a { color: var(--text-sub); font-size: .85rem; transition: color .2s; }
-  .footer-links a:hover { color: var(--brass-hi); }
+  .footer-links li { margin-bottom: .6rem; }
+  .footer-links a { color: var(--text-sub); font-size: .88rem; transition: color .2s; }
+  .footer-links a:hover { color: var(--primary); }
   .footer-bottom {
     max-width: 1320px;
     margin: 0 auto;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--border-soft);
+    border-top: 1px solid var(--border-subtle);
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    color: var(--text-faint);
-    font-size: .78rem;
-    font-family: var(--font-mono);
+    color: var(--text-muted);
+    font-size: .8rem;
   }
 
-  /* RESPONSIVE DESIGN & MOBILE DRAWER */
+  /* RESPONSIVE DESIGNS */
   @media(max-width: 1024px) {
     .footer-grid { grid-template-columns: 1fr 1fr; }
-    .hero-title { font-size: 2.3rem; }
+    .hero-title { font-size: 2.4rem; }
   }
 
   @media(max-width: 768px) {
@@ -436,112 +412,103 @@
     .nav-links {
       position: absolute;
       top: var(--nav-h);
-      left: 0;
-      width: 100%;
-      background: var(--ink-2);
-      border-bottom: 1px solid var(--border-soft);
+      left: 0; width: 100%;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
       flex-direction: column;
       padding: 1rem 1.5rem;
-      gap: .5rem;
       transform: translateY(-150%);
       opacity: 0;
       pointer-events: none;
-      transition: transform .3s ease, opacity .3s ease;
-      box-shadow: var(--shadow);
+      transition: all .3s ease;
     }
-    .nav-links.mobile-open {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .nav-links a { width: 100%; padding: .75rem 1rem; }
+    .nav-links.mobile-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .nav-links a { width: 100%; padding: .75rem; }
     
     .filter-section { flex-direction: column; align-items: stretch; }
     .dropdown-filters { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
     .select-filter { min-width: 0; width: 100%; }
-    .tabs-container { overflow-x: auto; width: 100%; justify-content: flex-start; }
-    
+    .tabs-container { overflow-x: auto; width: 100%; }
     .footer-grid { grid-template-columns: 1fr; }
-    .hero { padding: 2.5rem 1rem 1rem; }
-    .hero-title { font-size: 1.85rem; }
-    .materials-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2rem; }
   }
 
   @media(max-width: 480px) {
     .dropdown-filters { grid-template-columns: 1fr; }
     .card-actions { grid-template-columns: 1fr; }
-    .action-btn { border-right: none; border-bottom: 1px solid var(--border-soft); }
+    .action-btn { border-right: none; border-bottom: 1px solid var(--border-subtle); }
     .action-btn:last-child { border-bottom: none; }
   }
 </style>
 </head>
 <body>
-<div class="grain"></div>
+<div class="bg-glow-layer"></div>
 
-<!-- MODERN NAVBAR -->
+<!-- NAVIGATION -->
 <nav class="navbar">
   <div class="nav-container">
     <a href="index.html" class="brand-logo">
-      <i class="fa-solid fa-book-bookmark"></i>
-      <div class="brand-text">
-        <span class="brand-name">EduPulse Hub</span>
-        <span class="brand-tag">Academic Vault</span>
+      <i class="fa-solid fa-graduation-cap"></i>
+      <div>
+        <div class="brand-name">EduPulse</div>
+        <div class="brand-tag">Academic Vault</div>
       </div>
     </a>
     
     <ul class="nav-links" id="navLinks">
-      <li><a href="#" class="active" data-type="All"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="#" class="active" data-type="All"><i class="fa-solid fa-border-all"></i> All Materials</a></li>
       <li><a href="#" data-type="Syllabus"><i class="fa-solid fa-scroll"></i> Syllabus</a></li>
       <li><a href="#" data-type="Notes"><i class="fa-solid fa-book-open"></i> Notes</a></li>
-      <li><a href="#" data-type="PYQ"><i class="fa-solid fa-file-signature"></i> PYQs</a></li>
+      <li><a href="#" data-type="PYQ"><i class="fa-solid fa-file-pen"></i> PYQs</a></li>
       <li><a href="#" data-type="Model Paper"><i class="fa-solid fa-file-lines"></i> Models</a></li>
     </ul>
 
     <div class="nav-actions">
-      
-      <button class="icon-btn" id="themeBtn" title="Toggle Dark/Light Mode"><i class="fa-solid fa-sun"></i></button>
-      <a href="login.html" class="login-link-btn" title="Admin Login Studio">
+      <button class="icon-btn" id="savedFilterBtn" title="Saved Bookmarks"><i class="fa-solid fa-bookmark"></i></button>
+      <button class="icon-btn" id="themeBtn" title="Toggle Theme"><i class="fa-solid fa-sun"></i></button>
+      <a href="login.html" class="login-link-btn" title="Admin Login">
         <i class="fa-solid fa-user-shield"></i> <span>Login</span>
       </a>
-      <button class="mobile-menu-btn" id="mobileBtn" aria-label="Toggle Navigation"><i class="fa-solid fa-bars"></i></button>
+      <button class="icon-btn mobile-menu-btn" id="mobileBtn"><i class="fa-solid fa-bars"></i></button>
     </div>
   </div>
 </nav>
 
 <!-- HERO SECTION -->
 <section class="hero">
-  <span class="hero-badge">Departmental Resource Vault</span>
+  <span class="hero-badge"><i class="fa-solid fa-bolt"></i> Departmental Resource Hub</span>
   <h1 class="hero-title">
-    Every syllabus, note &<br>
-    <span class="typewriter-wrapper"><span id="typewriter"></span><span class="cursor"></span></span>,<br>
-    catalogued in one shelf.
+    Access verified course syllabus, notes &amp;<br>
+    <span class="typewriter-wrapper"><span id="typewriter"></span><span class="cursor"></span></span>
   </h1>
-  <p class="hero-sub">Verified course notes, official semester syllabi and previous year papers, verified and catalogued for easy access.</p>
+  <p class="hero-sub">Organized previous year questions, lecture notes, and official course outlines all in one simple archive.</p>
+  
   <div class="search-container">
-    <input type="text" id="searchInput" class="search-input" placeholder="Search by subject, topic, code or department...">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search by subject, code, topic or branch...">
     <i class="fa-solid fa-magnifying-glass search-icon"></i>
   </div>
 </section>
 
-<!-- FILTER BAR -->
+<!-- CONTROLS & FILTERS -->
 <div class="filter-section">
   <div class="tabs-container" id="tabsContainer">
-    <button class="tab-btn active" data-type="All">All Material</button>
+    <button class="tab-btn active" data-type="All">All Items</button>
     <button class="tab-btn" data-type="Syllabus">Syllabus</button>
     <button class="tab-btn" data-type="Notes">Notes</button>
     <button class="tab-btn" data-type="PYQ">PYQs</button>
     <button class="tab-btn" data-type="Model Paper">Model Papers</button>
   </div>
+  
   <div class="dropdown-filters">
     <select id="yearFilter" class="select-filter">
-      <option value="All">Select Academic Year</option>
+      <option value="All">All Academic Years</option>
       <option value="1st Year">1st Year</option>
       <option value="2nd Year">2nd Year</option>
       <option value="3rd Year">3rd Year</option>
       <option value="4th Year">4th Year (Final)</option>
     </select>
     <select id="semFilter" class="select-filter">
-      <option value="All">Select Semester</option>
+      <option value="All">All Semesters</option>
       <option value="Sem 1">Semester 1</option><option value="Sem 2">Semester 2</option>
       <option value="Sem 3">Semester 3</option><option value="Sem 4">Semester 4</option>
       <option value="Sem 5">Semester 5</option><option value="Sem 6">Semester 6</option>
@@ -550,12 +517,14 @@
   </div>
 </div>
 
+<!-- CARDS CONTAINER -->
 <main class="main-layout">
   <div class="materials-grid" id="materialsGrid">
-    <div class="state-msg"><i class="fa-solid fa-spinner fa-spin"></i>Opening the archive…</div>
+    <div class="state-msg"><i class="fa-solid fa-circle-notch fa-spin"></i>Loading archive materials...</div>
   </div>
 </main>
 
+<!-- PDF PREVIEW MODAL -->
 <div class="modal" id="pdfModal">
   <div class="modal-content">
     <div class="modal-header">
@@ -566,24 +535,23 @@
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-col">
       <a href="#" class="brand-logo" style="margin-bottom:1rem;">
-        <i class="fa-solid fa-book-bookmark"></i>
-        <div class="brand-text">
-          <span class="brand-name">EduPulse Hub</span>
-        </div>
+        <i class="fa-solid fa-graduation-cap"></i>
+        <div class="brand-name">EduPulse</div>
       </a>
-      <p>EduPulse is an end-to-end college resource portal for students to easily access, view, share and download course documents.</p>
+      <p>EduPulse provides streamlined, quick academic document access for engineering & tech students.</p>
     </div>
     <div class="footer-col">
-      <h4>Quick Categories</h4>
+      <h4>Categories</h4>
       <ul class="footer-links">
         <li><a href="#" data-type="Syllabus">Semester Syllabus</a></li>
         <li><a href="#" data-type="Notes">Class Lecture Notes</a></li>
         <li><a href="#" data-type="PYQ">Previous Question Papers</a></li>
-        <li><a href="#" data-type="Model Paper">Sample Question Papers</a></li>
+        <li><a href="#" data-type="Model Paper">Sample Papers</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -591,58 +559,51 @@
       <ul class="footer-links">
         <li><a href="#">Computer Science &amp; Engg</a></li>
         <li><a href="#">Information Technology</a></li>
-        <li><a href="#">Electronics &amp; Communication</a></li>
-        <li><a href="#">Mechanical &amp; Civil Engg</a></li>
+        <li><a href="#">Electronics &amp; Comm.</a></li>
+        <li><a href="#">Mechanical &amp; Civil</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Faculty Desk</h4>
-      <p style="margin-bottom:1rem;">To add or manage materials, please authenticate via the Admin Portal.</p>
+      <h4>Admin Space</h4>
+      <p style="margin-bottom:1rem;">Faculty or admins can upload new documents via the control center.</p>
       <a href="login.html" class="login-link-btn"><i class="fa-solid fa-right-to-bracket"></i> <span>Admin Login</span></a>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 EduPulse Academic Vault</p>
-    <p><i class="fa-solid fa-shield-halved"></i> Verified Study Materials</p>
-    <p><i class="fa-solid fa-code"></i> Designed & Developed by Vikshant</p>
+    <p>© 2026 EduPulse Hub</p>
+    <p><i class="fa-solid fa-shield-halved"></i> Verified Departmental Vault</p>
+    <p><i class="fa-solid fa-code"></i> Designed &amp; Developed by Vikshant</p>
   </div>
 </footer>
 
 <script>
-/* ---------- TYPEWRITER EFFECT ---------- */
-const phrases = ["question paper", "class notes", "course syllabus", "sample paper"];
-let phraseIdx = 0;
-let charIdx = 0;
-let isDeleting = false;
+/* ---------- TYPEWRITER ANIMATION ---------- */
+const phrases = ["question papers", "lecture notes", "course syllabi", "model papers"];
+let phraseIdx = 0, charIdx = 0, isDeleting = false;
 const typewriterEl = document.getElementById("typewriter");
 
 function typeEffect() {
   const currentPhrase = phrases[phraseIdx];
-
-  if (isDeleting) {
-    typewriterEl.textContent = currentPhrase.substring(0, charIdx - 1);
-    charIdx--;
-  } else {
-    typewriterEl.textContent = currentPhrase.substring(0, charIdx + 1);
-    charIdx++;
-  }
-
-  let typingSpeed = isDeleting ? 50 : 110;
+  typewriterEl.textContent = isDeleting 
+    ? currentPhrase.substring(0, charIdx - 1) 
+    : currentPhrase.substring(0, charIdx + 1);
+  
+  charIdx += isDeleting ? -1 : 1;
+  let typingSpeed = isDeleting ? 40 : 90;
 
   if (!isDeleting && charIdx === currentPhrase.length) {
-    typingSpeed = 2200;
+    typingSpeed = 2000;
     isDeleting = true;
   } else if (isDeleting && charIdx === 0) {
     isDeleting = false;
     phraseIdx = (phraseIdx + 1) % phrases.length;
-    typingSpeed = 400;
+    typingSpeed = 300;
   }
-
   setTimeout(typeEffect, typingSpeed);
 }
 document.addEventListener("DOMContentLoaded", typeEffect);
 
-/* ---------- CORE APP LOGIC ---------- */
+/* ---------- STATE MANAGEMENT ---------- */
 let selectedType = 'All';
 let showOnlySaved = false;
 let allMaterials = [];
@@ -656,10 +617,7 @@ function loadMaterials(){
 }
 
 function saveMaterials(list){
-  try {
-    localStorage.setItem('edupulse_db', JSON.stringify(list));
-    return true;
-  } catch(e){ return false; }
+  try { localStorage.setItem('edupulse_db', JSON.stringify(list)); return true; } catch(e){ return false; }
 }
 
 function loadBookmarks(){
@@ -670,16 +628,13 @@ function loadBookmarks(){
 }
 
 function saveBookmarks(list){
-  try {
-    localStorage.setItem('edupulse_bookmarks', JSON.stringify(list));
-    return true;
-  } catch(e){ return false; }
+  try { localStorage.setItem('edupulse_bookmarks', JSON.stringify(list)); return true; } catch(e){ return false; }
 }
 
-/* Default Initial Seed Data */
+/* DEFAULT DEMO DATA */
 const seedData = () => ([
-  {id:1001,type:'Syllabus',title:'B.Tech CSE — Full Syllabus (2026 Batch)',desc:'Complete semester-wise curriculum with credit structure and evaluation scheme.',subject:'Curriculum',branch:'CSE',year:'1st Year',semester:'',adminName:'Dept. Office',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-3600000},
-  {id:1002,type:'Notes',title:'Data Structures — Trees & Graphs',desc:'Lecture notes covering binary trees, BST, AVL trees and graph traversal.',subject:'Data Structures',branch:'CSE',year:'',semester:'Sem 3',adminName:'Prof. R. Sharma',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-86400000}
+  {id:1001,type:'Syllabus',title:'B.Tech CSE — Full Syllabus Outline',desc:'Comprehensive curriculum roadmap and semester credit breakdown.',subject:'Curriculum',branch:'CSE',year:'1st Year',semester:'',adminName:'Dept. Office',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-3600000},
+  {id:1002,type:'Notes',title:'Data Structures — Trees & Graph Traversal',desc:'Complete notes on BST, AVL Trees, BFS, DFS and graph algorithms.',subject:'Data Structures',branch:'CSE',year:'',semester:'Sem 3',adminName:'Prof. R. Sharma',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-86400000}
 ]);
 
 function timeAgo(ts){
@@ -687,12 +642,12 @@ function timeAgo(ts){
   if(s<60) return 'Just now';
   if(s<3600) return Math.floor(s/60)+'m ago';
   if(s<86400) return Math.floor(s/3600)+'h ago';
-  if(s<2592000) return Math.floor(s/86400)+'d ago';
-  return Math.floor(s/2592000)+'mo ago';
+  return Math.floor(s/86400)+'d ago';
 }
 
 function esc(str){ return String(str||'').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
+/* ---------- RENDER LOGIC ---------- */
 function renderData(){
   const grid = document.getElementById('materialsGrid');
   const query = document.getElementById('searchInput').value.toLowerCase();
@@ -710,14 +665,14 @@ function renderData(){
   }).sort((a,b)=>b.timestamp-a.timestamp);
 
   if(!matches.length){
-    grid.innerHTML = `<div class="state-msg"><i class="fa-solid fa-box-archive"></i>No study materials found matching your selected filters.</div>`;
+    grid.innerHTML = `<div class="state-msg"><i class="fa-solid fa-folder-open"></i>No academic materials match your current criteria.</div>`;
     return;
   }
 
   matches.forEach(item=>{
     const isBookmarked = bookmarks.includes(item.id);
-    const badgeTag = item.semester ? item.semester : (item.year || 'N/A');
-    const callNo = (item.branch||'GEN').slice(0,3).toUpperCase() + '·' + badgeTag;
+    const badgeTag = item.semester ? item.semester : (item.year || 'General');
+    const callNo = (item.branch||'GEN').slice(0,3).toUpperCase() + ' • ' + badgeTag;
     const pdfSrc = item.pdfData || item.pdfUrl || '#';
 
     const card = document.createElement('div');
@@ -728,16 +683,18 @@ function renderData(){
           <span class="call-number">${esc(callNo)}</span>
           <i class="fa-${isBookmarked?'solid':'regular'} fa-bookmark bookmark-icon ${isBookmarked?'active':''}" data-id="${item.id}"></i>
         </div>
-        <h2 class="card-title">${esc(item.title)}</h2>
+        <h3 class="card-title">${esc(item.title)}</h3>
         <p class="card-desc">${esc(item.desc||'')}</p>
         <div class="card-meta">
           <span class="meta-pill">${esc(item.type)}</span>
           <span class="meta-pill">${esc(item.subject)}</span>
           <span class="meta-pill">${esc(item.branch)}</span>
-          <span class="meta-pill">${esc(badgeTag)}</span>
         </div>
       </div>
-      <div class="card-admin-tag"><span>Added by <b>${esc(item.adminName)}</b></span><span><i class="fa-regular fa-clock"></i> ${timeAgo(item.timestamp)}</span></div>
+      <div class="card-footer">
+        <span>By <b>${esc(item.adminName)}</b></span>
+        <span><i class="fa-regular fa-clock"></i> ${timeAgo(item.timestamp)}</span>
+      </div>
       <div class="card-actions">
         <button class="action-btn btn-view" data-action="view" data-id="${item.id}"><i class="fa-solid fa-eye"></i> View</button>
         <button class="action-btn btn-share" data-action="share" data-id="${item.id}"><i class="fa-solid fa-share-nodes"></i> Share</button>
@@ -747,60 +704,18 @@ function renderData(){
   });
 }
 
-/* Helper Function: Base64 Blob Conversion */
-function dataURLtoBlob(dataurl) {
-  const arr = dataurl.split(',');
-  const mime = arr[0].match(/:(.*?);/)[1];
-  const bstr = atob(arr[1]);
-  let n = bstr.length;
-  const u8arr = new Uint8Array(n);
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n);
-  }
-  return new Blob([u8arr], { type: mime });
-}
-
-/* Dynamic Web Share API */
+/* SHARE UTILITY */
 async function shareResource(item) {
-  const pdfSrc = item.pdfData || item.pdfUrl;
-  const tagInfo = item.semester ? item.semester : (item.year || 'N/A');
   const websiteUrl = window.location.origin !== 'null' ? window.location.origin : 'https://edupulsehub.pages.dev';
-
-  const shareCaption = `📚 Subject: ${item.subject} | Class: ${tagInfo}\n🌐 Link: ${websiteUrl}`;
-
-  try {
-    await navigator.clipboard.writeText(shareCaption);
-  } catch (e) {
-    console.warn("Clipboard auto-copy failed", e);
-  }
-
-  const cleanTitle = (item.title || 'Material').replace(/[^a-zA-Z0-9 ]/g, "").trim();
-  const cleanSubject = (item.subject || 'Subject').replace(/[^a-zA-Z0-9 ]/g, "").trim();
-  const fileName = `${cleanTitle}_${cleanSubject}_EduPulseHub.pdf`;
-
+  const shareText = `📚 Subject: ${item.subject}\n📄 Material: ${item.title}\n🌐 Link: ${websiteUrl}`;
+  
   if (navigator.share) {
     try {
-      let pdfFile = null;
-
-      if (pdfSrc && pdfSrc.startsWith('data:')) {
-        const blob = dataURLtoBlob(pdfSrc);
-        pdfFile = new File([blob], fileName, { type: 'application/pdf' });
-      } else if (pdfSrc && pdfSrc.startsWith('http')) {
-        const response = await fetch(pdfSrc);
-        const blob = await response.blob();
-        pdfFile = new File([blob], fileName, { type: 'application/pdf' });
-      }
-
-      if (pdfFile && navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
-        await navigator.share({
-          files: [pdfFile],
-          text: shareCaption
-        });
-        return;
-      }
-    } catch (err) {
-      if (err.name !== 'AbortError') console.warn(err);
-    }
+      await navigator.share({ title: item.title, text: shareText, url: websiteUrl });
+    } catch (e) { console.warn("Share aborted", e); }
+  } else {
+    navigator.clipboard.writeText(shareText);
+    alert("Share link & caption copied to clipboard!");
   }
 }
 
@@ -813,10 +728,7 @@ function toggleBookmark(id){
 
 function viewPDF(item){
   const pdfSrc = item.pdfData || item.pdfUrl;
-  if(!pdfSrc){
-    alert("No PDF preview available.");
-    return;
-  }
+  if(!pdfSrc){ alert("Preview unavailable for this file."); return; }
   document.getElementById('modalTitle').innerText = item.title;
   document.getElementById('pdfFrame').src = pdfSrc;
   document.getElementById('pdfModal').style.display = 'flex';
@@ -835,7 +747,7 @@ function setActiveType(type){
   renderData();
 }
 
-/* Event Handlers */
+/* EVENT LISTENERS */
 document.getElementById('yearFilter').addEventListener('change', (e)=>{
   if(e.target.value !== 'All') document.getElementById('semFilter').value = 'All';
   renderData();
@@ -884,7 +796,7 @@ document.getElementById('mobileBtn').addEventListener('click', ()=>{
   document.getElementById('navLinks').classList.toggle('mobile-open');
 });
 
-/* App Initialization */
+/* INIT APPLICATION */
 (function init(){
   allMaterials = loadMaterials();
   if(allMaterials.length === 0){
