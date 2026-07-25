@@ -227,7 +227,7 @@
   .hero-sub { color: var(--text-sub); font-size: clamp(0.95rem, 2vw, 1.05rem); margin-bottom: 2rem; line-height: 1.6; padding: 0 0.5rem; }
 
   /* SEARCH BAR */
-  .search-container { max-width: 580px; margin: 0 auto; position: pointer; padding: 0 0.5rem; width: 100%; }
+  .search-container { max-width: 580px; margin: 0 auto; position: relative; padding: 0 0.5rem; width: 100%; }
   .search-input {
     width: 100%;
     padding: 1rem 1rem 1rem 3.2rem;
@@ -594,7 +594,7 @@
 
 <script>
 /* ---------- TYPEWRITER ANIMATION ---------- */
-const phrases = ["question papers", "lecture notes", "course syllabi", "model papers"];
+const phrases = ["Question Papers", "Lecture notes", "Course syllabi", "model papers"];
 let phraseIdx = 0, charIdx = 0, isDeleting = false;
 const typewriterEl = document.getElementById("typewriter");
 
@@ -605,7 +605,7 @@ function typeEffect() {
     : currentPhrase.substring(0, charIdx + 1);
   
   charIdx += isDeleting ? -1 : 1;
-  let typingSpeed = isDeleting ? 40 : 90;
+  let typingSpeed = isDeleting ? 50 : 100;
 
   if (!isDeleting && charIdx === currentPhrase.length) {
     typingSpeed = 2000;
@@ -720,62 +720,67 @@ function renderData(){
   });
 }
 
-/* ADVANCED SHARE UTILITY WITH PDF FILE SUPPORT */
+/* NATIVE SHARE & CLIPBOARD FORMATTER */
 async function shareResource(item) {
   const websiteUrl = window.location.origin !== 'null' && window.location.origin.startsWith('http') 
     ? window.location.origin + window.location.pathname 
     : 'https://edupulsehub.pages.dev';
 
-  const classInfo = item.semester ? item.semester : (item.year || 'General Group');
-  const shareText = `📚 *Subject:* ${item.subject}\n🎓 *Class/Year:* ${classInfo}\n📄 *Topic:* ${item.title}\n\n🌐 *Access Vault Here:* ${websiteUrl}`;
+  const classInfo = item.semester ? item.semester : (item.year || 'General Year');
   
-  let sharedSuccessfully = false;
+  // Custom structured caption format: Subject | Class | Topic | URL
+  const captionText = `📚 *Subject:* ${item.subject} | 🎓 *Class:* ${classInfo} |🌐 *Visit:* ${websiteUrl}`;
+  
+  // 1. Copy caption automatically to clipboard
+  try {
+    await navigator.clipboard.writeText(captionText);
+  } catch (e) {
+    console.error("Clipboard copy failed", e);
+  }
 
-  // Check if Web Share API supports file sharing
-  if (navigator.canShare && item.pdfData && item.pdfData.startsWith('http')) {
+  let sharedSuccessfully = false;
+  const pdfUrl = item.pdfData || item.pdfUrl;
+
+  // 2. Open native app share sheet with file support if available
+  if (navigator.canShare && pdfUrl) {
     try {
-      // Fetch PDF blob to share the physical file
-      const response = await fetch(item.pdfData);
+      const response = await fetch(pdfUrl);
       const blob = await response.blob();
-      const file = new File([blob], `${item.title.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`, { type: 'application/pdf' });
+      const safeFileName = (item.title || 'Document').replace(/[^a-zA-Z0-9]/g, '_') + '.pdf';
+      const file = new File([blob], safeFileName, { type: 'application/pdf' });
 
       if (navigator.canShare({ files: [file] })) {
         await navigator.share({
           title: item.title,
-          text: shareText,
+          text: captionText,
           files: [file]
         });
         sharedSuccessfully = true;
       }
     } catch (err) {
-      console.log('File share fallback initiated:', err);
+      console.log('File sharing fallback:', err);
     }
   }
 
-  // Fallback to text/link share if file sharing isn't supported/failed
+  // 3. Fallback to standard link/text share sheet if file share is unsupported
   if (!sharedSuccessfully && navigator.share) {
     try {
       await navigator.share({
         title: item.title,
-        text: shareText,
+        text: captionText,
         url: websiteUrl
       });
       sharedSuccessfully = true;
     } catch (err) {
-      console.log('Share canceled or failed');
+      console.log('Share sheet dismissed');
     }
   }
 
-  // Always copy formatted details & link to clipboard as requested
-  if (!sharedSuccessfully || navigator.clipboard) {
-    try {
-      await navigator.clipboard.writeText(shareText);
-      if (!sharedSuccessfully) {
-        alert("📋 Details & Link copied to clipboard! You can now paste and share it anywhere.");
-      }
-    } catch (e) {
-      console.error("Clipboard error", e);
-    }
+  // Notify user that caption is ready in clipboard
+  if (sharedSuccessfully) {
+    console.log("Caption automatically copied to clipboard.");
+  } else {
+    alert("📋 Caption copied to clipboard! You can now paste it into WhatsApp, Telegram, or any app.");
   }
 }
 
