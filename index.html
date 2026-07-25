@@ -437,46 +437,67 @@ function renderData(){
     grid.appendChild(card);
   });
 }
-
-/* ---------- NATIVE SYSTEM APPS SHARE FUNCTION ---------- */
+/* ---------- PDF FILE + CUSTOM CAPTION SHARE ---------- */
 async function shareResource(item){
-  let targetUrl = item.pdfData || item.pdfUrl || window.location.href;
+  const pdfSrc = item.pdfData || item.pdfUrl || window.location.href;
+  const tagInfo = item.semester ? `Semester: ${item.semester}` : `Year: ${item.year || 'N/A'}`;
+  
+  // Custom caption format
+  const shareText = `📚 *${item.title}*\n📖 Subject: ${item.subject}\n🎓 ${tagInfo}\n\n🔗 View/Download: ${pdfSrc}\n🌐 Website: ${window.location.origin}`;
 
-  // Non-http links (like dummy local links) native dialogs me share nahi ho sakti, fallback set
-  if(!targetUrl.startsWith('http')){
-    targetUrl = window.location.href;
-  }
-
-  const shareData = {
-    title: item.title,
-    text: `📚 *${item.title}*\n📖 Subject: ${item.subject}\nCheck this out on EduPulse Hub!`,
-    url: targetUrl
-  };
-
-  // Browser level App Picker trigger (WhatsApp, Telegram, etc.)
+  // 1. Check if Native Web Share is available
   if (navigator.share) {
     try {
-      await navigator.share(shareData);
+      // Direct HTTP PDF URL check & File conversion
+      if (pdfSrc.startsWith('http')) {
+        const response = await fetch(pdfSrc);
+        const blob = await response.blob();
+        
+        // Sanitize file name
+        const fileName = (item.title.replace(/[^a-zA-Z0-9]/g, "_") || "document") + ".pdf";
+        const file = new File([blob], fileName, { type: 'application/pdf' });
+
+        // Check if browser allows PDF file sharing
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            files: [file],
+            title: item.title,
+            text: shareText
+          });
+          return;
+        }
+      }
+
+      // Fallback: Share Text & URL if file attachment is restricted
+      await navigator.share({
+        title: item.title,
+        text: shareText,
+        url: pdfSrc.startsWith('http') ? pdfSrc : window.location.href
+      });
       return;
     } catch (err) {
-      if(err.name !== 'AbortError'){
-        console.log('Share error:', err);
+      if (err.name !== 'AbortError') {
+        console.warn('Share Dialog closed or failed, falling back to Clipboard.', err);
+      } else {
+        return; // User canceled share sheet
       }
     }
   }
 
-  // Fallback Clipboard logic agar Native share block ya unsupported ho
+  // 2. Fallback: Copy Caption & Link to Clipboard
   if (navigator.clipboard) {
     try {
-      await navigator.clipboard.writeText(`${shareData.text}\n${targetUrl}`);
-      alert("📋 Content link copied to clipboard!\nAap ise direct WhatsApp ya kisi bhi app me paste kar sakte hain.");
+      await navigator.clipboard.writeText(shareText);
+      alert("📋 Great! Your PDF details and link are safely copied to your clipboard. You can now paste and share them across any app like WhatsApp, Slack, or Email.");
     } catch(e) {
-      alert("Link: " + targetUrl);
+      alert(shareText);
     }
   } else {
-    alert(`Share text:\n${shareData.text}\n${targetUrl}`);
+    alert(shareText);
   }
 }
+
+
 
 /* ---------- INTERACTIONS ---------- */
 function toggleBookmark(id){
