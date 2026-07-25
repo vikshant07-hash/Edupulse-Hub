@@ -3,30 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EduPulse Hub | Admin Authentication</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<title>EduPulse Hub | Admin Portal Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root {
-    --ink: #11172a;
-    --ink-2: #1a2238;
-    --brass: #c9a227;
-    --brass-hi: #e3bf47;
-    --maroon-hi: #c65543;
-    --teal: #2dd4bf;
-    --text-main: #f2ead9;
-    --text-sub: #a99b7c;
-    --border: rgba(201,162,39,0.25);
-    --shadow: 0 18px 40px rgba(0,0,0,0.45);
-    --font-display: 'Fraunces', serif;
-    --font-body: 'Inter', sans-serif;
-    --font-mono: 'IBM Plex Mono', monospace;
+    --bg-base: #080b11;
+    --bg-surface: #0f1523;
+    --bg-surface-elevated: #161e31;
+    --bg-glass: rgba(15, 21, 35, 0.75);
+    
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --primary-glow: rgba(99, 102, 241, 0.18);
+    
+    --accent-teal: #14b8a6;
+    --accent-teal-glow: rgba(20, 184, 166, 0.15);
+    --accent-gold: #f59e0b;
+    --accent-rose: #f43f5e;
+    
+    --text-main: #f3f4f6;
+    --text-sub: #9ca3af;
+    --text-muted: #6b7280;
+    
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-active: rgba(99, 102, 241, 0.35);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    
+    --shadow-main: 0 12px 32px -8px rgba(0, 0, 0, 0.5);
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-body); }
-  
+  [data-theme="light"] {
+    --bg-base: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #f1f5f9;
+    --bg-glass: rgba(255, 255, 255, 0.82);
+    
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --primary-glow: rgba(79, 70, 229, 0.12);
+    
+    --accent-teal: #0d9488;
+    --accent-teal-glow: rgba(13, 148, 136, 0.12);
+    --accent-gold: #d97706;
+    --accent-rose: #e11d48;
+    
+    --text-main: #0f172a;
+    --text-sub: #475569;
+    --text-muted: #94a3b8;
+    
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --border-active: rgba(79, 70, 229, 0.25);
+    --shadow-main: 0 12px 32px -8px rgba(15, 23, 42, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans); }
   body {
-    background: var(--ink);
+    background-color: var(--bg-base);
     color: var(--text-main);
     min-height: 100vh;
     display: flex;
@@ -35,50 +74,81 @@
     padding: 1.5rem;
     position: relative;
     overflow: hidden;
+    transition: background-color .3s ease, color .3s ease;
   }
 
-  /* Background Ambient Glow */
-  .bg-glow {
-    position: absolute;
+  /* Ambient Glow Canvas */
+  .bg-glow-layer {
+    position: fixed;
     inset: 0;
     pointer-events: none;
+    z-index: -1;
     background: 
-      radial-gradient(circle at 20% 20%, rgba(201,162,39,0.1) 0%, transparent 40%),
-      radial-gradient(circle at 80% 80%, rgba(168,64,47,0.12) 0%, transparent 45%);
+      radial-gradient(circle at 15% 15%, var(--primary-glow) 0%, transparent 45%),
+      radial-gradient(circle at 85% 85%, var(--accent-teal-glow) 0%, transparent 45%);
   }
 
+  .theme-toggle-top {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-sub);
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  .theme-toggle-top:hover { color: var(--text-main); border-color: var(--border-active); }
+
   .login-card {
-    background: var(--ink-2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
     width: 100%;
     max-width: 420px;
-    padding: 2.2rem 2rem;
-    box-shadow: var(--shadow);
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-main);
     position: relative;
     z-index: 10;
   }
 
   .card-header {
     text-align: center;
-    margin-bottom: 1.8rem;
+    margin-bottom: 2rem;
   }
 
   .brand-logo {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    color: var(--text-main);
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 0.4rem;
+    gap: 12px;
+    margin-bottom: .6rem;
   }
-
-  .brand-logo i { color: var(--brass); }
+  .brand-logo i {
+    font-size: 1.25rem;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px var(--primary-glow);
+  }
+  .brand-name { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.5px; text-align: left;}
+  .brand-tag { font-family: var(--font-mono); font-size: .62rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-align: left; }
 
   .card-subtitle {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     color: var(--text-sub);
+    margin-top: .4rem;
   }
 
   .field {
@@ -87,7 +157,7 @@
 
   .field label {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     font-weight: 600;
     color: var(--text-sub);
     margin-bottom: 0.4rem;
@@ -99,62 +169,66 @@
 
   .input-wrapper i.field-icon {
     position: absolute;
-    left: 1rem;
+    left: 1.1rem;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--text-sub);
-    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
   }
 
   .field input {
     width: 100%;
-    background: rgba(17,23,42,0.6);
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    padding: 0.75rem 2.5rem 0.75rem 2.6rem;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 0.8rem 2.5rem 0.8rem 2.8rem;
     color: var(--text-main);
     font-size: 0.9rem;
     outline: none;
-    transition: border-color 0.2s;
+    transition: all 0.2s ease;
   }
 
   .field input:focus {
-    border-color: var(--brass-hi);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-glow);
   }
 
   .toggle-pwd {
     position: absolute;
-    right: 0.8rem;
+    right: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--text-sub);
+    color: var(--text-muted);
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    transition: color 0.2s;
   }
   .toggle-pwd:hover { color: var(--text-main); }
 
-  /* Captcha Box Styles */
+  /* CAPTCHA SECTION */
   .captcha-box {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 0.4rem;
   }
 
   #captchaCanvas {
-    background: #11172a;
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    background: var(--bg-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
     cursor: pointer;
+    width: 100%;
+    max-width: 170px;
+    height: 44px;
   }
 
   .refresh-btn {
-    background: transparent;
-    border: 1px solid var(--border);
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
     color: var(--text-sub);
-    width: 38px;
-    height: 38px;
-    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -163,57 +237,89 @@
   }
 
   .refresh-btn:hover {
-    color: var(--brass-hi);
-    border-color: var(--brass-hi);
+    color: var(--primary);
+    border-color: var(--primary);
   }
 
   .login-btn {
     width: 100%;
-    background: linear-gradient(135deg, #a8402f, #c65543);
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
     color: #fff;
     border: none;
-    padding: 0.85rem;
-    border-radius: 9px;
+    padding: 0.9rem;
+    border-radius: var(--radius-md);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     cursor: pointer;
-    margin-top: 0.6rem;
+    margin-top: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 8px 18px rgba(168,64,47,0.3);
+    box-shadow: 0 6px 16px var(--primary-glow);
+    transition: all 0.2s ease;
   }
 
   .login-btn:hover {
-    filter: brightness(1.1);
+    transform: translateY(-1px);
+    opacity: 0.95;
+  }
+  .login-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
   }
 
-  /* Clear Error & Success Messaging */
+  /* ALERT STATUS MESSAGES */
   .status-msg {
     font-size: 0.85rem;
-    text-align: center;
-    margin-top: 1rem;
-    padding: 0.6rem;
-    border-radius: 8px;
+    text-align: left;
+    margin-top: 1.2rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-md);
     display: none;
     font-weight: 600;
     line-height: 1.4;
+    align-items: center;
+    gap: 10px;
   }
 
   .status-msg.error {
-    display: block;
-    background: rgba(198, 85, 67, 0.15);
-    border: 1px solid var(--maroon-hi);
-    color: #ff8b7b;
-    animation: shake 0.3s ease-in-out;
+    display: flex;
+    background: rgba(244, 63, 94, 0.12);
+    border: 1px solid rgba(244, 63, 94, 0.3);
+    color: var(--accent-rose);
+    animation: shake 0.35s ease-in-out;
   }
 
   .status-msg.success {
-    display: block;
-    background: rgba(45, 212, 191, 0.15);
-    border: 1px solid var(--teal);
-    color: var(--teal);
+    display: flex;
+    background: rgba(20, 184, 166, 0.12);
+    border: 1px solid rgba(20, 184, 166, 0.3);
+    color: var(--accent-teal);
+  }
+
+  /* LOADER BAR & SPINNER FOR 3-SEC REDIRECT */
+  .loader-container {
+    display: none;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .loader-bar-bg {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-surface-elevated);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: .6rem;
+  }
+
+  .loader-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-teal), var(--primary));
+    transition: width 3s linear;
   }
 
   @keyframes shake {
@@ -225,15 +331,22 @@
 </head>
 <body>
 
-<div class="bg-glow"></div>
+<div class="bg-glow-layer"></div>
+
+<button class="theme-toggle-top" id="themeBtn" title="Toggle Theme">
+  <i class="fa-solid fa-sun"></i>
+</button>
 
 <div class="login-card">
   <div class="card-header">
     <div class="brand-logo">
-      <i class="fa-solid fa-shield-halved"></i>
-      <span>EduPulse Admin</span>
+      <i class="fa-solid fa-graduation-cap"></i>
+      <div>
+        <div class="brand-name">EduPulse</div>
+        <div class="brand-tag">Admin Studio</div>
+      </div>
     </div>
-    <p class="card-subtitle">Enter credentials to unlock vault admin tools</p>
+    <p class="card-subtitle">Enter credentials to unlock vault administration tools</p>
   </div>
 
   <form id="adminLoginForm">
@@ -260,7 +373,7 @@
     <div class="field">
       <label>Security Verification</label>
       <div class="captcha-box">
-        <canvas id="captchaCanvas" width="160" height="42" title="Click to reload Captcha"></canvas>
+        <canvas id="captchaCanvas" width="170" height="44" title="Click to reload Captcha"></canvas>
         <button type="button" class="refresh-btn" id="refreshCaptchaBtn" title="Reload Captcha">
           <i class="fa-solid fa-rotate-right"></i>
         </button>
@@ -274,24 +387,33 @@
       </div>
     </div>
 
-    <button type="submit" class="login-btn">
+    <button type="submit" class="login-btn" id="submitBtn">
       <i class="fa-solid fa-right-to-bracket"></i> Authenticate
     </button>
 
+    <!-- Error/Success Status Message -->
     <div class="status-msg" id="statusMsg"></div>
+
+    <!-- 3-Second Redirection Loader -->
+    <div class="loader-container" id="loaderContainer">
+      <div class="loader-bar-bg">
+        <div class="loader-bar-fill" id="loaderFill"></div>
+      </div>
+    </div>
   </form>
 </div>
 
 <script>
 let currentCaptcha = "";
 
-/* Generates Captcha Canvas */
+/* COLORFUL CAPTCHA GENERATOR */
 function generateColouredCaptcha() {
   const canvas = document.getElementById("captchaCanvas");
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "#161d30";
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  ctx.fillStyle = isDark ? "#080b11" : "#f1f5f9";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -300,8 +422,9 @@ function generateColouredCaptcha() {
     currentCaptcha += chars.charAt(Math.floor(Math.random() * chars.length));
   }
 
-  for (let i = 0; i < 6; i++) {
-    ctx.strokeStyle = `hsl(${Math.random() * 360}, 65%, 50%)`;
+  // Draw background random lines
+  for (let i = 0; i < 5; i++) {
+    ctx.strokeStyle = `hsl(${Math.random() * 360}, 70%, 55%)`;
     ctx.beginPath();
     ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
     ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
@@ -309,33 +432,35 @@ function generateColouredCaptcha() {
     ctx.stroke();
   }
 
-  const colors = ["#e3bf47", "#2dd4bf", "#c65543", "#6ba4b8", "#d9a74a"];
-  ctx.font = "bold 22px 'IBM Plex Mono', monospace";
+  const colors = ["#6366f1", "#14b8a6", "#f59e0b", "#f43f5e", "#a855f7"];
+  ctx.font = "bold 22px 'JetBrains Mono', monospace";
   ctx.textBaseline = "middle";
 
   for (let i = 0; i < currentCaptcha.length; i++) {
     const char = currentCaptcha[i];
     ctx.save();
     ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-    const x = 20 + i * 26;
+    const x = 20 + i * 28;
     const y = canvas.height / 2 + (Math.random() * 4 - 2);
-    const angle = (Math.random() - 0.5) * 0.3;
+    const angle = (Math.random() - 0.5) * 0.35;
     
     ctx.translate(x, y);
     ctx.rotate(angle);
     ctx.fillText(char, 0, 0);
     ctx.restore();
   }
-
-  for (let i = 0; i < 25; i++) {
-    ctx.fillStyle = `rgba(242, 234, 217, ${Math.random() * 0.3})`;
-    ctx.beginPath();
-    ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 1.2, 0, Math.PI * 2);
-    ctx.fill();
-  }
 }
 
-/* Password View Toggle */
+/* THEME TOGGLE */
+document.getElementById('themeBtn').addEventListener('click', ()=>{
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+  generateColouredCaptcha();
+});
+
+/* PASSWORD VISIBILITY TOGGLE */
 document.getElementById("togglePwd").addEventListener("click", function() {
   const pwdInput = document.getElementById("password");
   if(pwdInput.type === "password"){
@@ -350,23 +475,28 @@ document.getElementById("togglePwd").addEventListener("click", function() {
 document.getElementById("captchaCanvas").addEventListener("click", generateColouredCaptcha);
 document.getElementById("refreshCaptchaBtn").addEventListener("click", generateColouredCaptcha);
 
-/* Login Form Submission Handler */
+/* FORM SUBMISSION WITH 3-SECOND LOADER */
 document.getElementById("adminLoginForm").addEventListener("submit", function(e) {
   e.preventDefault();
   const status = document.getElementById("statusMsg");
-  
+  const loaderBox = document.getElementById("loaderContainer");
+  const loaderFill = document.getElementById("loaderFill");
+  const submitBtn = document.getElementById("submitBtn");
+
   const user = document.getElementById("username").value.trim();
   const pass = document.getElementById("password").value;
   const captcha = document.getElementById("captchaInput").value.trim();
 
-  // Reset status
+  // Reset Display
   status.className = "status-msg";
   status.style.display = "none";
+  loaderBox.style.display = "none";
+  loaderFill.style.width = "0%";
 
-  // 1. Verify Captcha (Case-Insensitive)
+  // 1. Verify Captcha
   if (captcha.toUpperCase() !== currentCaptcha.toUpperCase()) {
     status.className = "status-msg error";
-    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Incorrect Captcha code!`;
+    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Invalid Captcha code! Please try again.`;
     generateColouredCaptcha();
     document.getElementById("captchaInput").value = "";
     return;
@@ -374,24 +504,35 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
 
   // 2. Validate Credentials
   if (user === "admin" && pass === "admin123") {
+    // Show Success Message
     status.className = "status-msg success";
-    status.innerHTML = `<i class="fa-solid fa-circle-check"></i> Access Granted! Redirecting to Dashboard...`;
+    status.innerHTML = `<i class="fa-solid fa-circle-check"></i> Access Granted! Redirecting in 3 seconds...`;
     
-    // Set Login Session Flag
+    // Save Auth State
     sessionStorage.setItem("edupulse_admin_auth", "true");
+    submitBtn.disabled = true;
 
+    // Trigger Animated 3-second Loader
+    loaderBox.style.display = "block";
     setTimeout(() => {
-      window.location.href = "admin.html"; // Redirect to main studio page
-    }, 1000);
+      loaderFill.style.width = "100%";
+    }, 50);
+
+    // Redirect exactly after 3 seconds
+    setTimeout(() => {
+      window.location.href = "admin.html";
+    }, 3000);
+
   } else {
+    // Clear & Direct Error Messaging
     status.className = "status-msg error";
-    status.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Invalid Username or Password!`;
+    status.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Incorrect Username or Password!`;
     generateColouredCaptcha();
     document.getElementById("captchaInput").value = "";
   }
 });
 
-// Initialize Captcha
+// Initialize on Load
 generateColouredCaptcha();
 </script>
 </body>
