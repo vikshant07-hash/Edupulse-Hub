@@ -415,9 +415,9 @@
         <label for="year">Academic Year</label>
         <select id="year">
           <option value="">Select Year</option>
-          <option value="1st Year">BA 1st Year</option>
-          <option value="2nd Year">BA 2nd Year</option>
-          <option value="3rd Year">BA 3rd Year</option>
+          <option value="BA 1st Year">BA 1st Year</option>
+          <option value="BA 2nd Year">BA 2nd Year</option>
+          <option value="BA 3rd Year">BA 3rd Year</option>
           
         </select>
       </div>
@@ -425,10 +425,10 @@
         <label for="semester">Year</label>
         <select id="semester">
           <option value="">Select Year</option>
-          <option value="Sem 1">2020</option><option value="Sem 2">2021</option>
-          <option value="Sem 3">2022</option><option value="Sem 4">2023</option>
-          <option value="Sem 5">2024</option><option value="Sem 6">2025</option>
-          <option value="Sem 7">2026</option><option value="Sem 8">2027</option>
+          <option value="2020">2020</option><option value="2021">2021</option>
+          <option value="2022">2022</option><option value="2023">2023</option>
+          <option value="2024">2024</option><option value="2025">2025</option>
+          <option value="2026">2026</option><option value="2027">2027</option>
         </select>
       </div>
 
@@ -603,7 +603,7 @@ document.getElementById('fileInput').addEventListener('change', e=>{
   const file = e.target.files[0];
   if(!file) return;
   if(file.type !== 'application/pdf'){ showToast('Please select a valid PDF file format.', true); return; }
-  if(file.size > 2.5*1024*1024){ showToast('File too large (Max 2.5MB). Please use a PDF link.', true); return; }
+  if(file.size > 5*1024*1024){ showToast('File too large (Max 2.5MB). Please use a PDF link.', true); return; }
   document.getElementById('fileNameText').innerText = `Selected: ${file.name}`;
   const reader = new FileReader();
   reader.onload = evt => { pdfBase64 = evt.target.result; };
