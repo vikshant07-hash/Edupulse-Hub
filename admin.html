@@ -438,7 +438,7 @@
       </div>
 
       <div class="full-width">
-        <label>PDF Source Verification (Max size: 4 MB)</label>
+        <label>PDF Source Verification (Max size: 2.5 MB)</label>
         <div class="source-toggle">
           <button type="button" class="toggle-btn active" id="tabLink"><i class="fa-solid fa-link"></i> Paste Link</button>
           <button type="button" class="toggle-btn" id="tabUpload"><i class="fa-solid fa-upload"></i> Upload File</button>
@@ -603,7 +603,7 @@ document.getElementById('fileInput').addEventListener('change', e=>{
   const file = e.target.files[0];
   if(!file) return;
   if(file.type !== 'application/pdf'){ showToast('Please select a valid PDF file format.', true); return; }
-  if(file.size > 5*1024*1024){ showToast('File too large (Max 2.5MB). Please use a PDF link.', true); return; }
+  if(file.size > 2.5*1024*1024){ showToast('File too large (Max 2.5MB). Please use a PDF link.', true); return; }
   document.getElementById('fileNameText').innerText = `Selected: ${file.name}`;
   const reader = new FileReader();
   reader.onload = evt => { pdfBase64 = evt.target.result; };
