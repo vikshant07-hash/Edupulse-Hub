@@ -438,61 +438,80 @@ function renderData(){
   });
 }
 
-/* ---------- CUSTOM SHARE WITH RENAMED FILE + CAPTION ---------- */
+/* Helper Function: Base64/DataURL ko Blob me convert karne ke liye */
+function dataURLtoBlob(dataurl) {
+  const arr = dataurl.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
+}
+
+/* Updated PDF Share Function */
 async function shareResource(item) {
   const pdfSrc = item.pdfData || item.pdfUrl;
   const tagInfo = item.semester ? item.semester : (item.year || 'N/A');
-  const websiteUrl = window.location.origin !== 'null' ? window.location.origin : 'https://edupulsehub.com';
+  const websiteUrl = window.location.origin !== 'null' ? window.location.origin : 'https://edupulsehub.pages.dev';
 
-  // Format Caption: Subject | Class | Website Link
+  // Caption text format
   const shareCaption = `📚 Subject: ${item.subject} | Class: ${tagInfo}\n🌐 Link: ${websiteUrl}`;
 
-  // Custom File Naming Format: [Title] [Subject Name]/edupulsehub.pdf
+  // Clean filename for mobile OS (Avoid invalid characters like '/')
   const cleanTitle = (item.title || 'Material').replace(/[^a-zA-Z0-9 ]/g, "").trim();
   const cleanSubject = (item.subject || 'Subject').replace(/[^a-zA-Z0-9 ]/g, "").trim();
-  const customFileName = `${cleanTitle} ${cleanSubject}/edupulsehub.pdf`;
+  const fileName = `${cleanTitle}_${cleanSubject}_EduPulseHub.pdf`;
 
   if (navigator.share) {
     try {
-      if (pdfSrc && pdfSrc.startsWith('http')) {
+      let pdfFile = null;
+
+      // 1. Agar Data base64/data:application/pdf format me hai
+      if (pdfSrc && pdfSrc.startsWith('data:')) {
+        const blob = dataURLtoBlob(pdfSrc);
+        pdfFile = new File([blob], fileName, { type: 'application/pdf' });
+      } 
+      // 2. Agar PDF ek online HTTP URL hai
+      else if (pdfSrc && pdfSrc.startsWith('http')) {
         const response = await fetch(pdfSrc);
         const blob = await response.blob();
-        
-        // Convert Blob into a File object with custom name
-        const file = new File([blob], customFileName, { type: 'application/pdf' });
-
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({
-            files: [file],
-            text: shareCaption
-          });
-          return;
-        }
+        pdfFile = new File([blob], fileName, { type: 'application/pdf' });
       }
 
-      // Fallback: If File share isn't supported, trigger share dialog with URL link & Caption
-      await navigator.share({
-        title: item.title,
-        text: shareCaption + `\n📄 File Link: ${pdfSrc || websiteUrl}`
-      });
-      return;
+      // Check if browser supports sharing this File
+      if (pdfFile && navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
+        await navigator.share({
+          files: [pdfFile],
+          text: shareCaption
+        });
+        return;
+      } else {
+        // Direct Text Share fallback if file sharing fails
+        await navigator.share({
+          title: item.title,
+          text: `${shareCaption}\n📄 Link: ${pdfSrc}`
+        });
+        return;
+      }
     } catch (err) {
       if (err.name !== 'AbortError') {
-        console.warn('Share Dialog failed, fallback to direct option.', err);
+        console.warn('Share Dialog Error:', err);
       } else {
-        return;
+        return; // User canceled the share sheet
       }
     }
   }
 
-  // Fallback for browsers that don't support Web Share API
+  // Fallback for desktop/unsupported browsers
   if (navigator.clipboard) {
-    await navigator.clipboard.writeText(shareCaption + `\n📄 File Link: ${pdfSrc || websiteUrl}`);
-    alert("📄 Details & Link Copied! You can now paste and share it in any app.");
-  } else {
-    alert(shareCaption);
+    await navigator.clipboard.writeText(`${shareCaption}\n📄 Link: ${pdfSrc}`);
+    alert("📄 Text & Link copied! Paste it in WhatsApp or any app.");
   }
 }
+
 
 /* ---------- INTERACTIONS ---------- */
 function toggleBookmark(id){
