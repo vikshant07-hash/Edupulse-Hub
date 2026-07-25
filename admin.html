@@ -101,7 +101,7 @@
   <div class="brand"><i class="fa-solid fa-stamp"></i><span>Faculty Studio<span class="tag">EduPulse Cataloguing Desk</span></span></div>
   <div class="header-actions">
     <button class="icon-btn" id="themeBtn" title="Toggle theme"><i class="fa-solid fa-sun"></i></button>
-    <a href="edupulse.html" class="link-btn"><i class="fa-solid fa-globe"></i> View Live Hub</a>
+    <a href="index.html" class="link-btn"><i class="fa-solid fa-globe"></i> View Live Hub</a>
   </div>
 </header>
 
@@ -120,10 +120,10 @@
       <div><label>Branch / Department</label><input type="text" id="branch" placeholder="e.g. Computer Science"></div>
 
       <div><label>Academic Year</label>
-        <select id="year"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select>
+        <select id="year"><option value="1st Year">1st Year</option><option value="2nd Year">2nd Year</option><option value="3rd Year">3rd Year</option><option value="4th Year">4th Year</option></select>
       </div>
       <div><label>Semester</label>
-        <select id="semester"><option>Sem 1</option><option>Sem 2</option><option>Sem 3</option><option>Sem 4</option><option>Sem 5</option><option>Sem 6</option><option>Sem 7</option><option>Sem 8</option></select>
+        <select id="semester"><option value="Sem 1">Sem 1</option><option value="Sem 2">Sem 2</option><option value="Sem 3">Sem 3</option><option value="Sem 4">Sem 4</option><option value="Sem 5">Sem 5</option><option value="Sem 6">Sem 6</option><option value="Sem 7">Sem 7</option><option value="Sem 8">Sem 8</option></select>
       </div>
 
       <div class="full-width"><label>Description / Details</label><textarea id="desc" rows="3" placeholder="Overview of modules covered, key topics..."></textarea></div>
@@ -141,7 +141,7 @@
             <p id="fileNameText">Click to select a PDF from your device</p>
             <input type="file" id="fileInput" accept="application/pdf" style="display:none;">
           </div>
-          <p class="file-size-note">Keep uploads small (well under 4MB) — the file is embedded directly into the shared catalogue.</p>
+          <p class="file-size-note">Keep uploads small (under 3MB) — the file is embedded directly into browser storage.</p>
         </div>
       </div>
     </div>
@@ -152,10 +152,10 @@
   <section class="panel">
     <h2><i class="fa-solid fa-list-check"></i> Manage Catalogue</h2>
     <div class="stat-strip">
-      <div class="stat-chip"><div class="num" id="statTotal">–</div><div class="lbl">Total Docs</div></div>
-      <div class="stat-chip"><div class="num" id="statSubjects">–</div><div class="lbl">Subjects</div></div>
+      <div class="stat-chip"><div class="num" id="statTotal">0</div><div class="lbl">Total Docs</div></div>
+      <div class="stat-chip"><div class="num" id="statSubjects">0</div><div class="lbl">Subjects</div></div>
     </div>
-    <div id="pubList"><div class="empty-note"><i class="fa-solid fa-spinner fa-spin"></i>Loading catalogue…</div></div>
+    <div id="pubList"><div class="empty-note"><i class="fa-solid fa-box-archive"></i>No documents uploaded yet.</div></div>
   </section>
 </div>
 
@@ -166,13 +166,26 @@ let allMaterials = [];
 let pdfBase64 = "";
 let sourceMode = 'link';
 
-async function loadMaterials(){
-  try{ const res = await window.storage.get('materials', true); return res && res.value ? JSON.parse(res.value) : []; }
-  catch(e){ return []; }
+// FIXED STORAGE ENGINE (Using Standard localStorage)
+function loadMaterials(){
+  try {
+    const data = localStorage.getItem('edupulse_db');
+    return data ? JSON.parse(data) : [];
+  } catch(e) {
+    console.error(e);
+    return [];
+  }
 }
-async function saveMaterials(list){
-  try{ await window.storage.set('materials', JSON.stringify(list), true); return true; }
-  catch(e){ return false; }
+
+function saveMaterials(list){
+  try {
+    localStorage.setItem('edupulse_db', JSON.stringify(list));
+    return true;
+  } catch(e) {
+    console.error(e);
+    alert("Storage limit exceeded! Try using a URL link instead of heavy file upload.");
+    return false;
+  }
 }
 
 function showToast(msg, isError){
@@ -196,6 +209,7 @@ document.getElementById('tabLink').addEventListener('click', ()=>{
   document.getElementById('linkField').style.display = 'block';
   document.getElementById('uploadField').style.display = 'none';
 });
+
 document.getElementById('tabUpload').addEventListener('click', ()=>{
   sourceMode = 'upload';
   document.getElementById('tabUpload').classList.add('active');
@@ -209,14 +223,14 @@ document.getElementById('fileInput').addEventListener('change', e=>{
   const file = e.target.files[0];
   if(!file) return;
   if(file.type !== 'application/pdf'){ showToast('Please select a valid PDF file.', true); return; }
-  if(file.size > 4*1024*1024){ showToast('File too large — please keep it under 4MB, or use a link instead.', true); return; }
+  if(file.size > 3*1024*1024){ showToast('File too large — please keep it under 3MB, or use a link instead.', true); return; }
   document.getElementById('fileNameText').innerText = `Selected: ${file.name}`;
   const reader = new FileReader();
   reader.onload = evt => { pdfBase64 = evt.target.result; };
   reader.readAsDataURL(file);
 });
 
-document.getElementById('publishBtn').addEventListener('click', async ()=>{
+document.getElementById('publishBtn').addEventListener('click', ()=>{
   const title = document.getElementById('title').value.trim();
   const type = document.getElementById('type').value;
   const adminName = document.getElementById('adminName').value.trim();
@@ -225,19 +239,31 @@ document.getElementById('publishBtn').addEventListener('click', async ()=>{
   const year = document.getElementById('year').value;
   const semester = document.getElementById('semester').value;
   const desc = document.getElementById('desc').value.trim();
-  const pdfUrl = sourceMode === 'link' ? document.getElementById('pdfLink').value.trim() : pdfBase64;
+  
+  let pdfUrl = sourceMode === 'link' ? document.getElementById('pdfLink').value.trim() : pdfBase64;
 
-  if(!title || !adminName || !subject || !branch || !pdfUrl){
-    showToast('Please fill all mandatory fields and add a PDF source!', true);
+  // Fallback PDF generation if empty
+  if(!pdfUrl) {
+    pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+  }
+
+  if(!title || !adminName || !subject || !branch){
+    showToast('Please fill all mandatory fields (Title, Admin, Subject, Branch)!', true);
     return;
   }
 
   const btn = document.getElementById('publishBtn');
   btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Publishing…';
 
-  const material = { id: Date.now(), title, type, adminName, subject, branch, year, semester, desc, pdfUrl, timestamp: Date.now() };
+  const material = { 
+    id: Date.now(), 
+    title, type, adminName, subject, branch, year, semester, desc, 
+    pdfData: pdfUrl, 
+    timestamp: Date.now() 
+  };
+
   allMaterials = [material, ...allMaterials];
-  const ok = await saveMaterials(allMaterials);
+  const ok = saveMaterials(allMaterials);
 
   btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Publish to Student Hub';
 
@@ -245,13 +271,16 @@ document.getElementById('publishBtn').addEventListener('click', async ()=>{
     document.getElementById('title').value = '';
     document.getElementById('desc').value = '';
     document.getElementById('pdfLink').value = '';
+    document.getElementById('adminName').value = '';
+    document.getElementById('subject').value = '';
+    document.getElementById('branch').value = '';
     document.getElementById('fileNameText').innerText = 'Click to select a PDF from your device';
     pdfBase64 = "";
     renderList();
-    showToast('Document published to the student hub!');
-  }else{
-    allMaterials = allMaterials.filter(m=>m.id!==material.id);
-    showToast('Could not save — please try again.', true);
+    showToast('Document published to student hub successfully!');
+  } else {
+    allMaterials = allMaterials.filter(m => m.id !== material.id);
+    showToast('Could not save document.', true);
   }
 });
 
@@ -277,24 +306,22 @@ function renderList(){
     list.appendChild(row);
   });
 }
+
 function escHtml(s){ return String(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-document.getElementById('pubList').addEventListener('click', async e=>{
+document.getElementById('pubList').addEventListener('click', e=>{
   const btn = e.target.closest('.del-btn');
   if(!btn) return;
   const id = Number(btn.dataset.id);
-  const prev = allMaterials;
   allMaterials = allMaterials.filter(p=>p.id!==id);
+  saveMaterials(allMaterials);
   renderList();
-  const ok = await saveMaterials(allMaterials);
-  if(ok) showToast('Material deleted.');
-  else { allMaterials = prev; renderList(); showToast('Could not delete — please try again.', true); }
+  showToast('Material deleted.');
 });
 
-(async function init(){
-  allMaterials = await loadMaterials();
-  renderList();
-})();
+// Initialize on Load
+allMaterials = loadMaterials();
+renderList();
 </script>
 </body>
 </html>
