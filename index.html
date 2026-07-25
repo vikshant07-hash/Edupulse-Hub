@@ -13,7 +13,6 @@
     --ink-3: #1c2742;
     --brass: #c9a227;
     --brass-hi: #e3bf47;
-    --brass-dim: #8a721f;
     --maroon: #a8402f;
     --maroon-hi: #c65543;
     --teal: #2dd4bf;
@@ -63,9 +62,8 @@
 
   a { color: inherit; text-decoration: none; }
   ::selection { background: var(--brass-hi); color: #0b0f19; }
-  *:focus-visible { outline: 2px solid var(--brass-hi); outline-offset: 3px; }
 
-  /* Ambient Grain Background */
+  /* Background Ambient Ambient Layer */
   .grain {
     position: fixed;
     inset: 0;
@@ -76,12 +74,12 @@
       radial-gradient(circle at 85% 85%, rgba(168, 64, 47, 0.12) 0%, transparent 45%);
   }
 
-  /* NAVBAR */
+  /* MODERN CLEAN NAVBAR */
   .navbar {
     height: var(--nav-h);
     background: var(--glass);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-soft);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -92,24 +90,24 @@
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 1.8rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .brand-logo {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 12px;
     color: var(--text-main);
   }
-  .brand-logo i { color: var(--brass-hi); font-size: 1.4rem; }
+  .brand-logo i { color: var(--brass-hi); font-size: 1.35rem; }
   .brand-tag {
     font-family: var(--font-mono);
-    font-size: .62rem;
+    font-size: .6rem;
     letter-spacing: 1.5px;
     color: var(--text-faint);
     text-transform: uppercase;
@@ -117,69 +115,66 @@
     margin-top: -2px;
   }
 
-  .nav-links { display: flex; gap: .4rem; align-items: center; list-style: none; }
+  .nav-links { display: flex; gap: .3rem; align-items: center; list-style: none; }
   .nav-links a {
     color: var(--text-sub);
     font-weight: 600;
-    font-size: .86rem;
+    font-size: .85rem;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: .55rem .95rem;
+    padding: .5rem .9rem;
     border-radius: 8px;
-    border-bottom: 2px solid transparent;
-    transition: all .2s;
+    transition: all .2s ease;
   }
   .nav-links a:hover, .nav-links a.active {
     color: var(--brass-hi);
-    background: rgba(227, 191, 71, 0.06);
-    border-bottom-color: var(--brass-hi);
+    background: rgba(227, 191, 71, 0.08);
   }
 
   .nav-actions { display: flex; align-items: center; gap: .75rem; }
   .icon-btn {
     background: var(--card-bg-solid);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-soft);
     color: var(--text-main);
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: .95rem;
+    font-size: .9rem;
     transition: all .2s;
   }
   .icon-btn:hover, .icon-btn.active { color: var(--brass-hi); border-color: var(--brass-hi); }
-  .admin-btn {
+  
+  .login-link-btn {
     background: linear-gradient(135deg, var(--maroon), var(--maroon-hi));
     color: #fff8ec;
-    padding: .65rem 1.25rem;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
+    padding: .6rem 1.2rem;
+    border-radius: 9px;
     font-weight: 700;
-    font-size: .84rem;
-    display: flex;
+    font-size: .82rem;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 8px 20px rgba(168, 64, 47, 0.35);
+    box-shadow: 0 6px 16px rgba(168, 64, 47, 0.28);
     transition: filter .2s;
   }
-  .admin-btn:hover { filter: brightness(1.1); }
-  .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-main); font-size: 1.4rem; cursor: pointer; }
+  .login-link-btn:hover { filter: brightness(1.1); }
+  .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-main); font-size: 1.3rem; cursor: pointer; }
 
-  /* HERO SECTION */
-  .hero { padding: 4rem 1.5rem 1.5rem; text-align: center; max-width: 860px; margin: 0 auto; }
+  /* HERO & TYPEWRITER */
+  .hero { padding: 4.2rem 1.5rem 1.5rem; text-align: center; max-width: 860px; margin: 0 auto; }
   .hero-badge {
     font-family: var(--font-mono);
     background: transparent;
     border: 1px solid var(--border);
     color: var(--brass-hi);
-    padding: .4rem 1.1rem;
+    padding: .35rem 1rem;
     border-radius: 20px;
-    font-size: .68rem;
+    font-size: .65rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1.8px;
@@ -188,62 +183,62 @@
   }
   .hero-title {
     font-family: var(--font-display);
-    font-size: 3.1rem;
+    font-size: 3rem;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.22;
     letter-spacing: -0.5px;
     margin-bottom: 1rem;
   }
 
-  /* TYPEWRITER EFFECT STYLING */
-  .typewriter-box {
+  /* CLEAN TYPEWRITER WRAPPER WITH DIRECT BLINK CURSOR */
+  .typewriter-wrapper {
     color: var(--brass-hi);
-    border-bottom: 3px solid var(--brass-hi);
-    display: inline-block;
-    padding-right: 4px;
-    min-width: 220px;
-    text-align: left;
+    border-bottom: 2px solid var(--brass-hi);
+    display: inline-inline-flex;
+    align-items: center;
   }
   .cursor {
     display: inline-block;
     width: 3px;
+    height: 1em;
     background-color: var(--brass-hi);
-    margin-left: 3px;
+    margin-left: 4px;
+    vertical-align: middle;
     animation: blink 0.75s infinite;
   }
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-  .hero-sub { color: var(--text-sub); font-size: 1.05rem; margin-bottom: 2.4rem; line-height: 1.65; }
+  .hero-sub { color: var(--text-sub); font-size: 1rem; margin-bottom: 2.2rem; line-height: 1.6; }
 
-  .search-container { max-width: 660px; margin: 0 auto; position: relative; }
+  .search-container { max-width: 620px; margin: 0 auto; position: relative; }
   .search-input {
     width: 100%;
-    padding: 1.1rem 1.4rem 1.1rem 3.4rem;
+    padding: 1rem 1.2rem 1rem 3.2rem;
     background: var(--card-bg-solid);
     border: 1px solid var(--border);
     border-radius: 12px;
     color: var(--text-main);
-    font-size: .95rem;
+    font-size: .92rem;
     outline: none;
     box-shadow: var(--shadow);
     transition: border-color .2s;
   }
   .search-input:focus { border-color: var(--brass-hi); }
   .search-input::placeholder { color: var(--text-faint); }
-  .search-icon { position: absolute; left: 1.3rem; top: 50%; transform: translateY(-50%); color: var(--text-faint); font-size: 1.05rem; }
+  .search-icon { position: absolute; left: 1.2rem; top: 50%; transform: translateY(-50%); color: var(--text-faint); font-size: 1rem; }
 
   /* FILTER BAR */
-  .filter-section { max-width: 1400px; margin: 2.5rem auto 1.2rem; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .tabs-container { display: flex; gap: .4rem; flex-wrap: wrap; }
+  .filter-section { max-width: 1400px; margin: 2.2rem auto 1.2rem; padding: 0 1.8rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .tabs-container { display: flex; gap: .3rem; flex-wrap: wrap; }
   .tab-btn {
     background: none;
     border: none;
     border-bottom: 2px solid transparent;
     color: var(--text-sub);
-    padding: .6rem 1rem;
+    padding: .5rem .9rem;
     font-weight: 600;
     cursor: pointer;
-    font-size: .85rem;
+    font-size: .84rem;
   }
   .tab-btn.active { color: var(--brass-hi); border-bottom-color: var(--brass-hi); }
   .tab-btn:hover { color: var(--text-main); }
@@ -251,21 +246,21 @@
   .dropdown-filters { display: flex; gap: .8rem; flex-wrap: wrap; }
   .select-filter {
     background: var(--card-bg-solid);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-soft);
     color: var(--text-main);
-    padding: .6rem 1rem;
-    border-radius: 10px;
+    padding: .55rem .9rem;
+    border-radius: 9px;
     outline: none;
     font-weight: 500;
-    font-size: .83rem;
+    font-size: .82rem;
     cursor: pointer;
-    min-width: 160px;
+    min-width: 150px;
   }
 
   /* GRID & CARDS */
-  .main-layout { max-width: 1400px; margin: 1.2rem auto 0; padding: 0 1.5rem 4rem; flex: 1; width: 100%; }
-  .materials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1.5rem; }
-  .state-msg { grid-column: 1/-1; text-align: center; color: var(--text-sub); padding: 5rem 0; font-size: .95rem; }
+  .main-layout { max-width: 1400px; margin: 1.2rem auto 0; padding: 0 1.8rem 4rem; flex: 1; width: 100%; }
+  .materials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .state-msg { grid-column: 1/-1; text-align: center; color: var(--text-sub); padding: 4rem 0; font-size: .95rem; }
   .state-msg i { display: block; font-size: 2rem; margin-bottom: .8rem; color: var(--text-faint); }
 
   .card {
@@ -279,49 +274,49 @@
     overflow: hidden;
     transition: transform .25s, border-color .25s;
   }
-  .card:hover { transform: translateY(-5px); border-color: var(--border); }
+  .card:hover { transform: translateY(-4px); border-color: var(--border); }
   .card::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 5px;
+    height: 4px;
     background: linear-gradient(90deg, var(--brass), var(--maroon-hi));
-    opacity: .7;
+    opacity: .8;
   }
 
-  .card-body { padding: 1.6rem 1.6rem 0; }
-  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; gap: .6rem; }
+  .card-body { padding: 1.5rem 1.5rem 0; }
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.9rem; gap: .6rem; }
   .call-number {
     font-family: var(--font-mono);
-    font-size: .68rem;
+    font-size: .65rem;
     color: var(--brass-hi);
     border: 1px solid var(--border);
-    padding: .3rem .65rem;
-    border-radius: 6px;
+    padding: .25rem .55rem;
+    border-radius: 5px;
     white-space: nowrap;
   }
-  .bookmark-icon { cursor: pointer; color: var(--text-faint); font-size: 1.15rem; }
+  .bookmark-icon { cursor: pointer; color: var(--text-faint); font-size: 1.1rem; }
   .bookmark-icon.active { color: var(--brass-hi); }
 
-  .card-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin-bottom: .5rem; line-height: 1.35; }
-  .card-desc { color: var(--text-sub); font-size: .85rem; line-height: 1.55; margin-bottom: 1.2rem; }
+  .card-title { font-family: var(--font-display); font-size: 1.18rem; font-weight: 600; margin-bottom: .45rem; line-height: 1.35; }
+  .card-desc { color: var(--text-sub); font-size: .84rem; line-height: 1.5; margin-bottom: 1.1rem; }
 
-  .card-meta { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.2rem; }
+  .card-meta { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.1rem; }
   .meta-pill {
     background: var(--ink-3);
     border: 1px solid var(--border-soft);
-    padding: .25rem .65rem;
-    border-radius: 6px;
-    font-size: .72rem;
+    padding: .2rem .55rem;
+    border-radius: 5px;
+    font-size: .7rem;
     color: var(--text-sub);
     font-family: var(--font-mono);
   }
 
   .card-admin-tag {
-    font-size: .75rem;
+    font-size: .74rem;
     color: var(--text-faint);
-    padding: .85rem 1.6rem;
-    border-top: 1px dashed var(--border);
+    padding: .8rem 1.5rem;
+    border-top: 1px dashed var(--border-soft);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -331,9 +326,9 @@
   .card-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--border-soft); }
   .action-btn {
     border: none;
-    padding: .9rem .4rem;
+    padding: .85rem .3rem;
     font-weight: 700;
-    font-size: .78rem;
+    font-size: .76rem;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -350,7 +345,7 @@
   .btn-dl { color: var(--maroon-hi); }
   .btn-dl:hover { background: rgba(168, 64, 47, 0.12); }
 
-  /* MODALS */
+  /* PDF MODAL */
   .modal {
     position: fixed;
     inset: 0;
@@ -368,79 +363,45 @@
     width: 100%;
     max-width: 960px;
     height: 85vh;
-    border-radius: 18px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     box-shadow: var(--shadow);
   }
-  .modal-content.form-modal { height: auto; max-height: 88vh; max-width: 620px; }
   .modal-header {
-    padding: 1.2rem 1.5rem;
+    padding: 1.1rem 1.4rem;
     background: var(--card-bg-solid);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-soft);
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .modal-header h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; }
-  .modal-close { background: none; border: none; color: var(--text-sub); font-size: 1.3rem; cursor: pointer; }
+  .modal-header h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; }
+  .modal-close { background: none; border: none; color: var(--text-sub); font-size: 1.2rem; cursor: pointer; }
   .pdf-iframe { width: 100%; height: 100%; border: none; background: #fff; }
-  .modal-body { padding: 1.6rem; overflow-y: auto; }
-
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .form-grid .full { grid-column: 1/-1; }
-  .field label { display: block; font-size: .78rem; font-weight: 600; color: var(--text-sub); margin-bottom: .4rem; }
-  .field input, .field select, .field textarea {
-    width: 100%;
-    background: var(--card-bg-solid);
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    padding: .7rem .85rem;
-    color: var(--text-main);
-    font-size: .88rem;
-    outline: none;
-  }
-  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--brass-hi); }
-  .field textarea { resize: vertical; min-height: 70px; }
-  .form-submit {
-    margin-top: 1.4rem;
-    width: 100%;
-    background: linear-gradient(135deg, var(--maroon), var(--maroon-hi));
-    color: #fff8ec;
-    border: none;
-    padding: .9rem;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: .9rem;
-    cursor: pointer;
-  }
-  .form-note { font-size: .78rem; color: var(--text-faint); margin-top: .8rem; line-height: 1.5; }
-  .form-status { font-size: .82rem; margin-top: .6rem; min-height: 1.1em; }
-  .form-status.error { color: var(--maroon-hi); }
-  .form-status.ok { color: var(--teal); }
 
   /* FOOTER */
-  footer { background: var(--glass); border-top: 1px solid var(--border); padding: 3.5rem 1.5rem 2rem; margin-top: auto; }
+  footer { background: var(--glass); border-top: 1px solid var(--border-soft); padding: 3.5rem 1.8rem 2rem; margin-top: auto; }
   .footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 2.5rem; margin-bottom: 2.5rem; }
-  .footer-col h4 { font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 1rem; font-weight: 600; }
-  .footer-col p { color: var(--text-sub); font-size: .86rem; line-height: 1.65; }
+  .footer-col h4 { font-family: var(--font-display); font-size: 1rem; margin-bottom: 1rem; font-weight: 600; }
+  .footer-col p { color: var(--text-sub); font-size: .85rem; line-height: 1.6; }
   .footer-links { list-style: none; }
-  .footer-links li { margin-bottom: .6rem; }
-  .footer-links a { color: var(--text-sub); font-size: .86rem; transition: color .2s; }
+  .footer-links li { margin-bottom: .55rem; }
+  .footer-links a { color: var(--text-sub); font-size: .85rem; transition: color .2s; }
   .footer-links a:hover { color: var(--brass-hi); }
   .footer-bottom {
     max-width: 1400px;
     margin: 0 auto;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--border-soft);
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
     color: var(--text-faint);
-    font-size: .8rem;
+    font-size: .78rem;
     font-family: var(--font-mono);
   }
 
@@ -450,20 +411,19 @@
     .nav-links.mobile-open { display: flex; }
     .mobile-menu-btn { display: block; }
     .footer-grid { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
     .card-actions { grid-template-columns: 1fr; }
     .action-btn { border-right: none; border-bottom: 1px solid var(--border-soft); }
     .hero-title { font-size: 1.85rem; }
-    .typewriter-box { min-width: 150px; }
   }
 </style>
 </head>
 <body>
 <div class="grain"></div>
 
+<!-- MODERN NAVBAR -->
 <nav class="navbar">
   <div class="nav-container">
-    <a href="#" class="brand-logo">
+    <a href="index.html" class="brand-logo">
       <i class="fa-solid fa-book-bookmark"></i>
       <span>EduPulse Hub<span class="brand-tag">Academic Vault</span></span>
     </a>
@@ -477,26 +437,30 @@
     <div class="nav-actions">
       <button class="icon-btn" id="savedFilterBtn" title="Saved Bookmarks"><i class="fa-solid fa-bookmark"></i></button>
       <button class="icon-btn" id="themeBtn" title="Toggle Dark/Light Mode"><i class="fa-solid fa-sun"></i></button>
-      <button class="admin-btn" id="openAdminBtn"><i class="fa-solid fa-cloud-arrow-up"></i> <span>Add Material</span></button>
+      <a href="login.html" class="login-link-btn" title="Admin Login Studio">
+        <i class="fa-solid fa-user-shield"></i> <span>Faculty Desk</span>
+      </a>
       <button class="mobile-menu-btn" id="mobileBtn"><i class="fa-solid fa-bars"></i></button>
     </div>
   </div>
 </nav>
 
+<!-- HERO SECTION -->
 <section class="hero">
   <span class="hero-badge">Departmental Resource Vault</span>
   <h1 class="hero-title">
     Every syllabus, note &<br>
-    <span class="typewriter-box"><span id="typewriter"></span><span class="cursor"></span></span>,<br>
+    <span class="typewriter-wrapper"><span id="typewriter"></span><span class="cursor"></span></span>,<br>
     catalogued in one shelf.
   </h1>
-  <p class="hero-sub">Verified course notes, official semester syllabi and previous year papers, uploaded by faculty and organised like a proper library.</p>
+  <p class="hero-sub">Verified course notes, official semester syllabi and previous year papers, verified and catalogued for easy access.</p>
   <div class="search-container">
     <i class="fa-solid fa-magnifying-glass search-icon"></i>
     <input type="text" id="searchInput" class="search-input" placeholder="Search by subject, topic, code or department...">
   </div>
 </section>
 
+<!-- FILTER BAR -->
 <div class="filter-section">
   <div class="tabs-container" id="tabsContainer">
     <button class="tab-btn active" data-type="All">All Material</button>
@@ -531,52 +495,11 @@
 
 <div class="modal" id="pdfModal">
   <div class="modal-content">
-    <div class="modal-header"><h3 id="modalTitle">Document Viewer</h3><button class="modal-close" id="pdfCloseBtn"><i class="fa-solid fa-xmark"></i></button></div>
-    <iframe id="pdfFrame" class="pdf-iframe"></iframe>
-  </div>
-</div>
-
-<div class="modal" id="adminModal">
-  <div class="modal-content form-modal">
-    <div class="modal-header"><h3><i class="fa-solid fa-stamp"></i>&nbsp; Add to the Vault</h3><button class="modal-close" id="adminCloseBtn"><i class="fa-solid fa-xmark"></i></button></div>
-    <div class="modal-body">
-      <form id="materialForm">
-        <div class="form-grid">
-          <div class="field full"><label>Title</label><input type="text" id="f_title" required placeholder="e.g. Data Structures — Unit 3 Notes"></div>
-          <div class="field full"><label>Description</label><textarea id="f_desc" placeholder="Short note on what this document covers"></textarea></div>
-          <div class="field"><label>Type</label>
-            <select id="f_type"><option value="Syllabus">Syllabus</option><option value="Notes">Notes</option><option value="PYQ">PYQ</option><option value="Model Paper">Model Paper</option></select>
-          </div>
-          <div class="field"><label>Subject</label><input type="text" id="f_subject" required placeholder="e.g. Data Structures"></div>
-          <div class="field"><label>Branch / Department</label><input type="text" id="f_branch" required placeholder="e.g. CSE"></div>
-          
-          <div class="field"><label>Academic Year</label>
-            <select id="f_year">
-              <option value="">Select Year</option>
-              <option value="1st Year">1st Year</option>
-              <option value="2nd Year">2nd Year</option>
-              <option value="3rd Year">3rd Year</option>
-              <option value="4th Year">4th Year</option>
-            </select>
-          </div>
-          <div class="field"><label>Semester</label>
-            <select id="f_sem">
-              <option value="">Select Semester</option>
-              <option value="Sem 1">Sem 1</option><option value="Sem 2">Sem 2</option>
-              <option value="Sem 3">Sem 3</option><option value="Sem 4">Sem 4</option>
-              <option value="Sem 5">Sem 5</option><option value="Sem 6">Sem 6</option>
-              <option value="Sem 7">Sem 7</option><option value="Sem 8">Sem 8</option>
-            </select>
-          </div>
-
-          <div class="field full"><label>Your Name</label><input type="text" id="f_admin" required placeholder="Faculty name"></div>
-          <div class="field full"><label>PDF Link (URL)</label><input type="url" id="f_pdf" placeholder="https://... link to hosted PDF (Optional)"></div>
-        </div>
-        <button type="submit" class="form-submit"><i class="fa-solid fa-plus"></i> Publish to Vault</button>
-        <p class="form-status" id="formStatus"></p>
-        <p class="form-note"><i class="fa-solid fa-circle-info"></i> Year aur Semester me se kisi 1 ko chunein.</p>
-      </form>
+    <div class="modal-header">
+      <h3 id="modalTitle">Document Viewer</h3>
+      <button class="modal-close" id="pdfCloseBtn"><i class="fa-solid fa-xmark"></i></button>
     </div>
+    <iframe id="pdfFrame" class="pdf-iframe"></iframe>
   </div>
 </div>
 
@@ -584,7 +507,7 @@
   <div class="footer-grid">
     <div class="footer-col">
       <a href="#" class="brand-logo" style="margin-bottom:.8rem;"><i class="fa-solid fa-book-bookmark"></i><span>EduPulse Hub</span></a>
-      <p>EduPulse is an end-to-end college resource portal for students to easily access, view, share and download course documents — organised like a proper library catalogue.</p>
+      <p>EduPulse is an end-to-end college resource portal for students to easily access, view, share and download course documents.</p>
     </div>
     <div class="footer-col">
       <h4>Quick Categories</h4>
@@ -606,22 +529,19 @@
     </div>
     <div class="footer-col">
       <h4>Faculty Desk</h4>
-      <p style="margin-bottom:.8rem;">Add a single document from right here, or open the full cataloguing desk for uploads and managing the whole shelf.</p>
-      <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
-        <button class="admin-btn" id="openAdminBtn2" style="border:none;"><i class="fa-solid fa-cloud-arrow-up"></i> <span>Add Material</span></button>
-        <a href="admin.html" class="admin-btn" style="background:transparent;border:1px solid var(--border);color:var(--text-sub);box-shadow:none;"><i class="fa-solid fa-stamp"></i> <span>Faculty Studio</span></a>
-      </div>
+      <p style="margin-bottom:1rem;">To add or manage materials, please authenticate via the Admin Portal.</p>
+      <a href="login.html" class="login-link-btn"><i class="fa-solid fa-right-to-bracket"></i> <span>Faculty Login Studio</span></a>
     </div>
   </div>
   <div class="footer-bottom">
     <p>© 2026 EduPulse Academic Vault</p>
     <p><i class="fa-solid fa-shield-halved"></i> Verified Study Materials</p>
-    <p><i class="fa-solid fa-user-gear"></i> Designed & Developed by Vikshant</p>
+    <p><i class="fa-solid fa-code"></i> Designed & Developed by Vikshant</p>
   </div>
 </footer>
 
 <script>
-/* ---------- TYPEWRITER / BACKSPACE EFFECT ---------- */
+/* ---------- TYPEWRITER EFFECT ---------- */
 const phrases = ["question paper", "class notes", "course syllabus", "sample paper"];
 let phraseIdx = 0;
 let charIdx = 0;
@@ -639,15 +559,15 @@ function typeEffect() {
     charIdx++;
   }
 
-  let typingSpeed = isDeleting ? 60 : 120;
+  let typingSpeed = isDeleting ? 50 : 110;
 
   if (!isDeleting && charIdx === currentPhrase.length) {
-    typingSpeed = 2000; // Pause at full word
+    typingSpeed = 2200; // Pause when word complete
     isDeleting = true;
   } else if (isDeleting && charIdx === 0) {
     isDeleting = false;
     phraseIdx = (phraseIdx + 1) % phrases.length;
-    typingSpeed = 500;
+    typingSpeed = 400;
   }
 
   setTimeout(typeEffect, typingSpeed);
@@ -660,7 +580,6 @@ let showOnlySaved = false;
 let allMaterials = [];
 let bookmarks = [];
 
-/* ---------- STORAGE HELPERS ---------- */
 function loadMaterials(){
   try {
     const data = localStorage.getItem('edupulse_db');
@@ -689,12 +608,12 @@ function saveBookmarks(list){
   } catch(e){ return false; }
 }
 
+/* Default Initial Seed Data */
 const seedData = () => ([
   {id:1001,type:'Syllabus',title:'B.Tech CSE — Full Syllabus (2026 Batch)',desc:'Complete semester-wise curriculum with credit structure and evaluation scheme.',subject:'Curriculum',branch:'CSE',year:'1st Year',semester:'',adminName:'Dept. Office',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-3600000},
   {id:1002,type:'Notes',title:'Data Structures — Trees & Graphs',desc:'Lecture notes covering binary trees, BST, AVL trees and graph traversal.',subject:'Data Structures',branch:'CSE',year:'',semester:'Sem 3',adminName:'Prof. R. Sharma',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-86400000}
 ]);
 
-/* ---------- RENDERING ---------- */
 function timeAgo(ts){
   const s = Math.floor((Date.now()-ts)/1000);
   if(s<60) return 'Just now';
@@ -760,7 +679,7 @@ function renderData(){
   });
 }
 
-/* Helper Function: Base64 to Blob */
+/* Helper Function: Base64 Blob Conversion */
 function dataURLtoBlob(dataurl) {
   const arr = dataurl.split(',');
   const mime = arr[0].match(/:(.*?);/)[1];
@@ -773,7 +692,7 @@ function dataURLtoBlob(dataurl) {
   return new Blob([u8arr], { type: mime });
 }
 
-/* Dynamic Sharing Handler */
+/* Dynamic Web Share API */
 async function shareResource(item) {
   const pdfSrc = item.pdfData || item.pdfUrl;
   const tagInfo = item.semester ? item.semester : (item.year || 'N/A');
@@ -817,7 +736,6 @@ async function shareResource(item) {
   }
 }
 
-/* ---------- INTERACTIONS ---------- */
 function toggleBookmark(id){
   id = Number(id);
   bookmarks = bookmarks.includes(id) ? bookmarks.filter(b=>b!==id) : [...bookmarks, id];
@@ -849,7 +767,7 @@ function setActiveType(type){
   renderData();
 }
 
-/* ---------- EXCLUSION FILTERS ---------- */
+/* Event Handlers */
 document.getElementById('yearFilter').addEventListener('change', (e)=>{
   if(e.target.value !== 'All') document.getElementById('semFilter').value = 'All';
   renderData();
@@ -860,15 +778,6 @@ document.getElementById('semFilter').addEventListener('change', (e)=>{
   renderData();
 });
 
-document.getElementById('f_year').addEventListener('change', (e)=>{
-  if(e.target.value !== "") document.getElementById('f_sem').value = "";
-});
-
-document.getElementById('f_sem').addEventListener('change', (e)=>{
-  if(e.target.value !== "") document.getElementById('f_year').value = "";
-});
-
-/* ---------- EVENT LISTENERS ---------- */
 document.getElementById('searchInput').addEventListener('input', renderData);
 
 document.querySelectorAll('[data-type]').forEach(el=>{
@@ -907,66 +816,7 @@ document.getElementById('mobileBtn').addEventListener('click', ()=>{
   document.getElementById('navLinks').classList.toggle('mobile-open');
 });
 
-const adminModal = document.getElementById('adminModal');
-function openAdmin(){ adminModal.style.display='flex'; }
-function closeAdmin(){ adminModal.style.display='none'; document.getElementById('formStatus').textContent=''; }
-document.getElementById('openAdminBtn').addEventListener('click', openAdmin);
-document.getElementById('openAdminBtn2').addEventListener('click', openAdmin);
-document.getElementById('adminCloseBtn').addEventListener('click', closeAdmin);
-adminModal.addEventListener('click', e=>{ if(e.target.id==='adminModal') closeAdmin(); });
-
-document.getElementById('materialForm').addEventListener('submit', e=>{
-  e.preventDefault();
-  const status = document.getElementById('formStatus');
-  
-  const yr = document.getElementById('f_year').value;
-  const sm = document.getElementById('f_sem').value;
-
-  if(!yr && !sm){
-    status.className = 'form-status error';
-    status.textContent = 'Please choose either Academic Year or Semester!';
-    return;
-  }
-
-  let pUrl = document.getElementById('f_pdf').value.trim();
-  if(!pUrl){
-    pUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
-  }
-
-  const newItem = {
-    id: Date.now(),
-    title: document.getElementById('f_title').value.trim(),
-    desc: document.getElementById('f_desc').value.trim(),
-    type: document.getElementById('f_type').value,
-    subject: document.getElementById('f_subject').value.trim(),
-    branch: document.getElementById('f_branch').value.trim(),
-    year: yr,
-    semester: sm,
-    adminName: document.getElementById('f_admin').value.trim(),
-    pdfData: pUrl,
-    timestamp: Date.now()
-  };
-
-  status.className = 'form-status';
-  status.textContent = 'Publishing…';
-  
-  allMaterials = [newItem, ...allMaterials];
-  const ok = saveMaterials(allMaterials);
-  
-  if(ok){
-    status.className = 'form-status ok';
-    status.textContent = 'Published successfully!';
-    renderData();
-    e.target.reset();
-    setTimeout(closeAdmin, 900);
-  }else{
-    allMaterials = allMaterials.filter(m=>m.id!==newItem.id);
-    status.className = 'form-status error';
-    status.textContent = 'Could not save — please try again.';
-  }
-});
-
-/* ---------- INITIALIZATION ---------- */
+/* App Initialization */
 (function init(){
   allMaterials = loadMaterials();
   if(allMaterials.length === 0){
