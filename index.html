@@ -80,7 +80,6 @@
   a { color: inherit; text-decoration: none; }
   button { border: none; outline: none; background: transparent; cursor: pointer; }
 
-  /* Background Glow Canvas */
   .bg-glow-layer {
     position: fixed;
     inset: 0;
@@ -113,11 +112,7 @@
     align-items: center;
   }
   
-  .brand-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .brand-logo { display: flex; align-items: center; gap: 10px; }
   .brand-logo i {
     font-size: 1.1rem;
     color: #fff;
@@ -181,7 +176,6 @@
     white-space: nowrap;
   }
   .login-link-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-  
   .mobile-menu-btn { display: none; }
 
   /* HERO SECTION */
@@ -414,7 +408,6 @@
   }
   .footer-bottom > div { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
 
-  /* RESPONSIVE DESIGN ADJUSTMENTS */
   @media(max-width: 1024px) {
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
   }
@@ -440,18 +433,15 @@
     .nav-links a { width: 100%; padding: .65rem .8rem; }
     
     .filter-section { flex-direction: column; align-items: stretch; gap: 0.75rem; }
-    .dropdown-filters { display: grid; grid-template-columns: 1fr 1fr; width: 100%; gap: 0.5rem; }
-    .select-filter { min-width: 0; width: 100%; }
+    .dropdown-filters { display: grid; grid-template-columns: 1fr 1fr 1fr; width: 100%; gap: 0.4rem; }
+    .select-filter { min-width: 0; width: 100%; font-size: 0.76rem; padding: 0.5rem; }
     .tabs-container { width: 100%; padding: 0.25rem; }
     .footer-grid { grid-template-columns: 1fr; }
     .footer-bottom { flex-direction: column; justify-content: center; }
   }
 
-  @media(max-width: 480px) {
+  @media(max-width: 520px) {
     .dropdown-filters { grid-template-columns: 1fr; }
-    .nav-container { padding: 0 0.75rem; }
-    .hero { padding: 2.5rem 0.5rem 1rem; }
-    .materials-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -475,7 +465,7 @@
       <li><a href="#" data-type="Notes"><i class="fa-solid fa-book-open"></i> Notes</a></li>
       <li><a href="#" data-type="PYQ"><i class="fa-solid fa-file-pen"></i> PYQs</a></li>
       <li><a href="#" data-type="Model Paper"><i class="fa-solid fa-file-lines"></i> Models</a></li>
-            <li><a href="#" data-type="Other"><i class="fa-solid fa-file-other"></i> Others</a></li>
+      <li><a href="#" data-type="Other"><i class="fa-solid fa-file"></i> Others</a></li>
     </ul>
 
     <div class="nav-actions">
@@ -512,23 +502,41 @@
     <button class="tab-btn" data-type="Notes">Notes</button>
     <button class="tab-btn" data-type="PYQ">PYQs</button>
     <button class="tab-btn" data-type="Model Paper">Model Papers</button>
-        <button class="tab-btn" data-type="Other">Others</button>
+    <button class="tab-btn" data-type="Other">Others</button>
   </div>
   
   <div class="dropdown-filters">
+    <!-- Department / Branch Filter -->
+    <select id="deptFilter" class="select-filter">
+      <option value="All">All Departments</option>
+      <option value="Computer Science">Computer Science</option>
+      <option value="Information Technology">Information Technology</option>
+      <option value="Electronics">Electronics &amp; Comm.</option>
+      <option value="Mechanical">Mechanical &amp; Civil</option>
+      <option value="General">General / Basic Science</option>
+    </select>
+
+    <!-- Academic Year Filter -->
     <select id="yearFilter" class="select-filter">
       <option value="All">All Academic Years</option>
       <option value="BA 1st Year">BA 1st Year</option>
       <option value="BA 2nd Year">BA 2nd Year</option>
       <option value="BA 3rd Year">BA 3rd Year</option>
-      
+      <option value="BTech 1st Year">BTech 1st Year</option>
+      <option value="BTech Final Year">BTech Final Year</option>
     </select>
+
+    <!-- Session Year Filter (2020-2027) -->
     <select id="semFilter" class="select-filter">
-      <option value="All">All Years</option>
-      <option value="2020">2020</option><option value="2021">2021</option>
-      <option value="2022">2022</option><option value="2023">2023</option>
-      <option value="2024">2024</option><option value="2025">2025</option>
-      <option value="2026">2026</option><option value="2027">2027</option>
+      <option value="All">All Sessions (2020–27)</option>
+      <option value="Session 2020">Session 2020</option>
+      <option value="Session 2021">Session 2021</option>
+      <option value="Session 2022">Session 2022</option>
+      <option value="Session 2023">Session 2023</option>
+      <option value="Session 2024">Session 2024</option>
+      <option value="Session 2025">Session 2025</option>
+      <option value="Session 2026">Session 2026</option>
+      <option value="Session 2027">Session 2027</option>
     </select>
   </div>
 </div>
@@ -559,7 +567,7 @@
         <i class="fa-solid fa-graduation-cap"></i>
         <div class="brand-name">EduPulse Hub</div>
       </a>
-      <p>EduPulse Hub provides streamlined, quick academic document access for engineering & tech students.</p>
+      <p>EduPulse Hub provides streamlined, quick academic document access for engineering &amp; tech students.</p>
     </div>
     <div class="footer-col">
       <h4>Categories</h4>
@@ -589,13 +597,12 @@
     <p>© 2026 EduPulse Hub</p>
     <div>
       <p><i class="fa-solid fa-shield-halved"></i> Verified Vault</p>
-      <p><i class="fa-solid fa-code"></i> Developed & Designed by Vikshant</p>
+      <p><i class="fa-solid fa-code"></i> Developed &amp; Designed by Vikshant</p>
     </div>
   </div>
 </footer>
 
 <script>
-/* ---------- TYPEWRITER ANIMATION ---------- */
 const phrases = ["Question Papers", "Lecture notes", "Course syllabi", "model papers"];
 let phraseIdx = 0, charIdx = 0, isDeleting = false;
 const typewriterEl = document.getElementById("typewriter");
@@ -621,7 +628,6 @@ function typeEffect() {
 }
 document.addEventListener("DOMContentLoaded", typeEffect);
 
-/* ---------- STATE MANAGEMENT ---------- */
 let selectedType = 'All';
 let showOnlySaved = false;
 let allMaterials = [];
@@ -649,10 +655,9 @@ function saveBookmarks(list){
   try { localStorage.setItem('edupulse_bookmarks', JSON.stringify(list)); return true; } catch(e){ return false; }
 }
 
-/* DEFAULT DEMO DATA */
 const seedData = () => ([
-  {id:1001,type:'Syllabus',title:'B.Tech CSE — Full Syllabus Outline',desc:'Comprehensive curriculum roadmap and semester credit breakdown.',subject:'Curriculum',branch:'CSE',year:'1st Year',semester:'',adminName:'Dept. Office',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-3600000},
-  {id:1002,type:'Notes',title:'Data Structures — Trees & Graph Traversal',desc:'Complete notes on BST, AVL Trees, BFS, DFS and graph algorithms.',subject:'Data Structures',branch:'CSE',year:'',semester:'Sem 3',adminName:'Prof. R. Sharma',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-86400000}
+  {id:1001,type:'Syllabus',title:'B.Tech CSE — Full Syllabus Outline',desc:'Comprehensive curriculum roadmap and semester credit breakdown.',subject:'Curriculum',branch:'Computer Science',year:'BTech 1st Year',semester:'Session 2026',adminName:'Dept. Office',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-3600000},
+  {id:1002,type:'Notes',title:'Data Structures — Trees & Graph Traversal',desc:'Complete notes on BST, AVL Trees, BFS, DFS and graph algorithms.',subject:'Data Structures',branch:'Computer Science',year:'',semester:'Session 2025',adminName:'Prof. R. Sharma',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-86400000}
 ]);
 
 function timeAgo(ts){
@@ -665,21 +670,22 @@ function timeAgo(ts){
 
 function esc(str){ return String(str||'').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-/* ---------- RENDER LOGIC ---------- */
 function renderData(){
   const grid = document.getElementById('materialsGrid');
   const query = document.getElementById('searchInput').value.toLowerCase();
+  const dept = document.getElementById('deptFilter').value;
   const year = document.getElementById('yearFilter').value;
   const sem = document.getElementById('semFilter').value;
   grid.innerHTML = '';
 
   const matches = allMaterials.filter(item=>{
     const typeMatch = selectedType==='All' || item.type===selectedType;
+    const deptMatch = dept==='All' || (item.branch && item.branch.toLowerCase().includes(dept.toLowerCase()));
     const yearMatch = year==='All' || item.year===year;
     const semMatch = sem==='All' || item.semester===sem;
     const searchMatch = (item.title||'').toLowerCase().includes(query) || (item.subject||'').toLowerCase().includes(query) || (item.branch||'').toLowerCase().includes(query);
     const savedMatch = !showOnlySaved || bookmarks.includes(item.id);
-    return typeMatch && yearMatch && semMatch && searchMatch && savedMatch;
+    return typeMatch && deptMatch && yearMatch && semMatch && searchMatch && savedMatch;
   }).sort((a,b)=>b.timestamp-a.timestamp);
 
   if(!matches.length){
@@ -689,9 +695,8 @@ function renderData(){
 
   matches.forEach(item=>{
     const isBookmarked = bookmarks.includes(item.id);
-    const badgeTag = item.semester ? item.semester : (item.year || 'General');
-    const callNo = (item.branch||'GEN') + ' • ' + badgeTag;
-
+    const badgeTag = `${item.semester || ''} ${item.year ? '• ' + item.year : ''}`.trim();
+    const callNo = (item.branch||'GEN') + (badgeTag ? ' • ' + badgeTag : '');
     const pdfSrc = item.pdfData || item.pdfUrl || '#';
 
     const card = document.createElement('div');
@@ -723,18 +728,14 @@ function renderData(){
   });
 }
 
-/* NATIVE SHARE & CLIPBOARD FORMATTER */
 async function shareResource(item) {
   const websiteUrl = window.location.origin !== 'null' && window.location.origin.startsWith('http') 
     ? window.location.origin + window.location.pathname 
     : 'https://edupulsehub.pages.dev';
 
-  const classInfo = item.semester ? item.semester : (item.year || 'General Year');
+  const classInfo = `${item.semester || ''} ${item.year ? '(' + item.year + ')' : ''}`.trim() || 'General';
+  const captionText = `📚 *Subject:* ${item.subject} | 🎓 *Class/Session:* ${classInfo} | 🌐 *Visit:* ${websiteUrl}`;
   
-  // Custom structured caption format: Subject | Class | Topic | URL
-  const captionText = `📚 *Subject:* ${item.subject} | 🎓 *Class:* ${classInfo} |🌐 *Visit:* ${websiteUrl}`;
-  
-  // 1. Copy caption automatically to clipboard
   try {
     await navigator.clipboard.writeText(captionText);
   } catch (e) {
@@ -744,7 +745,6 @@ async function shareResource(item) {
   let sharedSuccessfully = false;
   const pdfUrl = item.pdfData || item.pdfUrl;
 
-  // 2. Open native app share sheet with file support if available
   if (navigator.canShare && pdfUrl) {
     try {
       const response = await fetch(pdfUrl);
@@ -765,7 +765,6 @@ async function shareResource(item) {
     }
   }
 
-  // 3. Fallback to standard link/text share sheet if file share is unsupported
   if (!sharedSuccessfully && navigator.share) {
     try {
       await navigator.share({
@@ -779,10 +778,7 @@ async function shareResource(item) {
     }
   }
 
-  // Notify user that caption is ready in clipboard
-  if (sharedSuccessfully) {
-    console.log("Caption automatically copied to clipboard.");
-  } else {
+  if (!sharedSuccessfully) {
     alert("📋 Caption copied to clipboard! You can now paste it into WhatsApp, Telegram, or any app.");
   }
 }
@@ -815,17 +811,9 @@ function setActiveType(type){
   renderData();
 }
 
-/* EVENT LISTENERS */
-document.getElementById('yearFilter').addEventListener('change', (e)=>{
-  if(e.target.value !== 'All') document.getElementById('semFilter').value = 'All';
-  renderData();
-});
-
-document.getElementById('semFilter').addEventListener('change', (e)=>{
-  if(e.target.value !== 'All') document.getElementById('yearFilter').value = 'All';
-  renderData();
-});
-
+document.getElementById('deptFilter').addEventListener('change', renderData);
+document.getElementById('yearFilter').addEventListener('change', renderData);
+document.getElementById('semFilter').addEventListener('change', renderData);
 document.getElementById('searchInput').addEventListener('input', renderData);
 
 document.querySelectorAll('[data-type]').forEach(el=>{
@@ -864,7 +852,6 @@ document.getElementById('mobileBtn').addEventListener('click', ()=>{
   document.getElementById('navLinks').classList.toggle('mobile-open');
 });
 
-/* INIT APPLICATION */
 (function init(){
   allMaterials = loadMaterials();
   if(allMaterials.length === 0){
