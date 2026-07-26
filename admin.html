@@ -368,7 +368,7 @@
 <div class="studio-layout">
   <!-- Left Form Panel -->
   <section class="panel">
-    <h2><i class="fa-solid fa-file-circle-plus"></i> Catalogue a New Resource</h2>
+    <h2><i class="fa-solid fa-file-circle-plus"></i> Create a New Resource</h2>
     <div class="form-grid">
       <div class="full-width">
         <label for="title">Resource Title *</label>
@@ -379,49 +379,66 @@
         <label for="type">Category Type</label>
         <select id="type">
           <option value="Syllabus">Syllabus</option>
-          <option value="Notes" selected>Lecture Notes</option>
+          <option value="Notes" selected>Notes</option>
           <option value="PYQ">PYQ Paper</option>
           <option value="Model Paper">Model Paper</option>
           <option value="Other">Other Reference</option>
         </select>
       </div>
       <div>
-        <label for="adminName">Faculty / Admin Name *</label>
+        <label for="adminName">Admin Name *</label>
         <input type="text" id="adminName" placeholder="e.g. Dr. A. P. Singh" autocomplete="off">
       </div>
 
       <div>
         <label for="subject">Subject Name / Code *</label>
-        <input type="text" id="subject" placeholder="e.g. CS-501 DBMS" autocomplete="off">
-      </div>
-      <div>
-        <label for="branch">Branch / Department *</label>
-        <input type="text" id="branch" placeholder="e.g. Computer Science" autocomplete="off">
-      </div>
-
-      <div>
-        <label for="year">Academic Year (Class Year)</label>
-        <select id="year">
-          <option value="">-- Choose Academic Year --</option>
-          <option value="BA 1st Year">BA / BSc 1st Year</option>
-          <option value="BA 2nd Year">BA / BSc 2nd Year</option>
-          <option value="BA 3rd Year">BA / BSc 3rd Year</option>
-          <option value="BTech 1st Year">BTech 1st Year</option>
-          <option value="BTech Final Year">BTech Final Year</option>
+        <select id="branch">
+          <option value="">-- Choose Subject & code--</option>
+          <option value="Comparative Govt. & Politics (POLS 201)">Comparative Govt. & Politics (POLS 201)</option>
+            <option value="International Relations (POLS 202)">International Relations (POLS 202)</option>
+          <option value="Hindi Gadya Sahitya (HIND 202)"> Hindi Gadya Sahitya (HIND 202)</option>
+          <option value="Aadhunik Hindi Kavita (HIND 203)"> Aadhunik Hindi Kavita (HIND 203)</option>
+          <option value="English Compulsory (ENG CE 201)">English Compulsory (ENG CE 201)</option>
+          <option value="Vyakaran evam Sanyojan (SKT-DSC-203)">Vyakaran evam Sanyojan (SKT-DSC-203)</option>
+          <option value="Other">Other</option>
         </select>
       </div>
       <div>
-        <label for="semester">Academic Session / Year (2020–2027) *</label>
+        <label for="branch">Department Name*</label>
+        <select id="branch">
+          <option value="">-- Choose Department --</option>
+          <option value="Political Science">Political Science</option>
+          <option value="Hindi">Hindi</option>
+          <option value="English">English</option>
+          <option value="Sanskrit">Sanskrit</option>
+          <option value="Other">Other</option>
+        </select>
+        
+      </div>
+
+      <div>
+        <label for="year">Academic Class Year</label>
+        <select id="year">
+          <option value="">-- Choose Academic Class --</option>
+          <option value="BA 1st Year" disabled>BA 1st Year</option>
+          <option value="BA 2nd Year">BA 2nd Year</option>
+          <option value="BA 3rd Year" disabled>BA 3rd Year</option>
+          <option value="other">Other</option>
+          
+        </select>
+      </div>
+      <div>
+        <label for="semester">Academic Session (2020–2027) *</label>
         <select id="semester">
-          <option value="">-- Select Session Year --</option>
-          <option value="Session 2020">Session 2020</option>
-          <option value="Session 2021">Session 2021</option>
-          <option value="Session 2022">Session 2022</option>
-          <option value="Session 2023">Session 2023</option>
-          <option value="Session 2024">Session 2024</option>
-          <option value="Session 2025">Session 2025</option>
-          <option value="Session 2026">Session 2026</option>
-          <option value="Session 2027">Session 2027</option>
+          <option value="">-- Select Year --</option>
+          <option value="2019-2020">2019-2020</option>
+          <option value="2020-2021">2020-2021</option>
+          <option value="2021-2022">2021-2022</option>
+          <option value="2022-2023">2022-2023</option>
+          <option value="2023-2024">2023-2024</option>
+          <option value="2024-2025">2024-2025</option>
+          <option value="2025-2026">2025-2026</option>
+          <option value="2026-2027">2026-2027</option>
         </select>
       </div>
 
@@ -450,7 +467,7 @@
       </div>
     </div>
 
-    <button class="btn-pub" id="publishBtn"><i class="fa-solid fa-cloud-arrow-up"></i> Publish to Student Hub</button>
+    <button class="btn-pub" id="publishBtn"><i class="fa-solid fa-cloud-arrow-up"></i>Create & Publish</button>
   </section>
 
   <!-- Right Manage Catalogue Panel -->
