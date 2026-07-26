@@ -392,19 +392,19 @@
 
       <div>
         <label for="subject">Subject Name / Code *</label>
-        <select id="branch">
-          <option value="">-- Choose Subject & code--</option>
+        <select id="subject">
+          <option value="">-- Choose Subject & Code --</option>
           <option value="Comparative Govt. & Politics (POLS 201)">Comparative Govt. & Politics (POLS 201)</option>
-            <option value="International Relations (POLS 202)">International Relations (POLS 202)</option>
-          <option value="Hindi Gadya Sahitya (HIND 202)"> Hindi Gadya Sahitya (HIND 202)</option>
-          <option value="Aadhunik Hindi Kavita (HIND 203)"> Aadhunik Hindi Kavita (HIND 203)</option>
+          <option value="International Relations (POLS 202)">International Relations (POLS 202)</option>
+          <option value="Hindi Gadya Sahitya (HIND 202)">Hindi Gadya Sahitya (HIND 202)</option>
+          <option value="Aadhunik Hindi Kavita (HIND 203)">Aadhunik Hindi Kavita (HIND 203)</option>
           <option value="English Compulsory (ENG CE 201)">English Compulsory (ENG CE 201)</option>
           <option value="Vyakaran evam Sanyojan (SKT-DSC-203)">Vyakaran evam Sanyojan (SKT-DSC-203)</option>
           <option value="Other">Other</option>
         </select>
       </div>
       <div>
-        <label for="branch">Department Name*</label>
+        <label for="branch">Department Name *</label>
         <select id="branch">
           <option value="">-- Choose Department --</option>
           <option value="Political Science">Political Science</option>
@@ -413,24 +413,22 @@
           <option value="Sanskrit">Sanskrit</option>
           <option value="Other">Other</option>
         </select>
-        
       </div>
 
       <div>
         <label for="year">Academic Class Year</label>
         <select id="year">
           <option value="">-- Choose Academic Class --</option>
-          <option value="BA 1st Year" disabled>BA 1st Year</option>
+          <option value="BA 1st Year">BA 1st Year</option>
           <option value="BA 2nd Year">BA 2nd Year</option>
-          <option value="BA 3rd Year" disabled>BA 3rd Year</option>
-          <option value="other">Other</option>
-          
+          <option value="BA 3rd Year">BA 3rd Year</option>
+          <option value="Other">Other</option>
         </select>
       </div>
       <div>
         <label for="semester">Academic Session (2020–2027) *</label>
         <select id="semester">
-          <option value="">-- Select Year --</option>
+          <option value="">-- Select Session --</option>
           <option value="2019-2020">2019-2020</option>
           <option value="2020-2021">2020-2021</option>
           <option value="2021-2022">2021-2022</option>
@@ -575,12 +573,11 @@ document.getElementById('themeBtn').addEventListener('click', ()=>{
 
 // Clear error state on focus/input
 ['title', 'adminName', 'subject', 'branch', 'semester'].forEach(id => {
-  document.getElementById(id).addEventListener('input', () => {
-    document.getElementById(id).classList.remove('error-input');
-  });
-  document.getElementById(id).addEventListener('change', () => {
-    document.getElementById(id).classList.remove('error-input');
-  });
+  const el = document.getElementById(id);
+  if(el){
+    el.addEventListener('input', () => el.classList.remove('error-input'));
+    el.addEventListener('change', () => el.classList.remove('error-input'));
+  }
 });
 
 document.getElementById('tabLink').addEventListener('click', ()=>{
@@ -645,14 +642,12 @@ document.getElementById('publishBtn').addEventListener('click', ()=>{
   }
   if(!branch){
     branchInput.classList.add('error-input');
-    showToast('Branch or Department is required!', true);
+    showToast('Department Name is required!', true);
     branchInput.focus(); return;
   }
-  
-  // Mandatory check: Either Academic Year OR Session Year must be selected (Session is explicitly made mandatory per instructions)
   if(!semester){
     semesterInput.classList.add('error-input');
-    showToast('Academic Session (2020-2027) is mandatory!', true);
+    showToast('Academic Session is mandatory!', true);
     semesterInput.focus(); return;
   }
 
@@ -674,7 +669,7 @@ document.getElementById('publishBtn').addEventListener('click', ()=>{
   allMaterials = [material, ...allMaterials];
   const ok = saveMaterials(allMaterials);
 
-  btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Publish to Student Hub';
+  btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i>Create & Publish';
 
   if(ok){
     titleInput.value = '';
