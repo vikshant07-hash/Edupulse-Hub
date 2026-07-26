@@ -544,6 +544,47 @@
     .footer-bottom-left, .footer-bottom-right { justify-content: center; width: 100%; }
     .main-layout { padding: 0 1rem 3rem; }
   }
+
+  /* Container styling */
+.website-link-container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: #334155; /* Slate gray color */
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Button / Link styling */
+.website-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff; /* White text */
+  background-color: #2563eb; /* Professional Blue (Aap isse apne theme ke hisab se change kar sakte hain) */
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover state */
+.website-link-btn:hover {
+  background-color: #1d4ed8; /* Darker blue on hover */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Active state */
+.website-link-btn:active {
+  transform: translateY(0);
+  background-color: #1e40af;
+}
+  
 </style>
 </head>
 <body>
@@ -617,7 +658,7 @@
     </select>
 
     <select id="yearFilter" class="select-filter">
-      <option value="All">All Academic Years</option>
+      <option value="All">All Classes</option>
       <option value="BA 1st Year">BA 1st Year</option>
       <option value="BA 2nd Year">BA 2nd Year</option>
       <option value="BA 3rd Year">BA 3rd Year</option>
@@ -689,7 +730,11 @@
       <h4>Admin Portal</h4>
       <p style="margin-bottom:1rem;">Authorized faculty members can securely upload and manage study files.</p>
       <a href="login.html" class="login-link-btn"><i class="fa-solid fa-right-to-bracket"></i> <span>Admin</span></a>
-      <p>Our Others Website: <a href= "https://vikshant.pages.dev">Click to visit</a></p>
+      <p class="website-link-container">
+  Our Others Website: 
+  <a href="https://vikshant.pages.dev" class="website-link-btn" target="_blank" rel="noopener">Click to visit</a>
+      </p>
+      
     </div>
   </div>
 
