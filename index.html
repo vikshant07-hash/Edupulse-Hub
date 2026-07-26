@@ -2,6 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>EduPulse Hub | Academic Resource Vault</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -555,6 +556,23 @@
     .footer-bottom-left, .footer-bottom-right { justify-content: center; width: 100%; }
     .main-layout { padding: 0 1rem 3rem; }
   }
+
+
+  /* Logo image ko design aur align karne ke liye */
+.brand-logo-img {
+  height: 40px;      /* Aap apni zaroorat ke hisab se height badal sakte hain */
+  width: auto;       /* Isse image ka aspect ratio kharab nahi hoga */
+  object-fit: contain;
+  margin-right: 10px; /* Logo aur text ke beech thoda gap dene ke liye */
+}
+
+/* Ensure kijiye ki flexbox enabled ho taaki logo aur text ek line mein rahein */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+  
 </style>
 </head>
 <body>
@@ -564,12 +582,16 @@
 <nav class="navbar">
   <div class="nav-container">
     <a href="index.html" class="brand-logo">
-      <i class="fa-solid fa-graduation-cap"></i>
+      <!-- 🟢 FontAwesome Icon ki jagah image tag lagayein -->
+      <img src="images/icon.png" alt="EduPulse Hub Logo" class="brand-logo-img">
       <div>
         <div class="brand-name">EduPulse Hub</div>
         <div class="brand-tag">Academic Vault</div>
       </div>
     </a>
+  </div>
+</nav>
+
     
     <ul class="nav-links" id="navLinks">
       <li><a href="#" class="active" data-type="All"><i class="fa-solid fa-border-all"></i> All Materials</a></li>
@@ -673,7 +695,7 @@
   <div class="footer-grid">
     <div class="footer-col">
       <a href="#" class="brand-logo" style="margin-bottom:1.2rem;">
-        <i class="fa-solid fa-graduation-cap"></i>
+        <img src="images/icon.png" alt="EduPulse Hub Logo" class="brand-logo-img">
         <div class="brand-name">EduPulse Hub</div>
       </a>
       <p>EduPulse Hub delivers a streamlined, high-performance academic document repository built for seamless student and faculty access.</p>
