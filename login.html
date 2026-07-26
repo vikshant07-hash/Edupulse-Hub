@@ -527,6 +527,7 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
   if (!user) {
     userInput.classList.add('error-input');
     status.className = "status-msg error";
+    status.style.display = "flex";
     status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Validation Error:</strong> Please provide your admin username to proceed.`;
     userInput.focus();
     return;
@@ -535,6 +536,7 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
   if (!pass) {
     passInput.classList.add('error-input');
     status.className = "status-msg error";
+    status.style.display = "flex";
     status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Validation Error:</strong> Password field cannot be left blank.`;
     passInput.focus();
     return;
@@ -543,6 +545,7 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
   if (!captcha) {
     captchaInput.classList.add('error-input');
     status.className = "status-msg error";
+    status.style.display = "flex";
     status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Validation Error:</strong> Please input the security verification code.`;
     captchaInput.focus();
     return;
@@ -552,6 +555,7 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
   if (captcha.toUpperCase() !== currentCaptcha.toUpperCase()) {
     captchaInput.classList.add('error-input');
     status.className = "status-msg error";
+    status.style.display = "flex";
     status.innerHTML = `<i class="fa-solid fa-shield-halved"></i> <strong>Security Failure:</strong> Invalid security captcha code entered. Please try again!`;
     generateColouredCaptcha();
     captchaInput.value = "";
@@ -562,6 +566,7 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
   // 3. Credential Verification (Default: admin / admin123)
   if (user === "admin" && pass === "admin123") {
     status.className = "status-msg success";
+    status.style.display = "flex";
     status.innerHTML = `<i class="fa-solid fa-circle-check"></i> <strong>Access Granted!</strong> Redirecting securely to Admin Studio...`;
     
     sessionStorage.setItem("edupulse_admin_auth", "true");
@@ -578,6 +583,7 @@ document.getElementById("adminLoginForm").addEventListener("submit", function(e)
     userInput.classList.add('error-input');
     passInput.classList.add('error-input');
     status.className = "status-msg error";
+    status.style.display = "flex";
     status.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <strong>Authentication Failed:</strong> Incorrect username or password combination. Access denied.`;
     generateColouredCaptcha();
     captchaInput.value = "";
