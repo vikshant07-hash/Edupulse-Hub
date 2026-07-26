@@ -764,13 +764,25 @@ const seedData = () => ([
   {id:1002,type:'Notes',title:'Data Structures — Trees & Graph Traversal',desc:'Complete notes on BST, AVL Trees, BFS, DFS and graph algorithms.',subject:'Data Structures',branch:'Computer Science',year:'',semester:'Session 2025',adminName:'Prof. R. Sharma',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-86400000}
 ]);
 
-function timeAgo(ts){
-  const s = Math.floor((Date.now()-ts)/1000);
-  if(s<60) return 'Just now';
-  if(s<3600) return Math.floor(s/60)+'m ago';
-  if(s<86400) return Math.floor(s/3600)+'h ago';
-  return Math.floor(s/86400)+'d ago';
+function timeAgo(ts) {
+  const s = Math.floor((Date.now() - ts) / 1000);
+  
+  if (s < 60) return 'Just now';
+  if (s < 3600) return Math.floor(s / 60) + 'm ago';
+  if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+  
+  // 10 din se kam ke liye 'd ago' dikhayega
+  if (s < 864000) return Math.floor(s / 86400) + 'd ago';
+  
+  // 10 din ya usse zyada hone par DD/MM/YYYY format me date dikhayega
+  const date = new Date(ts);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months 0-11 hote hain
+  const year = date.getFullYear();
+  
+  return `${day}/${month}/${year}`;
 }
+
 
 function esc(str){ return String(str||'').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
@@ -838,7 +850,7 @@ async function shareResource(item) {
     : 'https://edupulsehub.pages.dev';
 
   const classInfo = `${item.semester || ''} ${item.year ? '(' + item.year + ')' : ''}`.trim() || 'General';
-  const captionText = `📚 *Subject:* ${item.subject} | 🎓 *Class/Session:* ${classInfo} | 🌐 *Visit:* ${websiteUrl}`;
+  const captionText = ` *Subject:* ${item.subject} |  *Session/Class:* ${classInfo} | *Explore:* ${websiteUrl}`;
   
   try {
     await navigator.clipboard.writeText(captionText);
