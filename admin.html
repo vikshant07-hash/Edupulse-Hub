@@ -81,7 +81,7 @@
       radial-gradient(circle at 90% 90%, var(--accent-teal-glow) 0%, transparent 45%);
   }
 
-  /* Optimized Responsive Navbar */
+  /* Responsive Navbar */
   header {
     background: var(--bg-glass);
     backdrop-filter: blur(16px);
@@ -98,11 +98,7 @@
     header { padding: 0.75rem 1rem; flex-wrap: wrap; gap: 0.75rem; }
   }
 
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .brand { display: flex; align-items: center; gap: 10px; }
   .brand i {
     font-size: 1rem;
     color: #fff;
@@ -118,19 +114,9 @@
   .brand-title { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.5px; }
   .brand-tag { font-family: var(--font-mono); font-size: .58rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-  /* Navbar Action Buttons Container */
-  .header-actions { 
-    display: flex; 
-    align-items: center; 
-    gap: .6rem; 
-  }
+  .header-actions { display: flex; align-items: center; gap: .6rem; }
   @media(max-width: 640px) {
-    .header-actions { 
-      width: 100%; 
-      justify-content: space-between; 
-      border-top: 1px solid var(--border-subtle); 
-      padding-top: 0.6rem; 
-    }
+    .header-actions { width: 100%; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.6rem; }
   }
   
   .icon-btn {
@@ -161,11 +147,7 @@
     transition: all .2s ease;
     white-space: nowrap;
   }
-  .link-btn {
-    color: var(--text-sub);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
-  }
+  .link-btn { color: var(--text-sub); border: 1px solid var(--border-subtle); background: var(--bg-surface); }
   .link-btn:hover { color: var(--primary); border-color: var(--primary); }
 
   .logout-btn {
@@ -232,9 +214,15 @@
     border-color: var(--primary);
     box-shadow: 0 0 0 3px var(--primary-glow);
   }
-  input.error-input, select.error-input {
+  .error-input {
     border-color: var(--accent-rose) !important;
     box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.2) !important;
+    animation: shake 0.3s ease-in-out;
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
   }
   textarea { resize: vertical; }
 
@@ -251,11 +239,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
   }
-  .toggle-btn.active {
-    background: var(--primary);
-    color: #fff;
-    border-color: var(--primary);
-  }
+  .toggle-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
 
   .file-upload-box {
     border: 1px dashed var(--border-active);
@@ -291,6 +275,11 @@
   }
   .btn-pub:hover { opacity: 0.95; transform: translateY(-1px); }
   .btn-pub:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+
+  /* Manage Section Enhancements */
+  .search-box-wrap { position: relative; margin-bottom: 1rem; }
+  .search-box-wrap input { padding-left: 2.4rem; font-size: .82rem; }
+  .search-box-wrap i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: .85rem; }
 
   .manage-row {
     display: flex;
@@ -332,8 +321,8 @@
     padding: .8rem;
     text-align: center;
   }
-  .stat-chip .num { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
-  .stat-chip .lbl { font-size: .65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-mono); font-weight: 600; margin-top: 2px;}
+  .stat-chip .num { font-size: 1.35rem; font-weight: 800; color: var(--primary); }
+  .stat-chip .lbl { font-size: .62rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-mono); font-weight: 600; margin-top: 2px;}
 
   /* Toast Notification Message */
   #toast {
@@ -360,13 +349,12 @@
 <body>
 <div class="bg-glow-layer"></div>
 
-<!-- Updated Navbar with All Controls Visible on Mobile -->
 <header>
   <div class="brand">
     <i class="fa-solid fa-graduation-cap"></i>
     <div>
       <div class="brand-title">EduPulse Hub</div>
-      <div class="brand-tag">Admin Pannel</div>
+      <div class="brand-tag">Admin Faculty Studio</div>
     </div>
   </div>
   
@@ -384,7 +372,7 @@
     <div class="form-grid">
       <div class="full-width">
         <label for="title">Resource Title *</label>
-        <input type="text" id="title" placeholder="Enter Title" autocomplete="off">
+        <input type="text" id="title" placeholder="Enter resource title..." autocomplete="off">
       </div>
 
       <div>
@@ -412,23 +400,28 @@
       </div>
 
       <div>
-        <label for="year">Academic Year</label>
+        <label for="year">Academic Year (Class Year)</label>
         <select id="year">
-          <option value="">Select Year</option>
-          <option value="BA 1st Year">BA 1st Year</option>
-          <option value="BA 2nd Year">BA 2nd Year</option>
-          <option value="BA 3rd Year">BA 3rd Year</option>
-          
+          <option value="">-- Choose Academic Year --</option>
+          <option value="BA 1st Year">BA / BSc 1st Year</option>
+          <option value="BA 2nd Year">BA / BSc 2nd Year</option>
+          <option value="BA 3rd Year">BA / BSc 3rd Year</option>
+          <option value="BTech 1st Year">BTech 1st Year</option>
+          <option value="BTech Final Year">BTech Final Year</option>
         </select>
       </div>
       <div>
-        <label for="semester">Year</label>
+        <label for="semester">Academic Session / Year (2020–2027) *</label>
         <select id="semester">
-          <option value="">Select Year</option>
-          <option value="2020">2020</option><option value="2021">2021</option>
-          <option value="2022">2022</option><option value="2023">2023</option>
-          <option value="2024">2024</option><option value="2025">2025</option>
-          <option value="2026">2026</option><option value="2027">2027</option>
+          <option value="">-- Select Session Year --</option>
+          <option value="Session 2020">Session 2020</option>
+          <option value="Session 2021">Session 2021</option>
+          <option value="Session 2022">Session 2022</option>
+          <option value="Session 2023">Session 2023</option>
+          <option value="Session 2024">Session 2024</option>
+          <option value="Session 2025">Session 2025</option>
+          <option value="Session 2026">Session 2026</option>
+          <option value="Session 2027">Session 2027</option>
         </select>
       </div>
 
@@ -466,7 +459,14 @@
     <div class="stat-strip">
       <div class="stat-chip"><div class="num" id="statTotal">0</div><div class="lbl">Total Docs</div></div>
       <div class="stat-chip"><div class="num" id="statSubjects">0</div><div class="lbl">Subjects</div></div>
+      <div class="stat-chip"><div class="num" id="statBranches">0</div><div class="lbl">Branches</div></div>
     </div>
+    
+    <div class="search-box-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="searchFilter" placeholder="Search saved records..." autocomplete="off">
+    </div>
+
     <div id="pubList">
       <div class="empty-note"><i class="fa-solid fa-box-archive"></i>No documents uploaded yet.</div>
     </div>
@@ -476,9 +476,6 @@
 <div id="toast">Action complete</div>
 
 <script>
-/* =========================================================
-   1. SESSION AUTHENTICATION & 2-HOUR LOGOUT GUARD
-   ========================================================= */
 const TWO_HOURS_MS = 2 * 60 * 60 * 1000;
 
 function checkSessionAuth() {
@@ -519,9 +516,6 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
   }
 });
 
-/* =========================================================
-   2. MAIN CATALOGUE APP LOGIC & ERROR HANDLING
-   ========================================================= */
 let allMaterials = [];
 let pdfBase64 = "";
 let sourceMode = 'link';
@@ -562,24 +556,14 @@ document.getElementById('themeBtn').addEventListener('click', ()=>{
   document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
 });
 
-/* Remove error state on input typing */
-['title', 'adminName', 'subject', 'branch', 'pdfLink'].forEach(id => {
+// Clear error state on focus/input
+['title', 'adminName', 'subject', 'branch', 'semester'].forEach(id => {
   document.getElementById(id).addEventListener('input', () => {
     document.getElementById(id).classList.remove('error-input');
   });
-});
-
-/* Year & Semester Mutual Exclusion */
-document.getElementById('year').addEventListener('change', (e)=>{
-  if(e.target.value !== ""){
-    document.getElementById('semester').value = "";
-  }
-});
-
-document.getElementById('semester').addEventListener('change', (e)=>{
-  if(e.target.value !== ""){
-    document.getElementById('year').value = "";
-  }
+  document.getElementById(id).addEventListener('change', () => {
+    document.getElementById(id).classList.remove('error-input');
+  });
 });
 
 document.getElementById('tabLink').addEventListener('click', ()=>{
@@ -615,7 +599,7 @@ document.getElementById('publishBtn').addEventListener('click', ()=>{
   const adminInput = document.getElementById('adminName');
   const subjectInput = document.getElementById('subject');
   const branchInput = document.getElementById('branch');
-  const linkInput = document.getElementById('pdfLink');
+  const semesterInput = document.getElementById('semester');
 
   const title = titleInput.value.trim();
   const type = document.getElementById('type').value;
@@ -623,37 +607,39 @@ document.getElementById('publishBtn').addEventListener('click', ()=>{
   const subject = subjectInput.value.trim();
   const branch = branchInput.value.trim();
   const year = document.getElementById('year').value;
-  const semester = document.getElementById('semester').value;
+  const semester = semesterInput.value;
   const desc = document.getElementById('desc').value.trim();
 
+  // Strict Validation Rules
   if(!title){
     titleInput.classList.add('error-input');
-    showToast('Please enter a valid resource title.', true);
+    showToast('Resource Title is required!', true);
     titleInput.focus(); return;
   }
   if(!adminName){
     adminInput.classList.add('error-input');
-    showToast('Please specify the Faculty or Admin name.', true);
+    showToast('Faculty or Admin Name is required!', true);
     adminInput.focus(); return;
   }
   if(!subject){
     subjectInput.classList.add('error-input');
-    showToast('Please provide the Subject Name or Code.', true);
+    showToast('Subject Name or Code is required!', true);
     subjectInput.focus(); return;
   }
   if(!branch){
     branchInput.classList.add('error-input');
-    showToast('Please specify the Branch / Department.', true);
+    showToast('Branch or Department is required!', true);
     branchInput.focus(); return;
   }
   
-  if(!year && !semester){
-    showToast('Please choose either Academic Year OR Semester filter!', true);
-    return;
+  // Mandatory check: Either Academic Year OR Session Year must be selected (Session is explicitly made mandatory per instructions)
+  if(!semester){
+    semesterInput.classList.add('error-input');
+    showToast('Academic Session (2020-2027) is mandatory!', true);
+    semesterInput.focus(); return;
   }
 
-  let pdfUrl = sourceMode === 'link' ? linkInput.value.trim() : pdfBase64;
-
+  let pdfUrl = sourceMode === 'link' ? document.getElementById('pdfLink').value.trim() : pdfBase64;
   if(!pdfUrl) {
     pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
   }
@@ -676,12 +662,12 @@ document.getElementById('publishBtn').addEventListener('click', ()=>{
   if(ok){
     titleInput.value = '';
     document.getElementById('desc').value = '';
-    linkInput.value = '';
+    document.getElementById('pdfLink').value = '';
     adminInput.value = '';
     subjectInput.value = '';
     branchInput.value = '';
     document.getElementById('year').value = '';
-    document.getElementById('semester').value = '';
+    semesterInput.value = '';
     document.getElementById('fileNameText').innerText = 'Click to select a PDF from your local device';
     pdfBase64 = "";
     renderList();
@@ -693,22 +679,33 @@ document.getElementById('publishBtn').addEventListener('click', ()=>{
 
 function renderList(){
   const list = document.getElementById('pubList');
+  const filterVal = document.getElementById('searchFilter').value.toLowerCase();
+  
   document.getElementById('statTotal').innerText = allMaterials.length;
   document.getElementById('statSubjects').innerText = new Set(allMaterials.map(m=>m.subject)).size;
+  document.getElementById('statBranches').innerText = new Set(allMaterials.map(m=>m.branch)).size;
 
-  if(!allMaterials.length){
-    list.innerHTML = `<div class="empty-note"><i class="fa-solid fa-box-archive"></i>No documents uploaded yet.</div>`;
+  const filtered = allMaterials.filter(p => 
+    p.title.toLowerCase().includes(filterVal) || 
+    p.subject.toLowerCase().includes(filterVal) || 
+    p.branch.toLowerCase().includes(filterVal) ||
+    p.adminName.toLowerCase().includes(filterVal)
+  );
+
+  if(!filtered.length){
+    list.innerHTML = `<div class="empty-note"><i class="fa-solid fa-box-archive"></i>No matching records found.</div>`;
     return;
   }
+  
   list.innerHTML = '';
-  allMaterials.forEach(p=>{
-    const tagInfo = p.semester ? p.semester : (p.year || 'N/A');
+  filtered.forEach(p=>{
+    const tagInfo = `${p.semester}${p.year ? ' · ' + p.year : ''}`;
     const row = document.createElement('div');
     row.className = 'manage-row';
     row.innerHTML = `
       <div>
         <div class="row-title">${escHtml(p.title)}</div>
-        <div class="row-meta">${escHtml(p.type)} · ${escHtml(tagInfo)} · ${escHtml(p.adminName)}</div>
+        <div class="row-meta">${escHtml(p.type)} · ${escHtml(tagInfo)} · ${escHtml(p.subject)}</div>
       </div>
       <button class="del-btn" data-id="${p.id}" title="Delete Resource"><i class="fa-solid fa-trash"></i></button>`;
     list.appendChild(row);
@@ -716,6 +713,8 @@ function renderList(){
 }
 
 function escHtml(s){ return String(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+document.getElementById('searchFilter').addEventListener('input', renderList);
 
 document.getElementById('pubList').addEventListener('click', e=>{
   const btn = e.target.closest('.del-btn');
@@ -729,7 +728,6 @@ document.getElementById('pubList').addEventListener('click', e=>{
   }
 });
 
-// Initialize on Load
 allMaterials = loadMaterials();
 renderList();
 </script>
