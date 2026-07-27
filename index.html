@@ -5,59 +5,59 @@
     <link rel="icon" type="image/png" href="icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>EduPulse Hub | Academic Resource Vault</title>
-
-    <!-- SEO & Search Engine Optimization Tags -->
+    
+    <!-- SEO Tags -->
     <meta name="description" content="EduPulse Hub - Access verified course syllabus, lecture notes, previous year question papers (PYQs), and model papers for college students instantly.">
-    <meta name="keywords" content="EduPulse Hub, Academic Vault, Vikshant, Vikshant kralta, HPU Syllabus, College Notes, PYQ, Model Papers, Study Material, Exam Notes">
+    <meta name="keywords" content="EduPulse Hub, Academic Vault, HPU Syllabus, College Notes, PYQ, Model Papers, Study Material">
     <meta name="author" content="Vikshant">
     <meta name="robots" content="index, follow">
-
-    <!-- Open Graph / Social Media Sharing (WhatsApp, Telegram, Facebook) -->
+    
+    <!-- Open Graph -->
     <meta property="og:title" content="EduPulse Hub | Academic Resource Vault">
     <meta property="og:description" content="Access verified course syllabus, notes, PYQs and model papers instantly.">
     <meta property="og:image" content="icon.png">
     <meta property="og:url" content="https://edupulsehub.pages.dev">
     <meta property="og:type" content="website">
-
-    <!-- Twitter Card Tags -->
+    
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="EduPulse Hub | Academic Resource Vault">
     <meta name="twitter:description" content="Access verified course syllabus, notes, PYQs and model papers instantly.">
     <meta name="twitter:image" content="icon.png">
-
+    
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    
     <style>
         :root {
             --bg-base: #06090f;
             --bg-surface: #0d131f;
             --bg-surface-elevated: #151d2e;
             --bg-glass: rgba(13, 19, 31, 0.85);
-
+            
             --primary: #6366f1;
             --primary-hover: #4f46e5;
             --primary-glow: rgba(99, 102, 241, 0.2);
-
+            
             --accent-teal: #14b8a6;
             --accent-teal-glow: rgba(20, 184, 166, 0.18);
             --accent-gold: #f59e0b;
             --accent-rose: #f43f5e;
             --accent-cyan: #38bdf8;
-
+            
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
             --text-muted: #64748b;
-
+            
             --border-subtle: rgba(255, 255, 255, 0.08);
             --border-active: rgba(99, 102, 241, 0.4);
-
+            
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 18px;
             --radius-xl: 24px;
-
+            
             --shadow-main: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
             --font-sans: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
@@ -69,35 +69,28 @@
             --bg-surface: #ffffff;
             --bg-surface-elevated: #f1f5f9;
             --bg-glass: rgba(255, 255, 255, 0.9);
-
+            
             --primary: #4f46e5;
             --primary-hover: #4338ca;
             --primary-glow: rgba(79, 70, 229, 0.15);
-
+            
             --accent-teal: #0d9488;
             --accent-teal-glow: rgba(13, 148, 136, 0.12);
             --accent-gold: #d97706;
             --accent-rose: #e11d48;
             --accent-cyan: #0284c7;
-
+            
             --text-main: #0f172a;
             --text-sub: #475569;
             --text-muted: #94a3b8;
-
+            
             --border-subtle: rgba(15, 23, 42, 0.08);
             --border-active: rgba(79, 70, 229, 0.3);
             --shadow-main: 0 16px 40px -10px rgba(15, 23, 42, 0.08);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: var(--font-sans);
-        }
-        html {
-            scroll-behavior: smooth;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans); }
+        html { scroll-behavior: smooth; }
         body {
             background-color: var(--bg-base);
             color: var(--text-main);
@@ -109,23 +102,15 @@
             transition: background-color .3s ease, color .3s ease;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-        button {
-            border: none;
-            outline: none;
-            background: transparent;
-            cursor: pointer;
-        }
+        a { color: inherit; text-decoration: none; }
+        button { border: none; outline: none; background: transparent; cursor: pointer; font-family: var(--font-sans); }
 
         .bg-glow-layer {
             position: fixed;
             inset: 0;
             pointer-events: none;
             z-index: -1;
-            background:
+            background: 
                 radial-gradient(circle at 10% 10%, var(--primary-glow) 0%, transparent 40%),
                 radial-gradient(circle at 90% 90%, var(--accent-teal-glow) 0%, transparent 40%);
         }
@@ -151,38 +136,17 @@
             justify-content: space-between;
             align-items: center;
         }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
+        
+        .brand-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .brand-logo-img {
             height: 38px;
             width: auto;
             object-fit: contain;
         }
-        .brand-name {
-            font-size: 1.15rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-        .brand-tag {
-            font-family: var(--font-mono);
-            font-size: .6rem;
-            color: var(--accent-teal);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-        }
+        .brand-name { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.5px; }
+        .brand-tag { font-family: var(--font-mono); font-size: .6rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; }
 
-        .nav-links {
-            display: flex;
-            gap: .3rem;
-            align-items: center;
-            list-style: none;
-        }
+        .nav-links { display: flex; gap: .3rem; align-items: center; list-style: none; }
         .nav-links a {
             color: var(--text-sub);
             font-weight: 600;
@@ -194,21 +158,10 @@
             align-items: center;
             gap: 7px;
         }
-        .nav-links a:hover {
-            color: var(--text-main);
-            background: var(--border-subtle);
-        }
-        .nav-links a.active {
-            color: #fff;
-            background: var(--primary);
-            box-shadow: 0 4px 12px var(--primary-glow);
-        }
+        .nav-links a:hover { color: var(--text-main); background: var(--border-subtle); }
+        .nav-links a.active { color: #fff; background: var(--primary); box-shadow: 0 4px 12px var(--primary-glow); }
 
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: .6rem;
-        }
+        .nav-actions { display: flex; align-items: center; gap: .6rem; }
         .icon-btn {
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
@@ -223,16 +176,9 @@
             transition: all .2s ease;
             flex-shrink: 0;
         }
-        .icon-btn:hover {
-            color: var(--text-main);
-            border-color: var(--border-active);
-        }
-        .icon-btn.active {
-            color: var(--accent-gold);
-            border-color: var(--accent-gold);
-            background: rgba(245, 158, 11, 0.12);
-        }
-
+        .icon-btn:hover { color: var(--text-main); border-color: var(--border-active); }
+        .icon-btn.active { color: var(--accent-gold); border-color: var(--accent-gold); background: rgba(245, 158, 11, 0.12); }
+        
         .login-link-btn {
             background: var(--text-main);
             color: var(--bg-base);
@@ -246,73 +192,11 @@
             transition: all .2s ease;
             white-space: nowrap;
         }
-        .login-link-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-        .mobile-menu-btn {
-            display: none;
-        }
-
-        /* SYNC STATUS BAR */
-        .sync-status-bar {
-            background: var(--bg-surface-elevated);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 0.45rem 1.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-        .sync-status-bar .sync-badge {
-            background: var(--accent-teal-glow);
-            color: var(--accent-teal);
-            padding: 0.2rem 0.65rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.7rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .sync-status-bar .sync-warning {
-            color: var(--accent-gold);
-            font-weight: 500;
-        }
-        .sync-status-bar button {
-            background: var(--primary);
-            color: #fff;
-            padding: 0.3rem 0.7rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.7rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-        .sync-status-bar button:hover {
-            background: var(--primary-hover);
-        }
-        .sync-status-bar button.outline-btn {
-            background: transparent;
-            border: 1px solid var(--border-active);
-            color: var(--primary);
-        }
-        .sync-status-bar button.outline-btn:hover {
-            background: var(--primary-glow);
-        }
+        .login-link-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .mobile-menu-btn { display: none; }
 
         /* HERO SECTION */
-        .hero {
-            padding: 4rem 1rem 1.5rem;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
-        }
+        .hero { padding: 4rem 1rem 1.5rem; text-align: center; max-width: 900px; margin: 0 auto; width: 100%; }
         .hero-badge {
             background: var(--accent-teal-glow);
             border: 1px solid rgba(20, 184, 166, 0.3);
@@ -342,9 +226,7 @@
             text-align: left;
         }
         @media(max-width: 640px) {
-            .typewriter-box {
-                min-width: 210px;
-            }
+            .typewriter-box { min-width: 210px; }
         }
 
         .typewriter-wrapper {
@@ -361,35 +243,12 @@
             animation: blink 0.75s infinite;
             vertical-align: middle;
         }
-        @keyframes blink {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .hero-sub {
-            color: var(--text-sub);
-            font-size: clamp(0.98rem, 2vw, 1.1rem);
-            margin-bottom: 2.2rem;
-            line-height: 1.65;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 0.5rem;
-        }
+        .hero-sub { color: var(--text-sub); font-size: clamp(0.98rem, 2vw, 1.1rem); margin-bottom: 2.2rem; line-height: 1.65; max-width: 700px; margin-left: auto; margin-right: auto; padding: 0 0.5rem; }
 
         /* SEARCH BAR */
-        .search-container {
-            max-width: 620px;
-            margin: 0 auto;
-            position: relative;
-            padding: 0 0.5rem;
-            width: 100%;
-        }
+        .search-container { max-width: 620px; margin: 0 auto; position: relative; padding: 0 0.5rem; width: 100%; }
         .search-input {
             width: 100%;
             padding: 1.1rem 1rem 1.1rem 3.4rem;
@@ -402,22 +261,9 @@
             box-shadow: var(--shadow-main);
             transition: all .25s ease;
         }
-        .search-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px var(--primary-glow);
-        }
-        .search-input::placeholder {
-            color: var(--text-muted);
-        }
-        .search-icon {
-            position: absolute;
-            left: 1.7rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            pointer-events: none;
-        }
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-glow); }
+        .search-input::placeholder { color: var(--text-muted); }
+        .search-icon { position: absolute; left: 1.7rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.05rem; pointer-events: none; }
 
         /* FILTER SECTION */
         .filter-section {
@@ -450,15 +296,8 @@
             transition: all .2s ease;
             white-space: nowrap;
         }
-        .tab-btn.active {
-            color: #fff;
-            background: var(--primary);
-            box-shadow: 0 4px 12px var(--primary-glow);
-        }
-        .tab-btn:hover:not(.active) {
-            color: var(--text-main);
-            background: var(--border-subtle);
-        }
+        .tab-btn.active { color: #fff; background: var(--primary); box-shadow: 0 4px 12px var(--primary-glow); }
+        .tab-btn:hover:not(.active) { color: var(--text-main); background: var(--border-subtle); }
 
         .dropdown-filters {
             display: flex;
@@ -479,39 +318,15 @@
             cursor: pointer;
             min-width: 165px;
             transition: all .2s ease;
+            font-family: var(--font-sans);
         }
-        .select-filter:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-glow);
-        }
+        .select-filter:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
 
         /* MAIN CONTENT & CARDS */
-        .main-layout {
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 0 1.5rem 3.5rem;
-            flex: 1;
-            width: 100%;
-        }
-        .materials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-        }
-        .state-msg {
-            grid-column: 1/-1;
-            text-align: center;
-            color: var(--text-sub);
-            padding: 5rem 1rem;
-            font-size: 1rem;
-        }
-        .state-msg i {
-            display: block;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-muted);
-        }
+        .main-layout { max-width: 1320px; margin: 0 auto; padding: 0 1.5rem 3.5rem; flex: 1; width: 100%; }
+        .materials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; width: 100%; }
+        .state-msg { grid-column: 1/-1; text-align: center; color: var(--text-sub); padding: 5rem 1rem; font-size: 1rem; }
+        .state-msg i { display: block; font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-muted); }
 
         .card {
             background: var(--bg-surface);
@@ -523,24 +338,10 @@
             transition: all .25s ease;
             height: 100%;
         }
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-active);
-            box-shadow: var(--shadow-main);
-        }
+        .card:hover { transform: translateY(-4px); border-color: var(--border-active); box-shadow: var(--shadow-main); }
 
-        .card-body {
-            padding: 1.35rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.85rem;
-        }
+        .card-body { padding: 1.35rem; flex: 1; display: flex; flex-direction: column; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.85rem; }
         .call-number {
             font-family: var(--font-mono);
             font-size: .7rem;
@@ -550,41 +351,14 @@
             padding: .25rem .65rem;
             border-radius: var(--radius-sm);
         }
-        .bookmark-icon {
-            cursor: pointer;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            transition: all .2s;
-            padding: 4px;
-        }
-        .bookmark-icon:hover {
-            transform: scale(1.2);
-            color: var(--text-main);
-        }
-        .bookmark-icon.active {
-            color: var(--accent-gold);
-        }
+        .bookmark-icon { cursor: pointer; color: var(--text-muted); font-size: 1.1rem; transition: all .2s; padding: 4px; }
+        .bookmark-icon:hover { transform: scale(1.2); color: var(--text-main); }
+        .bookmark-icon.active { color: var(--accent-gold); }
 
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: .5rem;
-            line-height: 1.4;
-        }
-        .card-desc {
-            color: var(--text-sub);
-            font-size: .86rem;
-            line-height: 1.55;
-            margin-bottom: 1.2rem;
-            flex: 1;
-        }
+        .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; line-height: 1.4; }
+        .card-desc { color: var(--text-sub); font-size: .86rem; line-height: 1.55; margin-bottom: 1.2rem; flex: 1; }
 
-        .card-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: .4rem;
-            margin-top: auto;
-        }
+        .card-meta { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: auto; }
         .meta-pill {
             background: var(--bg-surface-elevated);
             padding: .25rem .65rem;
@@ -604,15 +378,9 @@
             justify-content: space-between;
             gap: 0.5rem;
         }
-        .card-footer b {
-            color: var(--text-sub);
-        }
+        .card-footer b { color: var(--text-sub); }
 
-        .card-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            border-top: 1px solid var(--border-subtle);
-        }
+        .card-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--border-subtle); }
         .action-btn {
             padding: .8rem .2rem;
             font-weight: 700;
@@ -627,23 +395,11 @@
             background: transparent;
             width: 100%;
         }
-        .action-btn:last-child {
-            border-right: none;
-        }
-        .btn-view:hover {
-            color: var(--primary);
-            background: var(--primary-glow);
-        }
-        .btn-share:hover {
-            color: var(--accent-teal);
-            background: var(--accent-teal-glow);
-        }
-        .btn-dl {
-            color: var(--accent-rose);
-        }
-        .btn-dl:hover {
-            background: rgba(244, 63, 94, 0.12);
-        }
+        .action-btn:last-child { border-right: none; }
+        .btn-view:hover { color: var(--primary); background: var(--primary-glow); }
+        .btn-share:hover { color: var(--accent-teal); background: var(--accent-teal-glow); }
+        .btn-dl { color: var(--accent-rose); }
+        .btn-dl:hover { background: rgba(244, 63, 94, 0.12); }
 
         /* PDF MODAL */
         .modal {
@@ -676,29 +432,12 @@
             justify-content: space-between;
             align-items: center;
         }
-        .modal-header h3 {
-            font-size: 1.05rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            padding-right: 1rem;
-        }
-        .modal-close {
-            color: var(--text-sub);
-            font-size: 1.2rem;
-            padding: 4px;
-        }
-        .modal-close:hover {
-            color: var(--accent-rose);
-        }
-        .pdf-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: #fff;
-        }
+        .modal-header h3 { font-size: 1.05rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-right: 1rem; }
+        .modal-close { color: var(--text-sub); font-size: 1.2rem; padding: 4px; cursor: pointer; }
+        .modal-close:hover { color: var(--accent-rose); }
+        .pdf-iframe { width: 100%; height: 100%; border: none; background: #fff; }
 
-        /* TOAST */
+        /* TOAST NOTIFICATION */
         .toast-container {
             position: fixed;
             bottom: 1.5rem;
@@ -724,33 +463,16 @@
             align-items: center;
             gap: 8px;
         }
-        .toast.success {
-            border-left: 3px solid var(--accent-teal);
-        }
-        .toast.error {
-            border-left: 3px solid var(--accent-rose);
-        }
-        .toast.info {
-            border-left: 3px solid var(--accent-cyan);
-        }
+        .toast.success { border-left: 3px solid var(--accent-teal); }
+        .toast.error { border-left: 3px solid var(--accent-rose); }
+        .toast.info { border-left: 3px solid var(--accent-cyan); }
         @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
+            from { opacity: 1; }
+            to { opacity: 0; transform: translateY(-10px); }
         }
 
         /* FOOTER */
@@ -766,9 +488,7 @@
         footer::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--primary), var(--accent-teal), transparent);
         }
@@ -793,12 +513,8 @@
             font-size: .86rem;
             line-height: 1.6;
         }
-        .footer-links {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: .65rem;
-        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: .65rem; }
         .footer-links a {
             color: var(--text-sub);
             font-size: .86rem;
@@ -807,10 +523,7 @@
             align-items: center;
             gap: 6px;
         }
-        .footer-links a:hover {
-            color: var(--primary);
-            transform: translateX(3px);
-        }
+        .footer-links a:hover { color: var(--primary); transform: translateX(3px); }
 
         .dev-highlight-box {
             display: inline-flex;
@@ -822,10 +535,7 @@
             border-radius: 50px;
             box-shadow: 0 4px 15px var(--primary-glow);
         }
-        .dev-highlight-box i {
-            color: var(--accent-gold);
-            font-size: .85rem;
-        }
+        .dev-highlight-box i { color: var(--accent-gold); font-size: .85rem; }
         .dev-highlight-text {
             font-weight: 700;
             font-size: .82rem;
@@ -847,17 +557,8 @@
             color: var(--text-muted);
             font-size: .8rem;
         }
-        .footer-bottom-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .footer-bottom-right {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-            flex-wrap: wrap;
-        }
+        .footer-bottom-left { display: flex; align-items: center; gap: 15px; }
+        .footer-bottom-right { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
         .footer-badge-pill {
             display: inline-flex;
             align-items: center;
@@ -870,34 +571,14 @@
             font-size: .75rem;
         }
 
-        /* STORAGE WARNING MODAL */
-        .storage-warning {
-            background: rgba(244, 63, 94, 0.1);
-            border: 1px solid rgba(244, 63, 94, 0.3);
-            color: var(--accent-rose);
-            padding: 0.6rem 1rem;
-            border-radius: var(--radius-md);
-            font-size: 0.78rem;
-            font-weight: 600;
-            text-align: center;
-            margin: 0.5rem 1.5rem;
-            display: none;
-        }
-        .storage-warning.show {
-            display: block;
-        }
-
         .website-link-container {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: var(--font-sans);
             font-size: 15px;
-            color: #334155;
+            color: var(--text-sub);
             margin: 30px 0;
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        [data-theme="dark"] .website-link-container {
-            color: #cbd5e1;
         }
 
         .website-link-btn {
@@ -914,11 +595,13 @@
             transition: all 0.2s ease-in-out;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
         }
+
         .website-link-btn:hover {
             background-color: #1d4ed8;
             transform: translateY(-1px);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
         }
+
         .website-link-btn:active {
             transform: translateY(0);
             background-color: #1e40af;
@@ -926,23 +609,15 @@
 
         /* RESPONSIVE DESIGN */
         @media(max-width: 1024px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 2.5rem;
-            }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
         }
 
         @media(max-width: 768px) {
-            .mobile-menu-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+            .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
             .nav-links {
                 position: absolute;
                 top: var(--nav-h);
-                left: 0;
-                width: 100%;
+                left: 0; width: 100%;
                 background: var(--bg-surface);
                 border-bottom: 1px solid var(--border-subtle);
                 flex-direction: column;
@@ -951,903 +626,525 @@
                 opacity: 0;
                 pointer-events: none;
                 transition: all .25s ease;
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.4);
                 align-items: stretch;
             }
-            .nav-links.mobile-open {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: auto;
-            }
-            .nav-links a {
-                width: 100%;
-                padding: .75rem 1rem;
-            }
-
-            .filter-section {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 1rem;
-                padding: 0 1rem;
-            }
-            .dropdown-filters {
-                display: grid;
-                grid-template-columns: 1fr;
-                width: 100%;
-                gap: 0.6rem;
-            }
-            .select-filter {
-                min-width: 0;
-                width: 100%;
-                font-size: 0.82rem;
-                padding: 0.65rem 1rem;
-            }
-            .tabs-container {
-                width: 100%;
-                padding: 0.3rem;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-                gap: 1rem;
-            }
-            .footer-bottom-left,
-            .footer-bottom-right {
-                justify-content: center;
-                width: 100%;
-            }
-            .main-layout {
-                padding: 0 1rem 3rem;
-            }
-            .sync-status-bar {
-                flex-direction: column;
-                gap: 0.4rem;
-                text-align: center;
-                padding: 0.5rem 1rem;
-            }
+            .nav-links.mobile-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+            .nav-links a { width: 100%; padding: .75rem 1rem; }
+            
+            .filter-section { flex-direction: column; align-items: stretch; gap: 1rem; padding: 0 1rem; }
+            .dropdown-filters { display: grid; grid-template-columns: 1fr; width: 100%; gap: 0.6rem; }
+            .select-filter { min-width: 0; width: 100%; font-size: 0.82rem; padding: 0.65rem 1rem; }
+            .tabs-container { width: 100%; padding: 0.3rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; justify-content: center; text-align: center; gap: 1rem; }
+            .footer-bottom-left, .footer-bottom-right { justify-content: center; width: 100%; }
+            .main-layout { padding: 0 1rem 3rem; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-glow-layer"></div>
+<div class="bg-glow-layer"></div>
 
-    <!-- NAVIGATION -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="brand-logo">
-                <img src="icon.png" alt="EduPulse Hub Logo" class="brand-logo-img">
-                <div>
-                    <div class="brand-name">EduPulse Hub</div>
-                    <div class="brand-tag">Academic Vault</div>
-                </div>
-            </a>
+<!-- NAVIGATION -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="brand-logo">
+      <img src="icon.png" alt="EduPulse Hub Logo" class="brand-logo-img">
+      <div>
+        <div class="brand-name">EduPulse Hub</div>
+        <div class="brand-tag">Academic Vault</div>
+      </div>
+    </a>
 
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#" class="active" data-type="All"><i class="fa-solid fa-border-all"></i> All Materials</a></li>
-                <li><a href="#" data-type="Syllabus"><i class="fa-solid fa-scroll"></i> Syllabus</a></li>
-                <li><a href="#" data-type="Notes"><i class="fa-solid fa-book-open"></i> Notes</a></li>
-                <li><a href="#" data-type="PYQ"><i class="fa-solid fa-file-pen"></i> PYQs</a></li>
-                <li><a href="#" data-type="Model Paper"><i class="fa-solid fa-file-lines"></i> Models</a></li>
-                <li><a href="#" data-type="Other"><i class="fa-solid fa-file"></i> Others</a></li>
-            </ul>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" class="active" data-type="All"><i class="fa-solid fa-border-all"></i> All Materials</a></li>
+      <li><a href="#" data-type="Syllabus"><i class="fa-solid fa-scroll"></i> Syllabus</a></li>
+      <li><a href="#" data-type="Notes"><i class="fa-solid fa-book-open"></i> Notes</a></li>
+      <li><a href="#" data-type="PYQ"><i class="fa-solid fa-file-pen"></i> PYQs</a></li>
+      <li><a href="#" data-type="Model Paper"><i class="fa-solid fa-file-lines"></i> Models</a></li>
+      <li><a href="#" data-type="Other"><i class="fa-solid fa-file"></i> Others</a></li>
+    </ul>
 
-            <div class="nav-actions">
-                <button class="icon-btn" id="savedFilterBtn" title="Saved Bookmarks"><i class="fa-solid fa-bookmark"></i></button>
-                <button class="icon-btn" id="themeBtn" title="Toggle Theme"><i class="fa-solid fa-sun"></i></button>
-                <a href="login.html" class="login-link-btn" title="Admin Login">
-                    <i class="fa-solid fa-user-shield"></i> <span>Login</span>
-                </a>
-                <button class="icon-btn mobile-menu-btn" id="mobileBtn"><i class="fa-solid fa-bars"></i></button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- SYNC STATUS BAR (cross-browser awareness) -->
-    <div class="sync-status-bar" id="syncStatusBar">
-        <span class="sync-badge"><i class="fa-solid fa-database"></i> Local Storage</span>
-        <span id="syncItemCount">0 items stored</span>
-        <span class="sync-warning" id="syncWarning" style="display:none;">
-            <i class="fa-solid fa-triangle-exclamation"></i> Data is browser-specific — not synced across devices
-        </span>
-        <button id="exportDataBtn" class="outline-btn" title="Download all data as JSON file">
-            <i class="fa-solid fa-download"></i> Export Data
-        </button>
-        <button id="importDataBtn" class="outline-btn" title="Load data from a JSON file">
-            <i class="fa-solid fa-upload"></i> Import Data
-        </button>
-        <input type="file" id="importFileInput" accept=".json" style="display:none;">
+    <div class="nav-actions">
+      <button class="icon-btn" id="savedFilterBtn" title="Saved Bookmarks"><i class="fa-solid fa-bookmark"></i></button>
+      <button class="icon-btn" id="themeBtn" title="Toggle Theme"><i class="fa-solid fa-sun"></i></button>
+      <a href="login.html" class="login-link-btn" title="Admin Login">
+        <i class="fa-solid fa-user-shield"></i> <span>Login</span>
+      </a>
+      <button class="icon-btn mobile-menu-btn" id="mobileBtn"><i class="fa-solid fa-bars"></i></button>
     </div>
+  </div>
+</nav>
 
-    <!-- STORAGE WARNING -->
-    <div class="storage-warning" id="storageWarning">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <strong>Storage almost full!</strong> Local storage is nearing its limit. Please export your data or remove old items to avoid data loss.
+<!-- HERO SECTION -->
+<section class="hero">
+  <span class="hero-badge"><i class="fa-solid fa-bolt"></i> Departmental Resource Hub</span>
+  <h1 class="hero-title">
+    Access verified course syllabus, notes &amp;<br>
+    <span class="typewriter-box"><span class="typewriter-wrapper"><span id="typewriter"></span><span class="cursor"></span></span></span>
+  </h1>
+  <p class="hero-sub">Organized previous year questions, lecture notes, and official course outlines all in one simple archive.</p>
+  
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search by subject, code, topic or branch...">
+    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+  </div>
+</section>
+
+<!-- CONTROLS & FILTERS -->
+<div class="filter-section">
+  <div class="tabs-container" id="tabsContainer">
+    <button class="tab-btn active" data-type="All">All Items</button>
+    <button class="tab-btn" data-type="Syllabus">Syllabus</button>
+    <button class="tab-btn" data-type="Notes">Notes</button>
+    <button class="tab-btn" data-type="PYQ">PYQs</button>
+    <button class="tab-btn" data-type="Model Paper">Model Papers</button>
+    <button class="tab-btn" data-type="Other">Others</button>
+  </div>
+  
+  <div class="dropdown-filters">
+    <select id="deptFilter" class="select-filter">
+      <option value="All">All Departments</option>
+      <option value="Political Science">Political Science</option>
+      <option value="Hindi">Hindi</option>
+      <option value="English">English</option>
+      <option value="Sanskrit">Sanskrit</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <select id="yearFilter" class="select-filter">
+      <option value="All">All Classes</option>
+      <option value="BA 1st Year">BA 1st Year</option>
+      <option value="BA 2nd Year">BA 2nd Year</option>
+      <option value="BA 3rd Year">BA 3rd Year</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <select id="semFilter" class="select-filter">
+      <option value="All">All Sessions</option>
+      <option value="2022-2023">2022-2023</option>
+      <option value="2023-2024">2023-2024</option>
+      <option value="2024-2025">2024-2025</option>
+      <option value="2025-2026">2025-2026</option>
+      <option value="2026-2027">2026-2027</option>
+    </select>
+  </div>
+</div>
+
+<!-- CARDS CONTAINER -->
+<main class="main-layout">
+  <div class="materials-grid" id="materialsGrid">
+    <div class="state-msg"><i class="fa-solid fa-circle-notch fa-spin"></i>Loading materials...</div>
+  </div>
+</main>
+
+<!-- PDF PREVIEW MODAL -->
+<div class="modal" id="pdfModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle">Document Viewer</h3>
+      <button class="modal-close" id="pdfCloseBtn"><i class="fa-solid fa-xmark"></i></button>
     </div>
+    <iframe id="pdfFrame" class="pdf-iframe" sandbox="allow-scripts allow-same-origin"></iframe>
+  </div>
+</div>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <span class="hero-badge"><i class="fa-solid fa-bolt"></i> Departmental Resource Hub</span>
-        <h1 class="hero-title">
-            Access verified course syllabus, notes &amp;<br>
-            <span class="typewriter-box"><span class="typewriter-wrapper"><span id="typewriter"></span><span class="cursor"></span></span></span>
-        </h1>
-        <p class="hero-sub">Organized previous year questions, lecture notes, and official course outlines all in one simple archive.</p>
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
 
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search by subject, code, topic or branch...">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        </div>
-    </section>
-
-    <!-- CONTROLS & FILTERS -->
-    <div class="filter-section">
-        <div class="tabs-container" id="tabsContainer">
-            <button class="tab-btn active" data-type="All">All Items</button>
-            <button class="tab-btn" data-type="Syllabus">Syllabus</button>
-            <button class="tab-btn" data-type="Notes">Notes</button>
-            <button class="tab-btn" data-type="PYQ">PYQs</button>
-            <button class="tab-btn" data-type="Model Paper">Model Papers</button>
-            <button class="tab-btn" data-type="Other">Others</button>
-        </div>
-
-        <div class="dropdown-filters">
-            <select id="deptFilter" class="select-filter">
-                <option value="All">All Departments</option>
-                <option value="Political Science">Political Science</option>
-                <option value="Hindi">Hindi</option>
-                <option value="English">English</option>
-                <option value="Sanskrit">Sanskrit</option>
-                <option value="Other">Other</option>
-            </select>
-
-            <select id="yearFilter" class="select-filter">
-                <option value="All">All Classes</option>
-                <option value="BA 1st Year">BA 1st Year</option>
-                <option value="BA 2nd Year">BA 2nd Year</option>
-                <option value="BA 3rd Year">BA 3rd Year</option>
-                <option value="Other">Other</option>
-            </select>
-
-            <select id="semFilter" class="select-filter">
-                <option value="All">All Sessions</option>
-                <option value="2019-2020">2020</option>
-                <option value="2020-2021">2021</option>
-                <option value="2021-2022">2022</option>
-                <option value="2022-2023">2023</option>
-                <option value="2023-2024">2024</option>
-                <option value="2024-2025">2025</option>
-                <option value="2025-2026">2026</option>
-                <option value="2026-2027">2027</option>
-            </select>
-        </div>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <a href="#" class="brand-logo" style="margin-bottom:1.2rem;">
+        <img src="icon.png" alt="EduPulse Hub Logo" class="brand-logo-img">
+        <div class="brand-name">EduPulse Hub</div>
+      </a>
+      <p>EduPulse Hub delivers a streamlined, high-performance academic document repository built for seamless student and faculty access.</p>
     </div>
-
-    <!-- CARDS CONTAINER -->
-    <main class="main-layout">
-        <div class="materials-grid" id="materialsGrid">
-            <div class="state-msg"><i class="fa-solid fa-circle-notch fa-spin"></i>Loading materials...</div>
-        </div>
-    </main>
-
-    <!-- PDF PREVIEW MODAL -->
-    <div class="modal" id="pdfModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">Document Viewer</h3>
-                <button class="modal-close" id="pdfCloseBtn"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <iframe id="pdfFrame" class="pdf-iframe" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
-        </div>
+    <div class="footer-col">
+      <h4>Quick Categories</h4>
+      <ul class="footer-links">
+        <li><a href="#" data-type="Syllabus"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>Syllabus</a></li>
+        <li><a href="#" data-type="Notes"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>Notes</a></li>
+        <li><a href="#" data-type="PYQ"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> Previous PYQs</a></li>
+        <li><a href="#" data-type="Model Paper"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> Model Papers</a></li>
+      </ul>
     </div>
+    <div class="footer-col">
+      <h4>HPU Department</h4>
+      <ul class="footer-links">
+        <li><a href="https://www.hpuniv.ac.in" target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> Political Science</a></li>
+        <li><a href="https://www.hpuniv.ac.in" target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> Hindi</a></li>
+        <li><a href="https://www.hpuniv.ac.in" target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> English</a></li>
+        <li><a href="https://www.hpuniv.ac.in" target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> Sanskrit</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Admin Portal</h4>
+      <p style="margin-bottom:1rem;">Authorized faculty members can securely upload and manage study files.</p>
+      <a href="login.html" class="login-link-btn"><i class="fa-solid fa-right-to-bracket"></i> <span>Admin</span></a>
+      <p class="website-link-container">
+        Our Other Website: 
+        <a href="https://vikshant.pages.dev" class="website-link-btn" target="_blank" rel="noopener">Click to visit</a>
+      </p>
+    </div>
+  </div>
 
-    <!-- TOAST CONTAINER -->
-    <div class="toast-container" id="toastContainer"></div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      <p>© 2026 EduPulse Hub. All rights reserved.</p>
+      <span class="footer-badge-pill"><i class="fa-solid fa-shield-halved"></i> Verified Vault</span>
+    </div>
+    <div class="footer-bottom-right">
+      <div class="dev-highlight-box">
+        <i class="fa-solid fa-code"></i>
+        <span class="dev-highlight-text">Developed &amp; Designed by Vikshant</span>
+      </div>
+    </div>
+  </div>
+</footer>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <a href="#" class="brand-logo" style="margin-bottom:1.2rem;">
-                    <img src="icon.png" alt="EduPulse Hub Logo" class="brand-logo-img">
-                    <div class="brand-name">EduPulse Hub</div>
-                </a>
-                <p>EduPulse Hub delivers a streamlined, high-performance academic document repository built for seamless student and faculty access.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Categories</h4>
-                <ul class="footer-links">
-                    <li><a href="#" data-type="Syllabus"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>Syllabus</a></li>
-                    <li><a href="#" data-type="Notes"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>Notes</a></li>
-                    <li><a href="#" data-type="PYQ"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> Previous PYQs</a></li>
-                    <li><a href="#" data-type="Model Paper"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> Model Papers</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>HPU Department</h4>
-                <ul class="footer-links">
-                    <li><a href="https://www.hpuniv.ac.in" target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> Political Science</a></li>
-                    <li><a href="https://www.hpuniv.ac.in" target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> Hindi</a></li>
-                    <li><a href="https://www.hpuniv.ac.in" target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> English</a></li>
-                    <li><a href="https://www.hpuniv.ac.in" target="_blank" rel="noopener"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i> Sanskrit</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Admin Portal</h4>
-                <p style="margin-bottom:1rem;">Authorized faculty members can securely upload and manage study files.</p>
-                <a href="login.html" class="login-link-btn"><i class="fa-solid fa-right-to-bracket"></i> <span>Admin</span></a>
-                <p class="website-link-container">
-                    Our Other Website:
-                    <a href="https://vikshant.pages.dev" class="website-link-btn" target="_blank" rel="noopener">Click to visit</a>
-                </p>
-            </div>
-        </div>
+<script>
+(function() {
+    // ==================== TYPEWRITER EFFECT ====================
+    const phrases = ["Question Papers", "Lecture notes", "Course syllabi", "model papers"];
+    let phraseIdx = 0, charIdx = 0, isDeleting = false;
+    const typewriterEl = document.getElementById("typewriter");
+    
+    function typeEffect() {
+        if (!typewriterEl) return;
+        const currentPhrase = phrases[phraseIdx];
+        typewriterEl.textContent = isDeleting 
+            ? currentPhrase.substring(0, charIdx - 1) 
+            : currentPhrase.substring(0, charIdx + 1);
+        
+        charIdx += isDeleting ? -1 : 1;
+        let typingSpeed = isDeleting ? 40 : 85;
 
-        <div class="footer-bottom">
-            <div class="footer-bottom-left">
-                <a href="whatnew.html">Last updated: 27-07-2026</a>
-                <p>© 2026 EduPulse Hub. All rights reserved.</p>
-                <span class="footer-badge-pill"><i class="fa-solid fa-shield-halved"></i> Verified Vault</span>
-            </div>
-            <div class="footer-bottom-right">
-                <div class="dev-highlight-box">
-                    <i class="fa-solid fa-code"></i>
-                    <span class="dev-highlight-text">Developed &amp; Designed by Vikshant</span>
-                </div>
-            </div>
-        </div>
-    </footer>
+        if (!isDeleting && charIdx === currentPhrase.length) {
+            typingSpeed = 2200;
+            isDeleting = true;
+        } else if (isDeleting && charIdx === 0) {
+            isDeleting = false;
+            phraseIdx = (phraseIdx + 1) % phrases.length;
+            typingSpeed = 300;
+        }
+        setTimeout(typeEffect, typingSpeed);
+    }
+    document.addEventListener("DOMContentLoaded", typeEffect);
 
-    <script>
-        (function() {
-            // ==================== TYPEWRITER EFFECT ====================
-            const phrases = ["Question Papers", "Lecture notes", "Course syllabi", "model papers"];
-            let phraseIdx = 0,
-                charIdx = 0,
-                isDeleting = false;
-            const typewriterEl = document.getElementById("typewriter");
+    // ==================== STATE MANAGEMENT ====================
+    const DB_KEY = 'edupulse_materials_db';
+    const BOOKMARKS_KEY = 'edupulse_bookmarks';
+    
+    let selectedType = 'All';
+    let showOnlySaved = false;
+    let allMaterials = [];
+    let bookmarks = [];
 
-            function typeEffect() {
-                if (!typewriterEl) return;
-                const currentPhrase = phrases[phraseIdx];
-                typewriterEl.textContent = isDeleting ?
-                    currentPhrase.substring(0, charIdx - 1) :
-                    currentPhrase.substring(0, charIdx + 1);
+    // Load data from localStorage (shared with admin panel)
+    function loadMaterials() {
+        try {
+            const data = localStorage.getItem(DB_KEY);
+            allMaterials = data ? JSON.parse(data) : [];
+            return allMaterials;
+        } catch(e) {
+            console.error("Failed to load materials:", e);
+            allMaterials = [];
+            return [];
+        }
+    }
 
-                charIdx += isDeleting ? -1 : 1;
-                let typingSpeed = isDeleting ? 40 : 85;
+    function loadBookmarks() {
+        try {
+            const data = localStorage.getItem(BOOKMARKS_KEY);
+            bookmarks = data ? JSON.parse(data) : [];
+        } catch(e) {
+            bookmarks = [];
+        }
+    }
 
-                if (!isDeleting && charIdx === currentPhrase.length) {
-                    typingSpeed = 2200;
-                    isDeleting = true;
-                } else if (isDeleting && charIdx === 0) {
-                    isDeleting = false;
-                    phraseIdx = (phraseIdx + 1) % phrases.length;
-                    typingSpeed = 300;
-                }
-                setTimeout(typeEffect, typingSpeed);
-            }
-            document.addEventListener("DOMContentLoaded", typeEffect);
+    function saveBookmarks() {
+        try {
+            localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
+        } catch(e) {
+            console.error("Failed to save bookmarks:", e);
+        }
+    }
 
-            // ==================== STATE ====================
-            let selectedType = 'All';
-            let showOnlySaved = false;
-            let allMaterials = [];
-            let bookmarks = [];
+    // ==================== UTILITY FUNCTIONS ====================
+    function timeAgo(ts) {
+        const s = Math.floor((Date.now() - ts) / 1000);
+        if (s < 60) return 'Just now';
+        if (s < 3600) return Math.floor(s / 60) + 'm ago';
+        if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+        if (s < 864000) return Math.floor(s / 86400) + 'd ago';
+        const date = new Date(ts);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
 
-            // ==================== LOCAL STORAGE HELPERS ====================
-            const STORAGE_KEY = 'edupulse_db';
-            const BOOKMARKS_KEY = 'edupulse_bookmarks';
-            const MAX_STORAGE_SIZE = 4.5 * 1024 * 1024; // 4.5MB warning threshold (localStorage is ~5-10MB)
+    function esc(str) {
+        return String(str || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
 
-            function loadMaterials() {
-                try {
-                    const data = localStorage.getItem(STORAGE_KEY);
-                    if (!data) return [];
-                    const parsed = JSON.parse(data);
-                    if (!Array.isArray(parsed)) return [];
-                    // Validate and clean each item
-                    return parsed.map(fixItemData).filter(Boolean);
-                } catch (e) {
-                    console.error("Failed to load materials:", e);
-                    return [];
-                }
-            }
+    function showToast(message, type = 'info') {
+        const container = document.getElementById('toastContainer');
+        if (!container) return;
+        const toast = document.createElement('div');
+        toast.className = 'toast ' + type;
+        const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', info: 'fa-circle-info' };
+        toast.innerHTML = `<i class="fa-solid ${icons[type] || icons.info}"></i> ${message}`;
+        container.appendChild(toast);
+        setTimeout(() => {
+            if (toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 3000);
+    }
 
-            function saveMaterials(list) {
-                try {
-                    const json = JSON.stringify(list);
-                    // Check size before saving
-                    if (json.length > MAX_STORAGE_SIZE) {
-                        showStorageWarning(true);
-                    } else {
-                        showStorageWarning(false);
-                    }
-                    localStorage.setItem(STORAGE_KEY, json);
-                    updateSyncStatus();
-                    return true;
-                } catch (e) {
-                    if (e.name === 'QuotaExceededError') {
-                        showToast('Storage full! Please export data and clear some items.', 'error');
-                        showStorageWarning(true);
-                    }
-                    console.error("Failed to save materials:", e);
-                    return false;
-                }
-            }
+    // ==================== RENDER MATERIALS ====================
+    function renderData() {
+        const grid = document.getElementById('materialsGrid');
+        if (!grid) return;
+        
+        const query = (document.getElementById('searchInput')?.value || '').toLowerCase();
+        const dept = document.getElementById('deptFilter')?.value || 'All';
+        const year = document.getElementById('yearFilter')?.value || 'All';
+        const sem = document.getElementById('semFilter')?.value || 'All';
+        
+        grid.innerHTML = '';
 
-            function loadBookmarks() {
-                try {
-                    const data = localStorage.getItem(BOOKMARKS_KEY);
-                    if (!data) return [];
-                    const parsed = JSON.parse(data);
-                    return Array.isArray(parsed) ? parsed.map(Number).filter(n => !isNaN(n)) : [];
-                } catch (e) {
-                    console.error("Failed to load bookmarks:", e);
-                    return [];
-                }
-            }
+        // Reload data to get latest from admin
+        loadMaterials();
 
-            function saveBookmarks(list) {
-                try {
-                    localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(list));
-                    return true;
-                } catch (e) {
-                    console.error("Failed to save bookmarks:", e);
-                    return false;
-                }
-            }
+        const matches = allMaterials.filter(item => {
+            const typeMatch = selectedType === 'All' || item.type === selectedType;
+            const deptMatch = dept === 'All' || (item.branch && item.branch.toLowerCase().includes(dept.toLowerCase()));
+            const yearMatch = year === 'All' || item.year === year;
+            const semMatch = sem === 'All' || item.semester === sem;
+            const searchMatch = !query || 
+                (item.title || '').toLowerCase().includes(query) || 
+                (item.subject || '').toLowerCase().includes(query) || 
+                (item.branch || '').toLowerCase().includes(query);
+            const savedMatch = !showOnlySaved || bookmarks.includes(item.id);
+            
+            return typeMatch && deptMatch && yearMatch && semMatch && searchMatch && savedMatch;
+        }).sort((a, b) => b.timestamp - a.timestamp);
 
-            function fixItemData(item) {
-                if (!item || typeof item !== 'object') return null;
-                return {
-                    id: Number(item.id) || Date.now() + Math.random(),
-                    title: String(item.title || 'Untitled'),
-                    desc: String(item.desc || ''),
-                    type: String(item.type || 'Other'),
-                    subject: String(item.subject || 'General'),
-                    branch: String(item.branch || 'General'),
-                    year: String(item.year || ''),
-                    semester: String(item.semester || ''),
-                    adminName: String(item.adminName || 'Admin'),
-                    timestamp: Number(item.timestamp) || Date.now(),
-                    pdfData: item.pdfData || null,
-                    pdfUrl: item.pdfUrl || null,
-                };
-            }
+        if (!matches.length) {
+            grid.innerHTML = `<div class="state-msg"><i class="fa-solid fa-folder-open"></i>No academic materials match your current criteria.</div>`;
+            return;
+        }
 
-            // ==================== STORAGE WARNING ====================
-            function showStorageWarning(show) {
-                const warningEl = document.getElementById('storageWarning');
-                if (warningEl) {
-                    warningEl.classList.toggle('show', show);
-                }
-            }
+        matches.forEach(item => {
+            const isBookmarked = bookmarks.includes(item.id);
+            const badgeTag = `${item.semester || ''} ${item.year ? '• ' + item.year : ''}`.trim();
+            const callNo = (item.branch || 'GEN') + (badgeTag ? ' • ' + badgeTag : '');
+            const pdfSrc = item.pdfData || item.pdfUrl || '#';
+            const hasPdf = pdfSrc !== '#' && pdfSrc !== '';
 
-            function checkStorageUsage() {
-                try {
-                    const data = localStorage.getItem(STORAGE_KEY);
-                    if (data && data.length > MAX_STORAGE_SIZE) {
-                        showStorageWarning(true);
-                    } else {
-                        showStorageWarning(false);
-                    }
-                } catch (e) {
-                    // ignore
-                }
-            }
-
-            // ==================== SYNC STATUS ====================
-            function updateSyncStatus() {
-                const countEl = document.getElementById('syncItemCount');
-                const warningEl = document.getElementById('syncWarning');
-                if (countEl) {
-                    countEl.textContent = allMaterials.length + ' item' + (allMaterials.length !== 1 ? 's' : '') +
-                        ' stored';
-                }
-                if (warningEl) {
-                    // Always show the cross-browser note since localStorage is inherently local
-                    warningEl.style.display = allMaterials.length > 0 ? 'inline-flex' : 'none';
-                }
-                checkStorageUsage();
-            }
-
-            // ==================== TOAST NOTIFICATIONS ====================
-            function showToast(message, type = 'info') {
-                const container = document.getElementById('toastContainer');
-                if (!container) return;
-                const toast = document.createElement('div');
-                toast.className = 'toast ' + type;
-                const iconMap = { success: 'fa-circle-check', error: 'fa-circle-xmark', info: 'fa-circle-info' };
-                toast.innerHTML = `<i class="fa-solid ${iconMap[type] || iconMap.info}"></i> ${message}`;
-                container.appendChild(toast);
-                // Auto-remove after animation
-                setTimeout(() => {
-                    if (toast.parentNode) toast.parentNode.removeChild(toast);
-                }, 3000);
-            }
-
-            // ==================== DATA EXPORT / IMPORT ====================
-            function exportData() {
-                try {
-                    const exportObj = {
-                        version: 1,
-                        exportedAt: new Date().toISOString(),
-                        materials: allMaterials,
-                        bookmarks: bookmarks,
-                    };
-                    const json = JSON.stringify(exportObj, null, 2);
-                    const blob = new Blob([json], { type: 'application/json' });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-                    a.download = 'edupulse-backup-' + timestamp + '.json';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                    showToast('Data exported successfully! Import this file on another browser to sync.', 'success');
-                } catch (e) {
-                    console.error("Export failed:", e);
-                    showToast('Export failed. Please try again.', 'error');
-                }
-            }
-
-            function importData(file) {
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    try {
-                        const imported = JSON.parse(e.target.result);
-                        if (!imported.materials || !Array.isArray(imported.materials)) {
-                            throw new Error('Invalid backup file format');
-                        }
-                        // Validate and fix each item
-                        const validMaterials = imported.materials.map(fixItemData).filter(Boolean);
-                        const validBookmarks = Array.isArray(imported.bookmarks) ?
-                            imported.bookmarks.map(Number).filter(n => !isNaN(n)) :
-                            [];
-
-                        // Merge with existing data (avoid duplicates by ID)
-                        const existingIds = new Set(allMaterials.map(m => m.id));
-                        const newItems = validMaterials.filter(m => !existingIds.has(m.id));
-                        allMaterials = [...allMaterials, ...newItems];
-
-                        // Merge bookmarks
-                        const existingBookmarks = new Set(bookmarks);
-                        validBookmarks.forEach(b => existingBookmarks.add(b));
-                        bookmarks = Array.from(existingBookmarks);
-
-                        saveMaterials(allMaterials);
-                        saveBookmarks(bookmarks);
-                        renderData();
-                        updateSyncStatus();
-                        showToast(
-                            `Imported ${newItems.length} new item(s) successfully! Total: ${allMaterials.length} items.`,
-                            'success');
-                    } catch (err) {
-                        console.error("Import failed:", err);
-                        showToast('Import failed. Please ensure the file is a valid EduPulse backup.',
-                            'error');
-                    }
-                };
-                reader.onerror = function() {
-                    showToast('Failed to read file. Please try again.', 'error');
-                };
-                reader.readAsText(file);
-            }
-
-            // ==================== SEED DATA ====================
-            function seedData() {
-                const now = Date.now();
-                const sampleData = [{
-                    id: 1001,
-                    title: 'BA 2nd Year Political Science Syllabus 2024-25',
-                    desc: 'Complete course syllabus for Political Science BA 2nd Year as per HPU guidelines. Covers all units and recommended readings.',
-                    type: 'Syllabus',
-                    subject: 'Political Science',
-                    branch: 'Political Science',
-                    year: 'BA 2nd Year',
-                    semester: '2024-2025',
-                    adminName: 'Vikshant',
-                    timestamp: now - 86400000 * 30,
-                    pdfData: null,
-                    pdfUrl: '#'
-                }, {
-                    id: 1002,
-                    title: 'Hindi Poetry Notes — Chhayavad Era',
-                    desc: 'Detailed lecture notes covering the Chhayavad poetic movement in Hindi literature. Includes analysis of key poems and poets.',
-                    type: 'Notes',
-                    subject: 'Hindi Literature',
-                    branch: 'Hindi',
-                    year: 'BA 2nd Year',
-                    semester: '2024-2025',
-                    adminName: 'Vikshant',
-                    timestamp: now - 86400000 * 20,
-                    pdfData: null,
-                    pdfUrl: '#'
-                }, {
-                    id: 1003,
-                    title: 'English PYQ 2023 — BA 2nd Year',
-                    desc: 'Previous year question paper for English compulsory paper, BA 2nd Year, HPU examination 2023.',
-                    type: 'PYQ',
-                    subject: 'English',
-                    branch: 'English',
-                    year: 'BA 2nd Year',
-                    semester: '2022-2023',
-                    adminName: 'Vikshant',
-                    timestamp: now - 86400000 * 15,
-                    pdfData: null,
-                    pdfUrl: '#'
-                }, {
-                    id: 1004,
-                    title: 'Sanskrit Model Paper — Grammar & Composition',
-                    desc: 'Model question paper for Sanskrit grammar and composition. Useful for exam practice and revision.',
-                    type: 'Model Paper',
-                    subject: 'Sanskrit',
-                    branch: 'Sanskrit',
-                    year: 'BA 2nd Year',
-                    semester: '2024-2025',
-                    adminName: 'Vikshant',
-                    timestamp: now - 86400000 * 10,
-                    pdfData: null,
-                    pdfUrl: '#'
-                }, {
-                    id: 1005,
-                    title: 'Political Science Notes — Indian Constitution',
-                    desc: 'Comprehensive notes on the Indian Constitution covering fundamental rights, directive principles, and key amendments.',
-                    type: 'Notes',
-                    subject: 'Political Science',
-                    branch: 'Political Science',
-                    year: 'BA 2nd Year',
-                    semester: '2024-2025',
-                    adminName: 'Vikshant',
-                    timestamp: now - 86400000 * 5,
-                    pdfData: null,
-                    pdfUrl: '#'
-                }];
-                return sampleData.map(fixItemData).filter(Boolean);
-            }
-
-            // ==================== TIME AGO ====================
-            function timeAgo(ts) {
-                const s = Math.floor((Date.now() - ts) / 1000);
-                if (s < 60) return 'Just now';
-                if (s < 3600) return Math.floor(s / 60) + 'm ago';
-                if (s < 86400) return Math.floor(s / 3600) + 'h ago';
-                if (s < 864000) return Math.floor(s / 86400) + 'd ago';
-                const date = new Date(ts);
-                const day = String(date.getDate()).padStart(2, '0');
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const year = date.getFullYear();
-                return `${day}/${month}/${year}`;
-            }
-
-            function esc(str) {
-                return String(str || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-            }
-
-            // ==================== RENDER ====================
-            function renderData() {
-                const grid = document.getElementById('materialsGrid');
-                if (!grid) return;
-                const query = (document.getElementById('searchInput')?.value || '').toLowerCase();
-                const dept = document.getElementById('deptFilter')?.value || 'All';
-                const year = document.getElementById('yearFilter')?.value || 'All';
-                const sem = document.getElementById('semFilter')?.value || 'All';
-                grid.innerHTML = '';
-
-                const matches = allMaterials.filter(item => {
-                    const typeMatch = selectedType === 'All' || item.type === selectedType;
-                    const deptMatch = dept === 'All' || (item.branch && item.branch.toLowerCase()
-                        .includes(dept.toLowerCase()));
-                    const yearMatch = year === 'All' || item.year === year;
-                    const semMatch = sem === 'All' || item.semester === sem;
-                    const searchMatch = !query ||
-                        (item.title || '').toLowerCase().includes(query) ||
-                        (item.subject || '').toLowerCase().includes(query) ||
-                        (item.branch || '').toLowerCase().includes(query);
-                    const savedMatch = !showOnlySaved || bookmarks.includes(item.id);
-                    return typeMatch && deptMatch && yearMatch && semMatch && searchMatch && savedMatch;
-                }).sort((a, b) => b.timestamp - a.timestamp);
-
-                if (!matches.length) {
-                    grid.innerHTML =
-                        `<div class="state-msg"><i class="fa-solid fa-folder-open"></i>No academic materials match your current criteria.</div>`;
-                    return;
-                }
-
-                matches.forEach(item => {
-                    const isBookmarked = bookmarks.includes(item.id);
-                    const badgeTag = `${item.semester || ''} ${item.year ? '• ' + item.year : ''}`.trim();
-                    const callNo = (item.branch || 'GEN') + (badgeTag ? ' • ' + badgeTag : '');
-                    const pdfSrc = item.pdfData || item.pdfUrl || '#';
-                    // For download, prefer the URL; if it's a data URL, use it directly
-                    const downloadSrc = pdfSrc !== '#' ? pdfSrc : null;
-
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.innerHTML = `
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
                 <div class="card-body">
-                  <div class="card-header">
-                    <span class="call-number">${esc(callNo)}</span>
-                    <i class="fa-${isBookmarked ? 'solid' : 'regular'} fa-bookmark bookmark-icon ${isBookmarked ? 'active' : ''}" data-id="${item.id}" title="${isBookmarked ? 'Remove bookmark' : 'Add bookmark'}"></i>
-                  </div>
-                  <h3 class="card-title">${esc(item.title)}</h3>
-                  <p class="card-desc">${esc(item.desc || 'No description available.')}</p>
-                  <div class="card-meta">
-                    <span class="meta-pill">${esc(item.type)}</span>
-                    <span class="meta-pill">${esc(item.subject)}</span>
-                    <span class="meta-pill">${esc(item.branch)}</span>
-                  </div>
+                    <div class="card-header">
+                        <span class="call-number">${esc(callNo)}</span>
+                        <i class="fa-${isBookmarked ? 'solid' : 'regular'} fa-bookmark bookmark-icon ${isBookmarked ? 'active' : ''}" data-id="${item.id}" title="${isBookmarked ? 'Remove bookmark' : 'Add bookmark'}"></i>
+                    </div>
+                    <h3 class="card-title">${esc(item.title)}</h3>
+                    <p class="card-desc">${esc(item.desc || 'No description available.')}</p>
+                    <div class="card-meta">
+                        <span class="meta-pill">${esc(item.type)}</span>
+                        <span class="meta-pill">${esc(item.subject)}</span>
+                        <span class="meta-pill">${esc(item.branch)}</span>
+                    </div>
                 </div>
                 <div class="card-footer">
-                  <span>By <b>${esc(item.adminName)}</b></span>
-                  <span><i class="fa-regular fa-clock"></i> ${timeAgo(item.timestamp)}</span>
+                    <span>By <b>${esc(item.adminName)}</b></span>
+                    <span><i class="fa-regular fa-clock"></i> ${timeAgo(item.timestamp)}</span>
                 </div>
                 <div class="card-actions">
-                  <button class="action-btn btn-view" data-action="view" data-id="${item.id}"><i class="fa-solid fa-eye"></i> View</button>
-                  <button class="action-btn btn-share" data-action="share" data-id="${item.id}"><i class="fa-solid fa-share-nodes"></i> Share</button>
-                  ${downloadSrc
-                    ? `<a href="${esc(downloadSrc)}" target="_blank" rel="noopener" download="${esc(item.title).replace(/[^a-zA-Z0-9]/g, '_')}.pdf" class="action-btn btn-dl"><i class="fa-solid fa-download"></i> PDF</a>`
-                    : `<button class="action-btn btn-dl" data-action="nodl" data-id="${item.id}" disabled style="opacity:0.5;cursor:not-allowed;"><i class="fa-solid fa-download"></i> N/A</button>`
-                  }
+                    <button class="action-btn btn-view" data-action="view" data-id="${item.id}"><i class="fa-solid fa-eye"></i> View</button>
+                    <button class="action-btn btn-share" data-action="share" data-id="${item.id}"><i class="fa-solid fa-share-nodes"></i> Share</button>
+                    ${hasPdf 
+                        ? `<a href="${esc(pdfSrc)}" target="_blank" rel="noopener" download="${esc(item.title).replace(/[^a-zA-Z0-9]/g, '_')}.pdf" class="action-btn btn-dl"><i class="fa-solid fa-download"></i> PDF</a>`
+                        : `<button class="action-btn btn-dl" disabled style="opacity:0.5;cursor:not-allowed;"><i class="fa-solid fa-download"></i> N/A</button>`
+                    }
                 </div>`;
-                    grid.appendChild(card);
+            grid.appendChild(card);
+        });
+    }
+
+    // ==================== BOOKMARK TOGGLE ====================
+    function toggleBookmark(id) {
+        id = Number(id);
+        if (isNaN(id)) return;
+        
+        if (bookmarks.includes(id)) {
+            bookmarks = bookmarks.filter(b => b !== id);
+        } else {
+            bookmarks.push(id);
+        }
+        saveBookmarks();
+        renderData();
+    }
+
+    // ==================== PDF VIEWER ====================
+    function viewPDF(item) {
+        const pdfSrc = item.pdfData || item.pdfUrl;
+        if (!pdfSrc || pdfSrc === '#') {
+            showToast('No PDF available for this resource.', 'info');
+            return;
+        }
+        document.getElementById('modalTitle').innerText = item.title;
+        document.getElementById('pdfFrame').src = pdfSrc;
+        document.getElementById('pdfModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePdfModal() {
+        document.getElementById('pdfModal').style.display = 'none';
+        document.getElementById('pdfFrame').src = '';
+        document.body.style.overflow = '';
+    }
+
+    // ==================== SHARE FUNCTION ====================
+    async function shareResource(item) {
+        const websiteUrl = window.location.origin + window.location.pathname;
+        const classInfo = `${item.semester || ''} ${item.year ? '(' + item.year + ')' : ''}`.trim() || 'General';
+        const captionText = `📚 *${item.subject}* | 🏫 ${classInfo}\n📄 ${item.title}\n🔗 Explore more: ${websiteUrl}`;
+        
+        try {
+            await navigator.clipboard.writeText(captionText);
+            showToast('📋 Info copied! Paste in WhatsApp/Telegram to share.', 'success');
+        } catch (e) {
+            console.error("Clipboard copy failed", e);
+        }
+
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: item.title,
+                    text: captionText,
+                    url: websiteUrl
                 });
+            } catch (err) {
+                // User cancelled or error
             }
+        }
+    }
 
-            // ==================== SHARE RESOURCE ====================
-            async function shareResource(item) {
-                const websiteUrl = (window.location.origin !== 'null' && window.location.origin.startsWith(
-                    'http')) ?
-                    window.location.origin + window.location.pathname :
-                    'https://edupulsehub.pages.dev';
+    // ==================== TYPE FILTER ====================
+    function setActiveType(type) {
+        selectedType = type;
+        document.querySelectorAll('[data-type]').forEach(el => {
+            el.classList.toggle('active', el.dataset.type === type);
+        });
+        renderData();
+    }
 
-                const classInfo = `${item.semester || ''} ${item.year ? '(' + item.year + ')' : ''}`.trim() ||
-                    'General';
-                const captionText =
-                    `📚 *${item.subject}* | 🏫 ${classInfo}\n📄 ${item.title}\n🔗 Explore more: ${websiteUrl}`;
+    // ==================== EVENT LISTENERS ====================
+    document.getElementById('deptFilter')?.addEventListener('change', renderData);
+    document.getElementById('yearFilter')?.addEventListener('change', renderData);
+    document.getElementById('semFilter')?.addEventListener('change', renderData);
+    document.getElementById('searchInput')?.addEventListener('input', renderData);
 
-                // Always copy to clipboard first
-                try {
-                    await navigator.clipboard.writeText(captionText);
-                    showToast('📋 Info copied! Paste in WhatsApp/Telegram to share.', 'success');
-                } catch (e) {
-                    console.error("Clipboard copy failed", e);
-                }
+    document.querySelectorAll('[data-type]').forEach(el => {
+        el.addEventListener('click', e => {
+            e.preventDefault();
+            setActiveType(el.dataset.type);
+            document.getElementById('navLinks')?.classList.remove('mobile-open');
+        });
+    });
 
-                // Try Web Share API
-                let shared = false;
-                const pdfUrl = item.pdfData || item.pdfUrl;
+    document.getElementById('materialsGrid')?.addEventListener('click', e => {
+        const bm = e.target.closest('.bookmark-icon');
+        if (bm) {
+            toggleBookmark(bm.dataset.id);
+            return;
+        }
+        
+        const btn = e.target.closest('[data-action]');
+        if (btn) {
+            const item = allMaterials.find(m => m.id === Number(btn.dataset.id));
+            if (!item) return;
+            if (btn.dataset.action === 'view') viewPDF(item);
+            if (btn.dataset.action === 'share') shareResource(item);
+        }
+    });
 
-                if (navigator.canShare && pdfUrl && pdfUrl.startsWith('http')) {
-                    try {
-                        const response = await fetch(pdfUrl);
-                        const blob = await response.blob();
-                        const safeFileName = (item.title || 'Document').replace(/[^a-zA-Z0-9]/g, '_') +
-                            '.pdf';
-                        const file = new File([blob], safeFileName, { type: 'application/pdf' });
+    document.getElementById('pdfCloseBtn')?.addEventListener('click', closePdfModal);
+    document.getElementById('pdfModal')?.addEventListener('click', e => {
+        if (e.target.id === 'pdfModal') closePdfModal();
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closePdfModal();
+    });
 
-                        if (navigator.canShare({ files: [file] })) {
-                            await navigator.share({ title: item.title, text: captionText, files: [file] });
-                            shared = true;
-                        }
-                    } catch (err) {
-                        console.log('File sharing not supported, trying URL share:', err);
-                    }
-                }
+    document.getElementById('savedFilterBtn')?.addEventListener('click', () => {
+        showOnlySaved = !showOnlySaved;
+        document.getElementById('savedFilterBtn').classList.toggle('active', showOnlySaved);
+        renderData();
+    });
 
-                if (!shared && navigator.share) {
-                    try {
-                        await navigator.share({ title: item.title, text: captionText, url: websiteUrl });
-                        shared = true;
-                    } catch (err) {
-                        if (err.name !== 'AbortError') {
-                            console.log('Share sheet dismissed or failed:', err);
-                        }
-                    }
-                }
+    document.getElementById('themeBtn')?.addEventListener('click', () => {
+        const html = document.documentElement;
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+        try { localStorage.setItem('edupulse_theme', isDark ? 'light' : 'dark'); } catch(e) {}
+    });
+
+    document.getElementById('mobileBtn')?.addEventListener('click', () => {
+        document.getElementById('navLinks')?.classList.toggle('mobile-open');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        const navLinks = document.getElementById('navLinks');
+        const mobileBtn = document.getElementById('mobileBtn');
+        if (navLinks && mobileBtn && navLinks.classList.contains('mobile-open')) {
+            if (!navLinks.contains(e.target) && !mobileBtn.contains(e.target)) {
+                navLinks.classList.remove('mobile-open');
             }
+        }
+    });
 
-            // ==================== BOOKMARK ====================
-            function toggleBookmark(id) {
-                id = Number(id);
-                if (isNaN(id)) return;
-                if (bookmarks.includes(id)) {
-                    bookmarks = bookmarks.filter(b => b !== id);
-                } else {
-                    bookmarks = [...bookmarks, id];
-                }
-                saveBookmarks(bookmarks);
-                renderData();
+    // ==================== INITIALIZATION ====================
+    function init() {
+        // Restore theme
+        try {
+            const savedTheme = localStorage.getItem('edupulse_theme');
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                const themeBtn = document.getElementById('themeBtn');
+                if (themeBtn) themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
             }
+        } catch(e) {}
 
-            // ==================== PDF VIEWER ====================
-            function viewPDF(item) {
-                const pdfSrc = item.pdfData || item.pdfUrl;
-                if (!pdfSrc || pdfSrc === '#') {
-                    showToast('No PDF available for this item yet.', 'info');
-                    return;
-                }
-                document.getElementById('modalTitle').innerText = item.title;
-                document.getElementById('pdfFrame').src = pdfSrc;
-                document.getElementById('pdfModal').style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
+        // Load data
+        loadMaterials();
+        loadBookmarks();
+        renderData();
 
-            function closePdfModal() {
-                document.getElementById('pdfModal').style.display = 'none';
-                document.getElementById('pdfFrame').src = '';
-                document.body.style.overflow = '';
-            }
+        // Refresh data every 30 seconds to catch admin updates
+        setInterval(() => {
+            loadMaterials();
+            renderData();
+        }, 30000);
 
-            // ==================== TYPE FILTER ====================
-            function setActiveType(type) {
-                selectedType = type;
-                document.querySelectorAll('[data-type]').forEach(el => {
-                    el.classList.toggle('active', el.dataset.type === type);
-                });
-                // Also update nav links
-                document.querySelectorAll('.nav-links a[data-type]').forEach(el => {
-                    el.classList.toggle('active', el.dataset.type === type);
-                });
-                document.querySelectorAll('.tabs-container .tab-btn[data-type]').forEach(el => {
-                    el.classList.toggle('active', el.dataset.type === type);
-                });
-                renderData();
-            }
+        console.log('✅ EduPulse Hub Student Portal Ready');
+    }
 
-            // ==================== EVENT LISTENERS ====================
-            document.getElementById('deptFilter')?.addEventListener('change', renderData);
-            document.getElementById('yearFilter')?.addEventListener('change', renderData);
-            document.getElementById('semFilter')?.addEventListener('change', renderData);
-            document.getElementById('searchInput')?.addEventListener('input', renderData);
-
-            // Tab & nav type filters
-            document.querySelectorAll('[data-type]').forEach(el => {
-                el.addEventListener('click', e => {
-                    e.preventDefault();
-                    setActiveType(el.dataset.type);
-                    // Close mobile menu if open
-                    document.getElementById('navLinks')?.classList.remove('mobile-open');
-                });
-            });
-
-            // Card actions (delegated)
-            document.getElementById('materialsGrid')?.addEventListener('click', e => {
-                const bm = e.target.closest('.bookmark-icon');
-                if (bm) {
-                    toggleBookmark(bm.dataset.id);
-                    return;
-                }
-                const btn = e.target.closest('[data-action]');
-                if (btn) {
-                    const itemId = Number(btn.dataset.id);
-                    const item = allMaterials.find(m => m.id === itemId);
-                    if (!item) return;
-                    if (btn.dataset.action === 'view') viewPDF(item);
-                    if (btn.dataset.action === 'share') shareResource(item);
-                }
-            });
-
-            // PDF modal
-            document.getElementById('pdfCloseBtn')?.addEventListener('click', closePdfModal);
-            document.getElementById('pdfModal')?.addEventListener('click', e => {
-                if (e.target.id === 'pdfModal') closePdfModal();
-            });
-            document.addEventListener('keydown', e => {
-                if (e.key === 'Escape') closePdfModal();
-            });
-
-            // Saved/bookmark filter
-            document.getElementById('savedFilterBtn')?.addEventListener('click', () => {
-                showOnlySaved = !showOnlySaved;
-                document.getElementById('savedFilterBtn').classList.toggle('active', showOnlySaved);
-                renderData();
-            });
-
-            // Theme toggle
-            document.getElementById('themeBtn')?.addEventListener('click', () => {
-                const html = document.documentElement;
-                const isDark = html.getAttribute('data-theme') === 'dark';
-                html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-                const btn = document.getElementById('themeBtn');
-                if (btn) {
-                    btn.innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' :
-                        '<i class="fa-solid fa-sun"></i>';
-                    btn.title = isDark ? 'Switch to Dark Mode' : 'Switch to Light Mode';
-                }
-                // Save preference
-                try { localStorage.setItem('edupulse_theme', isDark ? 'light' : 'dark'); } catch (e) {}
-            });
-
-            // Mobile menu
-            document.getElementById('mobileBtn')?.addEventListener('click', () => {
-                document.getElementById('navLinks')?.classList.toggle('mobile-open');
-            });
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', e => {
-                const navLinks = document.getElementById('navLinks');
-                const mobileBtn = document.getElementById('mobileBtn');
-                if (navLinks && mobileBtn && navLinks.classList.contains('mobile-open')) {
-                    if (!navLinks.contains(e.target) && !mobileBtn.contains(e.target)) {
-                        navLinks.classList.remove('mobile-open');
-                    }
-                }
-            });
-
-            // Export data
-            document.getElementById('exportDataBtn')?.addEventListener('click', exportData);
-
-            // Import data
-            document.getElementById('importDataBtn')?.addEventListener('click', () => {
-                document.getElementById('importFileInput')?.click();
-            });
-            document.getElementById('importFileInput')?.addEventListener('change', e => {
-                const file = e.target.files?.[0];
-                if (file) {
-                    importData(file);
-                    // Reset input so the same file can be re-imported
-                    e.target.value = '';
-                }
-            });
-
-            // ==================== INIT ====================
-            function init() {
-                // Restore theme preference
-                try {
-                    const savedTheme = localStorage.getItem('edupulse_theme');
-                    if (savedTheme === 'light') {
-                        document.documentElement.setAttribute('data-theme', 'light');
-                        const btn = document.getElementById('themeBtn');
-                        if (btn) {
-                            btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
-                            btn.title = 'Switch to Dark Mode';
-                        }
-                    }
-                } catch (e) {}
-
-                // Load data
-                allMaterials = loadMaterials();
-
-                // If no data exists, seed with sample data
-                if (allMaterials.length === 0) {
-                    allMaterials = seedData();
-                    saveMaterials(allMaterials);
-                    console.log('Seeded initial sample data.');
-                }
-
-                // Load bookmarks
-                bookmarks = loadBookmarks();
-
-                // Initial render
-                renderData();
-                updateSyncStatus();
-
-                // Check storage on load
-                checkStorageUsage();
-
-                console.log(
-                    `EduPulse Hub initialized: ${allMaterials.length} materials, ${bookmarks.length} bookmarks.`
-                    );
-                console.log(
-                    '💡 Tip: Use Export/Import buttons to sync data between browsers. Data is stored locally in this browser only.'
-                    );
-            }
-
-            // Run init when DOM is ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
-            } else {
-                init();
-            }
-        })();
-    </script>
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
 </body>
 </html>
