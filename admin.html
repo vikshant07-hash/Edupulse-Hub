@@ -1,747 +1,802 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EduPulse Hub | Admin Faculty Studio</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-  :root {
-    --bg-base: #080b11;
-    --bg-surface: #0f1523;
-    --bg-surface-elevated: #161e31;
-    --bg-glass: rgba(15, 21, 35, 0.88);
-    
-    --primary: #6366f1;
-    --primary-hover: #4f46e5;
-    --primary-glow: rgba(99, 102, 241, 0.18);
-    
-    --accent-teal: #14b8a6;
-    --accent-teal-glow: rgba(20, 184, 166, 0.15);
-    --accent-rose: #f43f5e;
-    
-    --text-main: #f3f4f6;
-    --text-sub: #9ca3af;
-    --text-muted: #6b7280;
-    
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-active: rgba(99, 102, 241, 0.35);
-    --border-error: rgba(244, 63, 94, 0.6);
-    
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 18px;
-    --radius-xl: 24px;
-    
-    --shadow-main: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
-    --font-sans: 'Plus Jakarta Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>EduPulse Hub | Academic Resource Vault</title>
+  <meta name="description" content="EduPulse Hub - Access verified course syllabus, lecture notes, previous year question papers (PYQs), and model papers for college students instantly.">
+  <meta name="keywords" content="EduPulse Hub, Academic Vault, HPU Syllabus, College Notes, PYQ, Model Papers, Study Material">
+  <meta name="author" content="Vikshant">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="EduPulse Hub | Academic Resource Vault">
+  <meta property="og:description" content="Access verified course syllabus, notes, PYQs and model papers instantly.">
+  <meta property="og:image" content="icon.png">
+  <meta property="og:url" content="https://edupulsehub.pages.dev">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EduPulse Hub | Academic Resource Vault">
+  <meta name="twitter:description" content="Access verified course syllabus, notes, PYQs and model papers instantly.">
+  <meta name="twitter:image" content="icon.png">
+  <link rel="icon" type="image/png" href="icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-base: #06090f;
+      --bg-surface: #0d131f;
+      --bg-surface-elevated: #151d2e;
+      --bg-glass: rgba(13, 19, 31, 0.85);
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --primary-glow: rgba(99, 102, 241, 0.2);
+      --accent-teal: #14b8a6;
+      --accent-teal-glow: rgba(20, 184, 166, 0.18);
+      --accent-gold: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-cyan: #38bdf8;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --text-muted: #64748b;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-active: rgba(99, 102, 241, 0.4);
+      --border-error: rgba(244, 63, 94, 0.6);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-main: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --nav-h: 76px;
+    }
 
-  [data-theme="light"] {
-    --bg-base: #f8fafc;
-    --bg-surface: #ffffff;
-    --bg-surface-elevated: #f1f5f9;
-    --bg-glass: rgba(255, 255, 255, 0.92);
-    
-    --primary: #4f46e5;
-    --primary-hover: #4338ca;
-    --primary-glow: rgba(79, 70, 229, 0.12);
-    
-    --accent-teal: #0d9488;
-    --accent-teal-glow: rgba(13, 148, 136, 0.12);
-    --accent-rose: #e11d48;
-    
-    --text-main: #0f172a;
-    --text-sub: #475569;
-    --text-muted: #94a3b8;
-    
-    --border-subtle: rgba(15, 23, 42, 0.08);
-    --border-active: rgba(79, 70, 229, 0.25);
-    --shadow-main: 0 16px 40px -10px rgba(15, 23, 42, 0.08);
-  }
+    [data-theme="light"] {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f1f5f9;
+      --bg-glass: rgba(255, 255, 255, 0.9);
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-glow: rgba(79, 70, 229, 0.15);
+      --accent-teal: #0d9488;
+      --accent-teal-glow: rgba(13, 148, 136, 0.12);
+      --accent-gold: #d97706;
+      --accent-rose: #e11d48;
+      --accent-cyan: #0284c7;
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --text-muted: #94a3b8;
+      --border-subtle: rgba(15, 23, 42, 0.08);
+      --border-active: rgba(79, 70, 229, 0.3);
+      --shadow-main: 0 16px 40px -10px rgba(15, 23, 42, 0.08);
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans); }
-  body {
-    background-color: var(--bg-base);
-    color: var(--text-main);
-    min-height: 100vh;
-    transition: background-color .3s ease, color .3s ease;
-  }
-  ::selection { background: var(--primary); color: #fff; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans); }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      width: 100%;
+      transition: background-color .3s ease, color .3s ease;
+    }
+    ::selection { background: var(--primary); color: #fff; }
 
-  .bg-glow-layer {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    background: 
-      radial-gradient(circle at 10% 10%, var(--primary-glow) 0%, transparent 40%),
-      radial-gradient(circle at 90% 90%, var(--accent-teal-glow) 0%, transparent 45%);
-  }
+    a { color: inherit; text-decoration: none; }
+    button { border: none; outline: none; background: transparent; cursor: pointer; }
 
-  /* Responsive Navbar */
-  header {
-    background: var(--bg-glass);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border-subtle);
-    padding: 0.85rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  @media(max-width: 640px) {
-    header { padding: 0.75rem 1rem; flex-wrap: wrap; gap: 0.75rem; }
-  }
+    .bg-glow-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at 10% 10%, var(--primary-glow) 0%, transparent 40%),
+        radial-gradient(circle at 90% 90%, var(--accent-teal-glow) 0%, transparent 40%);
+    }
 
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .brand i {
-    font-size: 1rem;
-    color: #fff;
-    background: linear-gradient(135deg, var(--primary), var(--accent-teal));
-    width: 34px;
-    height: 34px;
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px var(--primary-glow);
-  }
-  .brand-title { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.5px; }
-  .brand-tag { font-family: var(--font-mono); font-size: .58rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    /* NAVIGATION */
+    .navbar {
+      height: var(--nav-h);
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+    }
+    .nav-container {
+      max-width: 1320px;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-logo-img { height: 38px; width: auto; object-fit: contain; }
+    .brand-name { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.5px; }
+    .brand-tag { font-family: var(--font-mono); font-size: .6rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; }
 
-  .header-actions { display: flex; align-items: center; gap: .6rem; }
-  @media(max-width: 640px) {
-    .header-actions { width: 100%; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 0.6rem; }
-  }
-  
-  .icon-btn {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    color: var(--text-sub);
-    width: 38px;
-    height: 38px;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: .9rem;
-    transition: all .2s ease;
-  }
-  .icon-btn:hover { color: var(--text-main); border-color: var(--border-active); }
+    .nav-links { display: flex; gap: .3rem; align-items: center; list-style: none; }
+    .nav-links a {
+      color: var(--text-sub);
+      font-weight: 600;
+      font-size: .84rem;
+      padding: .5rem .9rem;
+      border-radius: var(--radius-md);
+      transition: all .2s ease;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .nav-links a:hover { color: var(--text-main); background: var(--border-subtle); }
+    .nav-links a.active { color: #fff; background: var(--primary); box-shadow: 0 4px 12px var(--primary-glow); }
 
-  .link-btn, .logout-btn {
-    text-decoration: none;
-    font-weight: 600;
-    font-size: .82rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: .5rem .9rem;
-    border-radius: var(--radius-md);
-    transition: all .2s ease;
-    white-space: nowrap;
-  }
-  .link-btn { color: var(--text-sub); border: 1px solid var(--border-subtle); background: var(--bg-surface); }
-  .link-btn:hover { color: var(--primary); border-color: var(--primary); }
+    .nav-actions { display: flex; align-items: center; gap: .6rem; }
+    .icon-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-sub);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95rem;
+      transition: all .2s ease;
+      flex-shrink: 0;
+    }
+    .icon-btn:hover { color: var(--text-main); border-color: var(--border-active); }
+    .icon-btn.active { color: var(--accent-gold); border-color: var(--accent-gold); background: rgba(245, 158, 11, 0.12); }
 
-  .logout-btn {
-    background: rgba(244, 63, 94, 0.12);
-    border: 1px solid rgba(244, 63, 94, 0.25);
-    color: var(--accent-rose);
-    cursor: pointer;
-    font-weight: 700;
-  }
-  .logout-btn:hover { background: var(--accent-rose); color: #fff; }
+    .login-link-btn {
+      background: var(--text-main);
+      color: var(--bg-base);
+      padding: .55rem 1rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: .84rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
+    .login-link-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .mobile-menu-btn { display: none; }
 
-  /* Studio Layout */
-  .studio-layout {
-    max-width: 1280px;
-    margin: 2rem auto;
-    padding: 0 1.2rem 3rem;
-    display: grid;
-    grid-template-columns: 1.7fr 1.1fr;
-    gap: 1.8rem;
-  }
-  @media(max-width: 960px){ .studio-layout { grid-template-columns: 1fr; padding: 0 1rem 2rem; } }
+    /* SYNC STATUS BAR */
+    .sync-status-bar {
+      background: var(--bg-surface-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.45rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .sync-status-bar .sync-badge {
+      background: var(--accent-teal-glow);
+      color: var(--accent-teal);
+      padding: 0.2rem 0.65rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .sync-status-bar .sync-warning {
+      color: var(--accent-gold);
+      font-weight: 500;
+    }
+    .sync-status-bar button {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.3rem 0.7rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .sync-status-bar button:hover { background: var(--primary-hover); }
+    .sync-status-bar button.outline-btn {
+      background: transparent;
+      border: 1px solid var(--border-active);
+      color: var(--primary);
+    }
+    .sync-status-bar button.outline-btn:hover { background: var(--primary-glow); }
 
-  .panel {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
-    padding: 1.8rem;
-    box-shadow: var(--shadow-main);
-    position: relative;
-  }
-  @media(max-width: 480px) { .panel { padding: 1.1rem; } }
+    /* HERO */
+    .hero { padding: 4rem 1rem 1.5rem; text-align: center; max-width: 900px; margin: 0 auto; width: 100%; }
+    .hero-badge {
+      background: var(--accent-teal-glow);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      color: var(--accent-teal);
+      padding: .35rem 1rem;
+      border-radius: 50px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-title {
+      font-size: clamp(2.1rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.22;
+      letter-spacing: -1.2px;
+      margin-bottom: 1.2rem;
+    }
+    .typewriter-box { display: inline-block; min-width: 290px; text-align: left; }
+    @media(max-width: 640px) { .typewriter-box { min-width: 210px; } }
+    .typewriter-wrapper {
+      background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.85em;
+      background-color: var(--primary);
+      margin-left: 2px;
+      animation: blink 0.75s infinite;
+      vertical-align: middle;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-  .panel h2 {
-    font-size: 1.12rem;
-    font-weight: 700;
-    margin-bottom: 1.4rem;
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: .9rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--text-main);
-  }
-  .panel h2 i { color: var(--primary); }
+    .hero-sub { color: var(--text-sub); font-size: clamp(0.98rem, 2vw, 1.1rem); margin-bottom: 2.2rem; line-height: 1.65; max-width: 700px; margin-left: auto; margin-right: auto; padding: 0 0.5rem; }
 
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
-  .full-width { grid-column: span 2; }
-  @media(max-width: 560px){ .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
+    .search-container { max-width: 620px; margin: 0 auto; position: relative; padding: 0 0.5rem; width: 100%; }
+    .search-input {
+      width: 100%;
+      padding: 1.1rem 1rem 1.1rem 3.4rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      color: var(--text-main);
+      font-size: .98rem;
+      outline: none;
+      box-shadow: var(--shadow-main);
+      transition: all .25s ease;
+    }
+    .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-glow); }
+    .search-input::placeholder { color: var(--text-muted); }
+    .search-icon { position: absolute; left: 1.7rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.05rem; pointer-events: none; }
 
-  label { display: block; font-size: .8rem; font-weight: 600; color: var(--text-sub); margin-bottom: .45rem; }
-  
-  input, select, textarea {
-    width: 100%;
-    padding: .75rem 1rem;
-    background: var(--bg-surface-elevated);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    color: var(--text-main);
-    outline: none;
-    font-size: .88rem;
-    transition: all 0.2s ease;
-  }
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--primary-glow);
-  }
-  .error-input {
-    border-color: var(--accent-rose) !important;
-    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.2) !important;
-    animation: shake 0.3s ease-in-out;
-  }
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    75% { transform: translateX(4px); }
-  }
-  textarea { resize: vertical; }
+    .filter-section {
+      max-width: 1320px;
+      margin: 2.5rem auto 1.5rem;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      width: 100%;
+    }
+    .tabs-container {
+      display: flex;
+      gap: .35rem;
+      background: var(--bg-surface);
+      padding: .35rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      overflow-x: auto;
+      max-width: 100%;
+    }
+    .tab-btn {
+      border-radius: var(--radius-sm);
+      color: var(--text-sub);
+      padding: .5rem .95rem;
+      font-weight: 600;
+      font-size: .82rem;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
+    .tab-btn.active { color: #fff; background: var(--primary); box-shadow: 0 4px 12px var(--primary-glow); }
+    .tab-btn:hover:not(.active) { color: var(--text-main); background: var(--border-subtle); }
 
-  .source-toggle { display: flex; gap: .6rem; margin-bottom: 1rem; }
-  .toggle-btn {
-    flex: 1;
-    padding: .6rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface-elevated);
-    color: var(--text-sub);
-    font-weight: 600;
-    font-size: .82rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .toggle-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .dropdown-filters { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; align-items: center; }
+    .select-filter {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: .6rem 1rem;
+      border-radius: var(--radius-md);
+      outline: none;
+      font-weight: 500;
+      font-size: .84rem;
+      cursor: pointer;
+      min-width: 165px;
+      transition: all .2s ease;
+    }
+    .select-filter:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
 
-  .file-upload-box {
-    border: 1px dashed var(--border-active);
-    padding: 1.6rem;
-    text-align: center;
-    border-radius: var(--radius-lg);
-    cursor: pointer;
-    background: var(--bg-surface-elevated);
-    transition: border-color .2s ease;
-  }
-  .file-upload-box:hover { border-color: var(--primary); }
-  .file-upload-box i { font-size: 2rem; color: var(--accent-rose); }
-  .file-upload-box p { margin-top: .5rem; font-weight: 600; font-size: .85rem; color: var(--text-sub); }
-  .file-size-note { font-size: .73rem; color: var(--text-muted); margin-top: .4rem; }
+    .main-layout { max-width: 1320px; margin: 0 auto; padding: 0 1.5rem 3.5rem; flex: 1; width: 100%; }
+    .materials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; width: 100%; }
+    .state-msg { grid-column: 1/-1; text-align: center; color: var(--text-sub); padding: 5rem 1rem; font-size: 1rem; }
+    .state-msg i { display: block; font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-muted); }
 
-  .btn-pub {
-    width: 100%;
-    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-    color: #fff;
-    border: none;
-    padding: .9rem;
-    border-radius: var(--radius-md);
-    font-weight: 700;
-    cursor: pointer;
-    font-size: .9rem;
-    margin-top: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    box-shadow: 0 6px 16px var(--primary-glow);
-    transition: all .2s ease;
-  }
-  .btn-pub:hover { opacity: 0.95; transform: translateY(-1px); }
-  .btn-pub:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: all .25s ease;
+      height: 100%;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--border-active); box-shadow: var(--shadow-main); }
+    .card-body { padding: 1.35rem; flex: 1; display: flex; flex-direction: column; }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.85rem; }
+    .call-number {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      font-weight: 600;
+      color: var(--accent-teal);
+      background: var(--accent-teal-glow);
+      padding: .25rem .65rem;
+      border-radius: var(--radius-sm);
+    }
+    .bookmark-icon { cursor: pointer; color: var(--text-muted); font-size: 1.1rem; transition: all .2s; padding: 4px; }
+    .bookmark-icon:hover { transform: scale(1.2); color: var(--text-main); }
+    .bookmark-icon.active { color: var(--accent-gold); }
+    .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; line-height: 1.4; }
+    .card-desc { color: var(--text-sub); font-size: .86rem; line-height: 1.55; margin-bottom: 1.2rem; flex: 1; }
+    .card-meta { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: auto; }
+    .meta-pill {
+      background: var(--bg-surface-elevated);
+      padding: .25rem .65rem;
+      border-radius: var(--radius-sm);
+      font-size: .72rem;
+      color: var(--text-sub);
+      font-weight: 500;
+    }
+    .card-footer {
+      padding: .85rem 1.35rem;
+      background: var(--bg-surface-elevated);
+      border-top: 1px solid var(--border-subtle);
+      font-size: .75rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .card-footer b { color: var(--text-sub); }
+    .card-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--border-subtle); }
+    .action-btn {
+      padding: .8rem .2rem;
+      font-weight: 700;
+      font-size: .8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: var(--text-sub);
+      border-right: 1px solid var(--border-subtle);
+      transition: all .2s;
+      background: transparent;
+      width: 100%;
+    }
+    .action-btn:last-child { border-right: none; }
+    .btn-view:hover { color: var(--primary); background: var(--primary-glow); }
+    .btn-share:hover { color: var(--accent-teal); background: var(--accent-teal-glow); }
+    .btn-dl { color: var(--accent-rose); }
+    .btn-dl:hover { background: rgba(244, 63, 94, 0.12); }
 
-  /* Manage Section Enhancements */
-  .search-box-wrap { position: relative; margin-bottom: 1rem; }
-  .search-box-wrap input { padding-left: 2.4rem; font-size: .82rem; }
-  .search-box-wrap i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: .85rem; }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+    .modal-content {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      width: 100%;
+      max-width: 950px;
+      height: 82vh;
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: var(--shadow-main);
+    }
+    .modal-header { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; }
+    .modal-header h3 { font-size: 1.05rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-right: 1rem; }
+    .modal-close { color: var(--text-sub); font-size: 1.2rem; padding: 4px; }
+    .modal-close:hover { color: var(--accent-rose); }
+    .pdf-iframe { width: 100%; height: 100%; border: none; background: #fff; }
 
-  .manage-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    background: var(--bg-surface-elevated);
-    border: 1px solid var(--border-subtle);
-    padding: .9rem 1rem;
-    border-radius: var(--radius-md);
-    margin-bottom: .75rem;
-    border-left: 3px solid var(--accent-teal);
-  }
-  .manage-row .row-title { font-weight: 700; font-size: .88rem; color: var(--text-main); }
-  .manage-row .row-meta { font-size: .74rem; color: var(--text-sub); margin-top: 3px; font-family: var(--font-mono); }
-  
-  .del-btn {
-    color: var(--accent-rose);
-    background: rgba(244, 63, 94, 0.12);
-    border: none;
-    padding: .45rem .75rem;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all .2s ease;
-  }
-  .del-btn:hover { background: var(--accent-rose); color: #fff; }
+    /* TOAST */
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      pointer-events: none;
+    }
+    .toast {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius-md);
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-main);
+      animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.5s forwards;
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast.success { border-left: 3px solid var(--accent-teal); }
+    .toast.error { border-left: 3px solid var(--accent-rose); }
+    .toast.info { border-left: 3px solid var(--accent-cyan); }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-10px); } }
 
-  .empty-note { color: var(--text-sub); text-align: center; padding: 2.2rem 0; font-size: .86rem; }
-  .empty-note i { display: block; font-size: 1.7rem; margin-bottom: .7rem; color: var(--text-muted); }
+    footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 4rem 1.5rem 2rem;
+      margin-top: auto;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), var(--accent-teal), transparent);
+    }
+    .footer-grid { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 2.2fr 1.2fr 1.2fr 1.6fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-col h4 { font-size: .95rem; margin-bottom: 1.2rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.3px; }
+    .footer-col p { color: var(--text-sub); font-size: .86rem; line-height: 1.6; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: .65rem; }
+    .footer-links a { color: var(--text-sub); font-size: .86rem; transition: all .2s ease; display: inline-flex; align-items: center; gap: 6px; }
+    .footer-links a:hover { color: var(--primary); transform: translateX(3px); }
+    .dev-highlight-box { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-surface-elevated); border: 1px solid var(--border-active); padding: .45rem .9rem; border-radius: 50px; box-shadow: 0 4px 15px var(--primary-glow); }
+    .dev-highlight-box i { color: var(--accent-gold); font-size: .85rem; }
+    .dev-highlight-text { font-weight: 700; font-size: .82rem; background: linear-gradient(135deg, var(--accent-cyan), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .footer-bottom { max-width: 1320px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; color: var(--text-muted); font-size: .8rem; }
+    .footer-bottom-left { display: flex; align-items: center; gap: 15px; }
+    .footer-bottom-right { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+    .footer-badge-pill { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-teal); background: var(--accent-teal-glow); padding: .2rem .6rem; border-radius: var(--radius-sm); font-weight: 600; font-size: .75rem; }
+    .website-link-container { font-family: var(--font-sans); font-size: 15px; color: var(--text-sub); margin: 30px 0; display: flex; align-items: center; gap: 10px; }
+    .website-link-btn { display: inline-flex; align-items: center; justify-content: center; padding: 8px 16px; font-size: 14px; font-weight: 500; color: #ffffff; background-color: #256d4e; text-decoration: none; border-radius: 6px; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .website-link-btn:hover { background-color: #1d4ed8; transform: translateY(-1px); }
 
-  .stat-strip { display: flex; gap: .8rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
-  .stat-chip {
-    flex: 1;
-    min-width: 90px;
-    background: var(--bg-surface-elevated);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: .8rem;
-    text-align: center;
-  }
-  .stat-chip .num { font-size: 1.35rem; font-weight: 800; color: var(--primary); }
-  .stat-chip .lbl { font-size: .62rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-mono); font-weight: 600; margin-top: 2px;}
-
-  /* Toast Notification Message */
-  #toast {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    background: var(--accent-teal);
-    color: #fff;
-    padding: .8rem 1.2rem;
-    border-radius: var(--radius-md);
-    font-weight: 700;
-    display: none;
-    z-index: 3000;
-    box-shadow: var(--shadow-main);
-    font-size: .85rem;
-    animation: fadeIn 0.25s ease-in-out;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-</style>
+    @media(max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width: 768px) {
+      .mobile-menu-btn { display: flex; }
+      .nav-links { position: absolute; top: var(--nav-h); left: 0; width: 100%; background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); flex-direction: column; padding: 1.25rem; transform: translateY(-120%); opacity: 0; pointer-events: none; transition: all .25s; box-shadow: 0 15px 30px rgba(0,0,0,0.4); align-items: stretch; }
+      .nav-links.mobile-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .nav-links a { width: 100%; padding: .75rem 1rem; }
+      .filter-section { flex-direction: column; align-items: stretch; gap: 1rem; padding: 0 1rem; }
+      .dropdown-filters { grid-template-columns: 1fr; width: 100%; gap: 0.6rem; display: grid; }
+      .select-filter { min-width: 0; width: 100%; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-bottom-left, .footer-bottom-right { justify-content: center; width: 100%; }
+    }
+  </style>
 </head>
 <body>
 <div class="bg-glow-layer"></div>
 
-<header>
-  <div class="brand">
-    <i class="fa-solid fa-graduation-cap"></i>
-    <div>
-      <div class="brand-title">EduPulse Hub</div>
-      <div class="brand-tag">Admin Faculty Studio</div>
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="brand-logo">
+      <img src="icon.png" alt="Logo" class="brand-logo-img">
+      <div><div class="brand-name">EduPulse Hub</div><div class="brand-tag">Academic Vault</div></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" class="active" data-type="All"><i class="fa-solid fa-border-all"></i> All</a></li>
+      <li><a href="#" data-type="Syllabus"><i class="fa-solid fa-scroll"></i> Syllabus</a></li>
+      <li><a href="#" data-type="Notes"><i class="fa-solid fa-book-open"></i> Notes</a></li>
+      <li><a href="#" data-type="PYQ"><i class="fa-solid fa-file-pen"></i> PYQs</a></li>
+      <li><a href="#" data-type="Model Paper"><i class="fa-solid fa-file-lines"></i> Models</a></li>
+      <li><a href="#" data-type="Other"><i class="fa-solid fa-file"></i> Others</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="icon-btn" id="savedFilterBtn" title="Bookmarks"><i class="fa-solid fa-bookmark"></i></button>
+      <button class="icon-btn" id="themeBtn" title="Theme"><i class="fa-solid fa-sun"></i></button>
+      <a href="login.html" class="login-link-btn"><i class="fa-solid fa-user-shield"></i> Login</a>
+      <button class="icon-btn mobile-menu-btn" id="mobileBtn"><i class="fa-solid fa-bars"></i></button>
     </div>
   </div>
-  
-  <div class="header-actions">
-    <button class="icon-btn" id="themeBtn" title="Toggle Theme"><i class="fa-solid fa-sun"></i></button>
-    <a href="index.html" class="link-btn"><i class="fa-solid fa-globe"></i> <span>Student Hub</span></a>
-    <button class="logout-btn" id="logoutBtn" title="Logout Session"><i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span></button>
-  </div>
-</header>
+</nav>
 
-<div class="studio-layout">
-  <!-- Left Form Panel -->
-  <section class="panel">
-    <h2><i class="fa-solid fa-file-circle-plus"></i> Create a New Resource</h2>
-    <div class="form-grid">
-      <div class="full-width">
-        <label for="title">Resource Title *</label>
-        <input type="text" id="title" placeholder="Enter resource title..." autocomplete="off">
-      </div>
-
-      <div>
-        <label for="type">Category Type</label>
-        <select id="type">
-          <option value="Syllabus">Syllabus</option>
-          <option value="Notes" selected>Notes</option>
-          <option value="PYQ">PYQ Paper</option>
-          <option value="Model Paper">Model Paper</option>
-          <option value="Other">Other Reference</option>
-        </select>
-      </div>
-      <div>
-        <label for="adminName">Admin Name *</label>
-        <input type="text" id="adminName" placeholder="e.g. Dr. A. P. Singh" autocomplete="off">
-      </div>
-
-      <div>
-        <label for="subject">Subject Name / Code *</label>
-        <select id="subject">
-          <option value="">-- Choose Subject & Code --</option>
-          <option value="Comparative Govt. & Politics (POLS 201)">Comparative Govt. & Politics (POLS 201)</option>
-          <option value="International Relations (POLS 202)">International Relations (POLS 202)</option>
-          <option value="Hindi Gadya Sahitya (HIND 202)">Hindi Gadya Sahitya (HIND 202)</option>
-          <option value="Aadhunik Hindi Kavita (HIND 203)">Aadhunik Hindi Kavita (HIND 203)</option>
-          <option value="English Compulsory (ENG CE 201)">English Compulsory (ENG CE 201)</option>
-          <option value="Vyakaran evam Sanyojan (SKT-DSC-203)">Vyakaran evam Sanyojan (SKT-DSC-203)</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div>
-        <label for="branch">Department Name *</label>
-        <select id="branch">
-          <option value="">-- Choose Department --</option>
-          <option value="Political Science">Political Science</option>
-          <option value="Hindi">Hindi</option>
-          <option value="English">English</option>
-          <option value="Sanskrit">Sanskrit</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="year">Academic Class Year</label>
-        <select id="year">
-          <option value="">-- Choose Academic Class --</option>
-          <option value="BA 1st Year">BA 1st Year</option>
-          <option value="BA 2nd Year">BA 2nd Year</option>
-          <option value="BA 3rd Year">BA 3rd Year</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div>
-        <label for="semester">Academic Session (2020–2027) *</label>
-        <select id="semester">
-          <option value="">-- Select Session --</option>
-          <option value="2019-2020">2019-2020</option>
-          <option value="2020-2021">2020-2021</option>
-          <option value="2021-2022">2021-2022</option>
-          <option value="2022-2023">2022-2023</option>
-          <option value="2023-2024">2023-2024</option>
-          <option value="2024-2025">2024-2025</option>
-          <option value="2025-2026">2025-2026</option>
-          <option value="2026-2027">2026-2027</option>
-        </select>
-      </div>
-
-      <div class="full-width">
-        <label for="desc">Description / Details</label>
-        <textarea id="desc" rows="3" placeholder="Overview of modules covered, units, key topics..."></textarea>
-      </div>
-
-      <div class="full-width">
-        <label>PDF Source Verification (Max size: 2.5 MB)</label>
-        <div class="source-toggle">
-          <button type="button" class="toggle-btn active" id="tabLink"><i class="fa-solid fa-link"></i> Paste Link</button>
-          <button type="button" class="toggle-btn" id="tabUpload"><i class="fa-solid fa-upload"></i> Upload File</button>
-        </div>
-        <div id="linkField">
-          <input type="url" id="pdfLink" placeholder="https://... secure direct link to hosted PDF">
-        </div>
-        <div id="uploadField" style="display:none;">
-          <div class="file-upload-box" id="dropBox">
-            <i class="fa-solid fa-file-pdf"></i>
-            <p id="fileNameText">Click to select a PDF from your local device</p>
-            <input type="file" id="fileInput" accept="application/pdf" style="display:none;">
-          </div>
-          <p class="file-size-note">Keep uploads compact (under 2.5MB) — oversized files exceed standard browser storage constraints.</p>
-        </div>
-      </div>
-    </div>
-
-    <button class="btn-pub" id="publishBtn"><i class="fa-solid fa-cloud-arrow-up"></i>Create & Publish</button>
-  </section>
-
-  <!-- Right Manage Catalogue Panel -->
-  <section class="panel">
-    <h2><i class="fa-solid fa-list-check"></i> Manage Catalogue</h2>
-    <div class="stat-strip">
-      <div class="stat-chip"><div class="num" id="statTotal">0</div><div class="lbl">Total Docs</div></div>
-      <div class="stat-chip"><div class="num" id="statSubjects">0</div><div class="lbl">Subjects</div></div>
-      <div class="stat-chip"><div class="num" id="statBranches">0</div><div class="lbl">Branches</div></div>
-    </div>
-    
-    <div class="search-box-wrap">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" id="searchFilter" placeholder="Search saved records..." autocomplete="off">
-    </div>
-
-    <div id="pubList">
-      <div class="empty-note"><i class="fa-solid fa-box-archive"></i>No documents uploaded yet.</div>
-    </div>
-  </section>
+<div class="sync-status-bar" id="syncStatusBar">
+  <span class="sync-badge"><i class="fa-solid fa-database"></i> Local Storage</span>
+  <span id="syncItemCount">0 items</span>
+  <span class="sync-warning" id="syncWarning" style="display:none;"><i class="fa-solid fa-triangle-exclamation"></i> Browser-specific storage</span>
+  <button id="exportDataBtn" class="outline-btn"><i class="fa-solid fa-download"></i> Export</button>
+  <button id="importDataBtn" class="outline-btn"><i class="fa-solid fa-upload"></i> Import</button>
+  <input type="file" id="importFileInput" accept=".json" style="display:none;">
 </div>
 
-<div id="toast">Action complete</div>
+<section class="hero">
+  <span class="hero-badge"><i class="fa-solid fa-bolt"></i> Departmental Resource Hub</span>
+  <h1 class="hero-title">Access verified course syllabus, notes &<br><span class="typewriter-box"><span class="typewriter-wrapper"><span id="typewriter"></span><span class="cursor"></span></span></span></h1>
+  <p class="hero-sub">Organized previous year questions, lecture notes, and official course outlines.</p>
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search by subject, code, topic or branch...">
+    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+  </div>
+</section>
+
+<div class="filter-section">
+  <div class="tabs-container" id="tabsContainer">
+    <button class="tab-btn active" data-type="All">All</button>
+    <button class="tab-btn" data-type="Syllabus">Syllabus</button>
+    <button class="tab-btn" data-type="Notes">Notes</button>
+    <button class="tab-btn" data-type="PYQ">PYQs</button>
+    <button class="tab-btn" data-type="Model Paper">Model Papers</button>
+    <button class="tab-btn" data-type="Other">Others</button>
+  </div>
+  <div class="dropdown-filters">
+    <select id="deptFilter" class="select-filter"><option value="All">All Departments</option><option value="Political Science">Political Science</option><option value="Hindi">Hindi</option><option value="English">English</option><option value="Sanskrit">Sanskrit</option><option value="Other">Other</option></select>
+    <select id="yearFilter" class="select-filter"><option value="All">All Classes</option><option value="BA 1st Year">BA 1st Year</option><option value="BA 2nd Year">BA 2nd Year</option><option value="BA 3rd Year">BA 3rd Year</option><option value="Other">Other</option></select>
+    <select id="semFilter" class="select-filter"><option value="All">All Sessions</option><option value="2019-2020">2020</option><option value="2020-2021">2021</option><option value="2021-2022">2022</option><option value="2022-2023">2023</option><option value="2023-2024">2024</option><option value="2024-2025">2025</option><option value="2025-2026">2026</option><option value="2026-2027">2027</option></select>
+  </div>
+</div>
+
+<main class="main-layout">
+  <div class="materials-grid" id="materialsGrid"><div class="state-msg"><i class="fa-solid fa-circle-notch fa-spin"></i>Loading...</div></div>
+</main>
+
+<div class="modal" id="pdfModal">
+  <div class="modal-content">
+    <div class="modal-header"><h3 id="modalTitle">Document Viewer</h3><button class="modal-close" id="pdfCloseBtn"><i class="fa-solid fa-xmark"></i></button></div>
+    <iframe id="pdfFrame" class="pdf-iframe" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col"><a href="#" class="brand-logo" style="margin-bottom:1.2rem;"><img src="icon.png" alt="Logo" class="brand-logo-img"><div class="brand-name">EduPulse Hub</div></a><p>Streamlined academic document repository for students and faculty.</p></div>
+    <div class="footer-col"><h4>Quick Categories</h4><ul class="footer-links"><li><a href="#" data-type="Syllabus"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>Syllabus</a></li><li><a href="#" data-type="Notes"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>Notes</a></li><li><a href="#" data-type="PYQ"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>PYQs</a></li><li><a href="#" data-type="Model Paper"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>Model Papers</a></li></ul></div>
+    <div class="footer-col"><h4>HPU Department</h4><ul class="footer-links"><li><a href="https://www.hpuniv.ac.in" target="_blank"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>Political Science</a></li><li><a href="https://www.hpuniv.ac.in" target="_blank"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>Hindi</a></li><li><a href="https://www.hpuniv.ac.in" target="_blank"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>English</a></li><li><a href="https://www.hpuniv.ac.in" target="_blank"><i class="fa-solid fa-chevron-right" style="font-size:0.65rem;"></i>Sanskrit</a></li></ul></div>
+    <div class="footer-col"><h4>Admin Portal</h4><p style="margin-bottom:1rem;">Authorized faculty members can securely manage study files.</p><a href="login.html" class="login-link-btn"><i class="fa-solid fa-right-to-bracket"></i> Admin</a><p class="website-link-container">Our Other Website: <a href="https://vikshant.pages.dev" class="website-link-btn" target="_blank">Visit</a></p></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-left"><a href="whatnew.html">Updated: 27-07-2026</a><p>© 2026 EduPulse Hub.</p><span class="footer-badge-pill"><i class="fa-solid fa-shield-halved"></i> Verified Vault</span></div>
+    <div class="footer-bottom-right"><div class="dev-highlight-box"><i class="fa-solid fa-code"></i><span class="dev-highlight-text">Developed by Vikshant</span></div></div>
+  </div>
+</footer>
 
 <script>
-const TWO_HOURS_MS = 2 * 60 * 60 * 1000;
+(function() {
+  // ==================== TYPEWRITER ====================
+  const phrases = ["Question Papers", "Lecture notes", "Course syllabi", "model papers"];
+  let phraseIdx = 0, charIdx = 0, isDeleting = false;
+  const typewriterEl = document.getElementById("typewriter");
+  function typeEffect() {
+    if (!typewriterEl) return;
+    const current = phrases[phraseIdx];
+    typewriterEl.textContent = isDeleting ? current.substring(0, charIdx - 1) : current.substring(0, charIdx + 1);
+    charIdx += isDeleting ? -1 : 1;
+    let speed = isDeleting ? 40 : 85;
+    if (!isDeleting && charIdx === current.length) { speed = 2200; isDeleting = true; }
+    else if (isDeleting && charIdx === 0) { isDeleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; speed = 300; }
+    setTimeout(typeEffect, speed);
+  }
+  document.addEventListener("DOMContentLoaded", typeEffect);
 
-function checkSessionAuth() {
-  const isAuth = sessionStorage.getItem("edupulse_admin_auth");
-  const loginTime = sessionStorage.getItem("edupulse_login_timestamp");
+  // ==================== GLOBAL STATE ====================
+  const STORAGE_KEY = 'edupulse_db';
+  const BOOKMARKS_KEY = 'edupulse_bookmarks';
+  let selectedType = 'All', showOnlySaved = false, allMaterials = [], bookmarks = [];
 
-  if (!isAuth || isAuth !== "true") {
-    window.location.href = "login.html";
-    return false;
+  function loadMaterials() {
+    try { const d = localStorage.getItem(STORAGE_KEY); return d ? JSON.parse(d).map(fixItem).filter(Boolean) : []; } catch(e) { return []; }
+  }
+  function saveMaterials(list) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); updateSyncStatus(); return true; } catch(e) { showToast('Storage full! Export data to free space.', 'error'); return false; }
+  }
+  function loadBookmarks() {
+    try { const d = localStorage.getItem(BOOKMARKS_KEY); return d ? JSON.parse(d).map(Number).filter(n=>!isNaN(n)) : []; } catch(e) { return []; }
+  }
+  function saveBookmarks(list) { try { localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(list)); } catch(e) {} }
+
+  function fixItem(item) {
+    if (!item || typeof item !== 'object') return null;
+    return { id: Number(item.id) || Date.now(), title: String(item.title||'Untitled'), desc: String(item.desc||''), type: String(item.type||'Other'), subject: String(item.subject||'General'), branch: String(item.branch||'General'), year: String(item.year||''), semester: String(item.semester||''), adminName: String(item.adminName||'Admin'), timestamp: Number(item.timestamp)||Date.now(), pdfData: item.pdfData || null, pdfUrl: item.pdfUrl || null };
   }
 
-  if (!loginTime) {
-    sessionStorage.setItem("edupulse_login_timestamp", Date.now().toString());
-  } else {
-    const elapsed = Date.now() - parseInt(loginTime, 10);
-    if (elapsed > TWO_HOURS_MS) {
-      alert("Session Expired! For security reasons, please login again.");
-      triggerLogout();
-      return false;
+  function seedData() {
+    const now = Date.now();
+    return [
+      { id:1001, title:'BA 2nd Year Political Science Syllabus 2024-25', desc:'Complete syllabus as per HPU guidelines.', type:'Syllabus', subject:'Political Science', branch:'Political Science', year:'BA 2nd Year', semester:'2024-2025', adminName:'Vikshant', timestamp:now-86400000*30, pdfUrl:'#' },
+      { id:1002, title:'Hindi Poetry Notes — Chhayavad Era', desc:'Detailed lecture notes covering Chhayavad poetic movement.', type:'Notes', subject:'Hindi Literature', branch:'Hindi', year:'BA 2nd Year', semester:'2024-2025', adminName:'Vikshant', timestamp:now-86400000*20, pdfUrl:'#' },
+      { id:1003, title:'English PYQ 2023 — BA 2nd Year', desc:'Previous year question paper for English compulsory.', type:'PYQ', subject:'English', branch:'English', year:'BA 2nd Year', semester:'2022-2023', adminName:'Vikshant', timestamp:now-86400000*15, pdfUrl:'#' },
+      { id:1004, title:'Sanskrit Model Paper — Grammar', desc:'Model question paper for Sanskrit grammar and composition.', type:'Model Paper', subject:'Sanskrit', branch:'Sanskrit', year:'BA 2nd Year', semester:'2024-2025', adminName:'Vikshant', timestamp:now-86400000*10, pdfUrl:'#' }
+    ].map(fixItem).filter(Boolean);
+  }
+
+  function timeAgo(ts) {
+    const s = Math.floor((Date.now() - ts)/1000);
+    if (s < 60) return 'Just now';
+    if (s < 3600) return Math.floor(s/60)+'m ago';
+    if (s < 86400) return Math.floor(s/3600)+'h ago';
+    if (s < 864000) return Math.floor(s/86400)+'d ago';
+    const d = new Date(ts); return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+  }
+  function esc(s) { return String(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function showToast(msg, type='info') {
+    const c = document.getElementById('toastContainer'); if(!c) return;
+    const t = document.createElement('div'); t.className = 'toast '+type;
+    t.innerHTML = `<i class="fa-solid fa-${type==='success'?'circle-check':type==='error'?'circle-xmark':'circle-info'}"></i> ${msg}`;
+    c.appendChild(t); setTimeout(()=>{ if(t.parentNode) t.remove(); }, 3000);
+  }
+
+  function updateSyncStatus() {
+    const countEl = document.getElementById('syncItemCount');
+    const warnEl = document.getElementById('syncWarning');
+    if(countEl) countEl.textContent = allMaterials.length + ' item'+(allMaterials.length!==1?'s':'');
+    if(warnEl) warnEl.style.display = allMaterials.length > 0 ? 'inline-flex' : 'none';
+  }
+
+  function exportData() {
+    const exp = { version:1, exportedAt: new Date().toISOString(), materials: allMaterials, bookmarks };
+    const blob = new Blob([JSON.stringify(exp,null,2)], {type:'application/json'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'edupulse-backup-'+new Date().toISOString().slice(0,19).replace(/:/g,'-')+'.json';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    showToast('Data exported! Import on another browser to sync.', 'success');
+  }
+
+  function importData(file) {
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const imp = JSON.parse(e.target.result);
+        if(!imp.materials || !Array.isArray(imp.materials)) throw new Error('Invalid format');
+        const valid = imp.materials.map(fixItem).filter(Boolean);
+        const ids = new Set(allMaterials.map(m=>m.id));
+        allMaterials = [...allMaterials, ...valid.filter(m=>!ids.has(m.id))];
+        if(Array.isArray(imp.bookmarks)) imp.bookmarks.forEach(b=>{ if(!bookmarks.includes(Number(b))) bookmarks.push(Number(b)); });
+        saveMaterials(allMaterials); saveBookmarks(bookmarks); renderData(); updateSyncStatus();
+        showToast(`Imported ${valid.filter(m=>!ids.has(m.id)).length} new items.`, 'success');
+      } catch(err) { showToast('Invalid backup file.', 'error'); }
+    };
+    reader.readAsText(file);
+  }
+
+  // ==================== RENDER CARDS ====================
+  function renderData() {
+    const grid = document.getElementById('materialsGrid'); if(!grid) return;
+    const q = (document.getElementById('searchInput')?.value||'').toLowerCase();
+    const dept = document.getElementById('deptFilter')?.value||'All', year = document.getElementById('yearFilter')?.value||'All', sem = document.getElementById('semFilter')?.value||'All';
+    grid.innerHTML = '';
+    const matches = allMaterials.filter(item => {
+      if(selectedType!=='All' && item.type!==selectedType) return false;
+      if(dept!=='All' && (!item.branch || !item.branch.toLowerCase().includes(dept.toLowerCase()))) return false;
+      if(year!=='All' && item.year!==year) return false;
+      if(sem!=='All' && item.semester!==sem) return false;
+      if(q && !(item.title||'').toLowerCase().includes(q) && !(item.subject||'').toLowerCase().includes(q) && !(item.branch||'').toLowerCase().includes(q)) return false;
+      if(showOnlySaved && !bookmarks.includes(item.id)) return false;
+      return true;
+    }).sort((a,b)=>b.timestamp-a.timestamp);
+    if(!matches.length) { grid.innerHTML = '<div class="state-msg"><i class="fa-solid fa-folder-open"></i>No materials found.</div>'; return; }
+    matches.forEach(item => {
+      const isBm = bookmarks.includes(item.id);
+      const pdfSrc = item.pdfData || item.pdfUrl || '#';
+      const downloadSrc = pdfSrc !== '#' ? pdfSrc : null;
+      const card = document.createElement('div'); card.className = 'card';
+      card.innerHTML = `
+        <div class="card-body">
+          <div class="card-header"><span class="call-number">${esc(item.branch||'GEN')} • ${esc(item.semester||'')}</span><i class="fa-${isBm?'solid':'regular'} fa-bookmark bookmark-icon ${isBm?'active':''}" data-id="${item.id}"></i></div>
+          <h3 class="card-title">${esc(item.title)}</h3><p class="card-desc">${esc(item.desc||'No description.')}</p>
+          <div class="card-meta"><span class="meta-pill">${esc(item.type)}</span><span class="meta-pill">${esc(item.subject)}</span><span class="meta-pill">${esc(item.branch)}</span></div>
+        </div>
+        <div class="card-footer"><span>By <b>${esc(item.adminName)}</b></span><span><i class="fa-regular fa-clock"></i> ${timeAgo(item.timestamp)}</span></div>
+        <div class="card-actions">
+          <button class="action-btn btn-view" data-action="view" data-id="${item.id}"><i class="fa-solid fa-eye"></i> View</button>
+          <button class="action-btn btn-share" data-action="share" data-id="${item.id}"><i class="fa-solid fa-share-nodes"></i> Share</button>
+          ${downloadSrc ? `<a href="${esc(downloadSrc)}" download class="action-btn btn-dl"><i class="fa-solid fa-download"></i> PDF</a>` : '<button class="action-btn btn-dl" disabled style="opacity:0.5"><i class="fa-solid fa-download"></i> N/A</button>'}
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  async function shareResource(item) {
+    const url = window.location.origin + window.location.pathname;
+    const text = `📚 ${item.subject} | ${item.semester||''} (${item.year||''})\n📄 ${item.title}\n🔗 ${url}`;
+    try { await navigator.clipboard.writeText(text); showToast('Copied! Paste to share.', 'success'); } catch(e) {}
+    if(navigator.share) {
+      try { await navigator.share({ title: item.title, text, url }); } catch(e) {}
     }
   }
-  return true;
-}
 
-function triggerLogout() {
-  sessionStorage.removeItem("edupulse_admin_auth");
-  sessionStorage.removeItem("edupulse_login_timestamp");
-  window.location.href = "login.html";
-}
-
-if (checkSessionAuth()) {
-  setInterval(checkSessionAuth, 60000);
-}
-
-document.getElementById('logoutBtn').addEventListener('click', () => {
-  if (confirm("Are you sure you want to securely log out?")) {
-    triggerLogout();
+  function viewPDF(item) {
+    const src = item.pdfData || item.pdfUrl;
+    if(!src || src==='#') { showToast('No PDF available.', 'info'); return; }
+    document.getElementById('modalTitle').innerText = item.title;
+    document.getElementById('pdfFrame').src = src;
+    document.getElementById('pdfModal').style.display = 'flex';
   }
-});
+  function closePdfModal() { document.getElementById('pdfModal').style.display = 'none'; document.getElementById('pdfFrame').src = ''; }
 
-let allMaterials = [];
-let pdfBase64 = "";
-let sourceMode = 'link';
-
-function loadMaterials(){
-  try {
-    const data = localStorage.getItem('edupulse_db');
-    return data ? JSON.parse(data) : [];
-  } catch(e) {
-    console.error(e);
-    return [];
-  }
-}
-
-function saveMaterials(list){
-  try {
-    localStorage.setItem('edupulse_db', JSON.stringify(list));
-    return true;
-  } catch(e) {
-    console.error(e);
-    showToast("Storage limit exceeded! File size too large. Please use a direct PDF URL Link.", true);
-    return false;
-  }
-}
-
-function showToast(msg, isError){
-  const t = document.getElementById('toast');
-  t.style.background = isError ? 'var(--accent-rose)' : 'var(--accent-teal)';
-  t.innerHTML = isError ? `<i class="fa-solid fa-circle-exclamation"></i> ${msg}` : `<i class="fa-solid fa-circle-check"></i> ${msg}`;
-  t.style.display = 'block';
-  setTimeout(()=> t.style.display='none', 3500);
-}
-
-document.getElementById('themeBtn').addEventListener('click', ()=>{
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme')==='dark';
-  html.setAttribute('data-theme', isDark?'light':'dark');
-  document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
-});
-
-// Clear error state on focus/input
-['title', 'adminName', 'subject', 'branch', 'semester'].forEach(id => {
-  const el = document.getElementById(id);
-  if(el){
-    el.addEventListener('input', () => el.classList.remove('error-input'));
-    el.addEventListener('change', () => el.classList.remove('error-input'));
-  }
-});
-
-document.getElementById('tabLink').addEventListener('click', ()=>{
-  sourceMode = 'link';
-  document.getElementById('tabLink').classList.add('active');
-  document.getElementById('tabUpload').classList.remove('active');
-  document.getElementById('linkField').style.display = 'block';
-  document.getElementById('uploadField').style.display = 'none';
-});
-
-document.getElementById('tabUpload').addEventListener('click', ()=>{
-  sourceMode = 'upload';
-  document.getElementById('tabUpload').classList.add('active');
-  document.getElementById('tabLink').classList.remove('active');
-  document.getElementById('uploadField').style.display = 'block';
-  document.getElementById('linkField').style.display = 'none';
-});
-
-document.getElementById('dropBox').addEventListener('click', ()=> document.getElementById('fileInput').click());
-document.getElementById('fileInput').addEventListener('change', e=>{
-  const file = e.target.files[0];
-  if(!file) return;
-  if(file.type !== 'application/pdf'){ showToast('Please select a valid PDF file format.', true); return; }
-  if(file.size > 2.5*1024*1024){ showToast('File too large (Max 2.5MB). Please use a PDF link.', true); return; }
-  document.getElementById('fileNameText').innerText = `Selected: ${file.name}`;
-  const reader = new FileReader();
-  reader.onload = evt => { pdfBase64 = evt.target.result; };
-  reader.readAsDataURL(file);
-});
-
-document.getElementById('publishBtn').addEventListener('click', ()=>{
-  const titleInput = document.getElementById('title');
-  const adminInput = document.getElementById('adminName');
-  const subjectInput = document.getElementById('subject');
-  const branchInput = document.getElementById('branch');
-  const semesterInput = document.getElementById('semester');
-
-  const title = titleInput.value.trim();
-  const type = document.getElementById('type').value;
-  const adminName = adminInput.value.trim();
-  const subject = subjectInput.value.trim();
-  const branch = branchInput.value.trim();
-  const year = document.getElementById('year').value;
-  const semester = semesterInput.value;
-  const desc = document.getElementById('desc').value.trim();
-
-  // Strict Validation Rules
-  if(!title){
-    titleInput.classList.add('error-input');
-    showToast('Resource Title is required!', true);
-    titleInput.focus(); return;
-  }
-  if(!adminName){
-    adminInput.classList.add('error-input');
-    showToast('Faculty or Admin Name is required!', true);
-    adminInput.focus(); return;
-  }
-  if(!subject){
-    subjectInput.classList.add('error-input');
-    showToast('Subject Name or Code is required!', true);
-    subjectInput.focus(); return;
-  }
-  if(!branch){
-    branchInput.classList.add('error-input');
-    showToast('Department Name is required!', true);
-    branchInput.focus(); return;
-  }
-  if(!semester){
-    semesterInput.classList.add('error-input');
-    showToast('Academic Session is mandatory!', true);
-    semesterInput.focus(); return;
+  function setActiveType(type) {
+    selectedType = type;
+    document.querySelectorAll('[data-type]').forEach(el => el.classList.toggle('active', el.dataset.type===type));
+    renderData();
   }
 
-  let pdfUrl = sourceMode === 'link' ? document.getElementById('pdfLink').value.trim() : pdfBase64;
-  if(!pdfUrl) {
-    pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
-  }
-
-  const btn = document.getElementById('publishBtn');
-  btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Publishing…';
-
-  const material = { 
-    id: Date.now(), 
-    title, type, adminName, subject, branch, year, semester, desc, 
-    pdfData: pdfUrl, 
-    timestamp: Date.now() 
-  };
-
-  allMaterials = [material, ...allMaterials];
-  const ok = saveMaterials(allMaterials);
-
-  btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i>Create & Publish';
-
-  if(ok){
-    titleInput.value = '';
-    document.getElementById('desc').value = '';
-    document.getElementById('pdfLink').value = '';
-    adminInput.value = '';
-    subjectInput.value = '';
-    branchInput.value = '';
-    document.getElementById('year').value = '';
-    semesterInput.value = '';
-    document.getElementById('fileNameText').innerText = 'Click to select a PDF from your local device';
-    pdfBase64 = "";
-    renderList();
-    showToast('Document published to student hub successfully!');
-  } else {
-    allMaterials = allMaterials.filter(m => m.id !== material.id);
-  }
-});
-
-function renderList(){
-  const list = document.getElementById('pubList');
-  const filterVal = document.getElementById('searchFilter').value.toLowerCase();
-  
-  document.getElementById('statTotal').innerText = allMaterials.length;
-  document.getElementById('statSubjects').innerText = new Set(allMaterials.map(m=>m.subject)).size;
-  document.getElementById('statBranches').innerText = new Set(allMaterials.map(m=>m.branch)).size;
-
-  const filtered = allMaterials.filter(p => 
-    p.title.toLowerCase().includes(filterVal) || 
-    p.subject.toLowerCase().includes(filterVal) || 
-    p.branch.toLowerCase().includes(filterVal) ||
-    p.adminName.toLowerCase().includes(filterVal)
-  );
-
-  if(!filtered.length){
-    list.innerHTML = `<div class="empty-note"><i class="fa-solid fa-box-archive"></i>No matching records found.</div>`;
-    return;
-  }
-  
-  list.innerHTML = '';
-  filtered.forEach(p=>{
-    const tagInfo = `${p.semester}${p.year ? ' · ' + p.year : ''}`;
-    const row = document.createElement('div');
-    row.className = 'manage-row';
-    row.innerHTML = `
-      <div>
-        <div class="row-title">${escHtml(p.title)}</div>
-        <div class="row-meta">${escHtml(p.type)} · ${escHtml(tagInfo)} · ${escHtml(p.subject)}</div>
-      </div>
-      <button class="del-btn" data-id="${p.id}" title="Delete Resource"><i class="fa-solid fa-trash"></i></button>`;
-    list.appendChild(row);
+  // ==================== EVENT BINDINGS ====================
+  document.getElementById('deptFilter')?.addEventListener('change', renderData);
+  document.getElementById('yearFilter')?.addEventListener('change', renderData);
+  document.getElementById('semFilter')?.addEventListener('change', renderData);
+  document.getElementById('searchInput')?.addEventListener('input', renderData);
+  document.querySelectorAll('[data-type]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); setActiveType(el.dataset.type); }));
+  document.getElementById('materialsGrid')?.addEventListener('click', e => {
+    const bm = e.target.closest('.bookmark-icon'); if(bm) { const id=Number(bm.dataset.id); bookmarks = bookmarks.includes(id) ? bookmarks.filter(b=>b!==id) : [...bookmarks, id]; saveBookmarks(bookmarks); renderData(); return; }
+    const btn = e.target.closest('[data-action]'); if(!btn) return;
+    const item = allMaterials.find(m=>m.id===Number(btn.dataset.id)); if(!item) return;
+    if(btn.dataset.action==='view') viewPDF(item); if(btn.dataset.action==='share') shareResource(item);
   });
-}
+  document.getElementById('pdfCloseBtn')?.addEventListener('click', closePdfModal);
+  document.getElementById('pdfModal')?.addEventListener('click', e => { if(e.target.id==='pdfModal') closePdfModal(); });
+  document.getElementById('savedFilterBtn')?.addEventListener('click', ()=>{ showOnlySaved=!showOnlySaved; document.getElementById('savedFilterBtn').classList.toggle('active',showOnlySaved); renderData(); });
+  document.getElementById('themeBtn')?.addEventListener('click', ()=>{
+    const html = document.documentElement; const isDark = html.getAttribute('data-theme')==='dark';
+    html.setAttribute('data-theme', isDark?'light':'dark');
+    document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+    try { localStorage.setItem('edupulse_theme', isDark?'light':'dark'); } catch(e) {}
+  });
+  document.getElementById('mobileBtn')?.addEventListener('click', ()=> document.getElementById('navLinks')?.classList.toggle('mobile-open'));
+  document.getElementById('exportDataBtn')?.addEventListener('click', exportData);
+  document.getElementById('importDataBtn')?.addEventListener('click', ()=> document.getElementById('importFileInput')?.click());
+  document.getElementById('importFileInput')?.addEventListener('change', e => { if(e.target.files[0]) { importData(e.target.files[0]); e.target.value=''; } });
 
-function escHtml(s){ return String(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-document.getElementById('searchFilter').addEventListener('input', renderList);
-
-document.getElementById('pubList').addEventListener('click', e=>{
-  const btn = e.target.closest('.del-btn');
-  if(!btn) return;
-  if(confirm("Are you sure you want to remove this resource from the student hub?")){
-    const id = Number(btn.dataset.id);
-    allMaterials = allMaterials.filter(p=>p.id!==id);
-    saveMaterials(allMaterials);
-    renderList();
-    showToast('Material deleted successfully.');
+  // ==================== INIT ====================
+  function init() {
+    try { if(localStorage.getItem('edupulse_theme')==='light') { document.documentElement.setAttribute('data-theme','light'); document.getElementById('themeBtn').innerHTML = '<i class="fa-solid fa-moon"></i>'; } } catch(e) {}
+    allMaterials = loadMaterials();
+    if(allMaterials.length === 0) { allMaterials = seedData(); saveMaterials(allMaterials); }
+    bookmarks = loadBookmarks();
+    renderData(); updateSyncStatus();
   }
-});
-
-allMaterials = loadMaterials();
-renderList();
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
 </script>
 </body>
 </html>
