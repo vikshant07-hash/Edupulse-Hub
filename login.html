@@ -1,598 +1,347 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EduPulse Hub | Admin Portal Login</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-  :root {
-    --bg-base: #080b11;
-    --bg-surface: #0f1523;
-    --bg-surface-elevated: #161e31;
-    --bg-glass: rgba(15, 21, 35, 0.75);
-    
-    --primary: #6366f1;
-    --primary-hover: #4f46e5;
-    --primary-glow: rgba(99, 102, 241, 0.18);
-    
-    --accent-teal: #14b8a6;
-    --accent-teal-glow: rgba(20, 184, 166, 0.15);
-    --accent-gold: #f59e0b;
-    --accent-rose: #f43f5e;
-    
-    --text-main: #f3f4f6;
-    --text-sub: #9ca3af;
-    --text-muted: #6b7280;
-    
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-active: rgba(99, 102, 241, 0.35);
-    --border-error: rgba(244, 63, 94, 0.6);
-    
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 18px;
-    --radius-xl: 24px;
-    
-    --shadow-main: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
-    --font-sans: 'Plus Jakarta Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-  }
-
-  [data-theme="light"] {
-    --bg-base: #f8fafc;
-    --bg-surface: #ffffff;
-    --bg-surface-elevated: #f1f5f9;
-    --bg-glass: rgba(255, 255, 255, 0.82);
-    
-    --primary: #4f46e5;
-    --primary-hover: #4338ca;
-    --primary-glow: rgba(79, 70, 229, 0.12);
-    
-    --accent-teal: #0d9488;
-    --accent-teal-glow: rgba(13, 148, 136, 0.12);
-    --accent-gold: #d97706;
-    --accent-rose: #e11d48;
-    
-    --text-main: #0f172a;
-    --text-sub: #475569;
-    --text-muted: #94a3b8;
-    
-    --border-subtle: rgba(15, 23, 42, 0.08);
-    --border-active: rgba(79, 70, 229, 0.25);
-    --border-error: rgba(225, 29, 72, 0.5);
-    --shadow-main: 0 16px 40px -10px rgba(15, 23, 42, 0.08);
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans); }
-  
-  body {
-    background-color: var(--bg-base);
-    color: var(--text-main);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    position: relative;
-    overflow-x: hidden;
-    transition: background-color .3s ease, color .3s ease;
-  }
-
-  .bg-glow-layer {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    background: 
-      radial-gradient(circle at 15% 15%, var(--primary-glow) 0%, transparent 45%),
-      radial-gradient(circle at 85% 85%, var(--accent-teal-glow) 0%, transparent 45%);
-  }
-
-  /* Top Actions Bar (Back & Theme Toggle) */
-  .top-actions {
-    position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-    right: 1.25rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 20;
-  }
-
-  .action-btn {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    color: var(--text-sub);
-    padding: 0.5rem 0.9rem;
-    height: 40px;
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all .2s ease;
-  }
-  .action-btn:hover { color: var(--text-main); border-color: var(--border-active); background: var(--bg-surface-elevated); }
-
-  .theme-toggle-top {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    justify-content: center;
-  }
-
-  .login-card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
-    width: 100%;
-    max-width: 440px;
-    padding: 2.5rem 2rem;
-    box-shadow: var(--shadow-main);
-    position: relative;
-    z-index: 10;
-    margin-top: 2rem;
-  }
-
-  @media (max-width: 480px) {
-    .login-card { padding: 1.8rem 1.2rem; border-radius: var(--radius-lg); }
-  }
-
-  .card-header {
-    text-align: center;
-    margin-bottom: 1.8rem;
-  }
-
-  .brand-logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: .5rem;
-  }
-  .brand-logo i {
-    font-size: 1.2rem;
-    color: #fff;
-    background: linear-gradient(135deg, var(--primary), var(--accent-teal));
-    width: 42px;
-    height: 42px;
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px var(--primary-glow);
-  }
-  .brand-name { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px; text-align: left; }
-  .brand-tag { font-family: var(--font-mono); font-size: .65rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-align: left; }
-
-  .card-subtitle {
-    font-size: 0.85rem;
-    color: var(--text-sub);
-    margin-top: .3rem;
-  }
-
-  .field {
-    margin-bottom: 1.1rem;
-  }
-
-  .field label {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-sub);
-    margin-bottom: 0.35rem;
-  }
-
-  .input-wrapper {
-    position: relative;
-  }
-
-  .input-wrapper i.field-icon {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-muted);
-    font-size: 0.9rem;
-  }
-
-  .field input {
-    width: 100%;
-    background: var(--bg-surface-elevated);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 0.75rem 2.4rem 0.75rem 2.6rem;
-    color: var(--text-main);
-    font-size: 0.88rem;
-    outline: none;
-    transition: all 0.2s ease;
-  }
-
-  .field input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--primary-glow);
-  }
-
-  .field input.error-input {
-    border-color: var(--accent-rose) !important;
-    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.2) !important;
-  }
-
-  .toggle-pwd {
-    position: absolute;
-    right: 0.9rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-muted);
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: color 0.2s;
-  }
-  .toggle-pwd:hover { color: var(--text-main); }
-
-  /* CAPTCHA SECTION */
-  .captcha-box {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  #captchaCanvas {
-    background: var(--bg-base);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    width: 100%;
-    max-width: 170px;
-    height: 42px;
-  }
-
-  .refresh-btn {
-    background: var(--bg-surface-elevated);
-    border: 1px solid var(--border-subtle);
-    color: var(--text-sub);
-    width: 42px;
-    height: 42px;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.2s;
-  }
-  .refresh-btn:hover { color: var(--primary); border-color: var(--primary); }
-
-  .login-btn {
-    width: 100%;
-    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-    color: #fff;
-    border: none;
-    padding: 0.88rem;
-    border-radius: var(--radius-md);
-    font-weight: 700;
-    font-size: 0.9rem;
-    cursor: pointer;
-    margin-top: 0.6rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    box-shadow: 0 6px 16px var(--primary-glow);
-    transition: all 0.2s ease;
-  }
-  .login-btn:hover { transform: translateY(-1px); opacity: 0.95; }
-  .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-  /* ERROR/STATUS MESSAGE BOX (Below Login Button) */
-  .status-msg {
-    font-size: 0.85rem;
-    text-align: left;
-    margin-top: 1rem;
-    padding: 0.8rem 1rem;
-    border-radius: var(--radius-md);
-    display: none;
-    font-weight: 600;
-    line-height: 1.45;
-    align-items: center;
-    gap: 10px;
-  }
-  .status-msg.error {
-    display: flex;
-    background: rgba(244, 63, 94, 0.12);
-    border: 1px solid var(--border-error);
-    color: var(--accent-rose);
-    animation: shake 0.35s ease-in-out;
-  }
-  .status-msg.success {
-    display: flex;
-    background: rgba(20, 184, 166, 0.12);
-    border: 1px solid rgba(20, 184, 166, 0.3);
-    color: var(--accent-teal);
-  }
-
-  /* LOADER CONTAINER */
-  .loader-container {
-    display: none;
-    margin-top: 0.9rem;
-    text-align: center;
-  }
-  .loader-bar-bg {
-    width: 100%;
-    height: 5px;
-    background: var(--bg-surface-elevated);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: .5rem;
-  }
-  .loader-bar-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--accent-teal), var(--primary));
-    transition: width 3s linear;
-  }
-
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-5px); }
-    40%, 80% { transform: translateX(5px); }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPulse Hub | Admin Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-base: #06090f;
+            --bg-surface: #0d131f;
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.2);
+            --accent-teal: #14b8a6;
+            --accent-rose: #f43f5e;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --shadow-main: 0 20px 50px -10px rgba(0, 0, 0, 0.8);
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            overflow: hidden;
+        }
+        .bg-animation {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, var(--primary-glow) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+        }
+        .login-container {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: var(--shadow-main);
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.5s ease;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .logo-area {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+        }
+        .login-container h2 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            text-align: center;
+        }
+        .login-container .subtitle {
+            color: var(--text-sub);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-bottom: 1.8rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: var(--text-sub);
+        }
+        .input-wrapper {
+            position: relative;
+        }
+        .input-wrapper i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sub);
+            font-size: 0.85rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.7rem 1rem 0.7rem 2.5rem;
+            background: var(--bg-base);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 0.88rem;
+            outline: none;
+            transition: all 0.2s;
+            font-family: var(--font-sans);
+        }
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+        .form-group input.error {
+            border-color: var(--accent-rose);
+            animation: shake 0.4s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .btn-login {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, var(--primary), #4f46e5);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: all 0.3s;
+            font-family: var(--font-sans);
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--primary-glow);
+        }
+        .btn-login:active {
+            transform: translateY(0);
+        }
+        .error-msg {
+            color: var(--accent-rose);
+            font-size: 0.78rem;
+            margin-top: 0.8rem;
+            text-align: center;
+            display: none;
+            padding: 0.5rem;
+            background: rgba(244, 63, 94, 0.1);
+            border-radius: 8px;
+        }
+        .error-msg.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--accent-teal);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .credential-hint {
+            margin-top: 1.5rem;
+            padding: 0.8rem;
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px dashed var(--border-subtle);
+            border-radius: 8px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.6;
+        }
+        .credential-hint strong {
+            color: var(--accent-teal);
+        }
+    </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
 
-<div class="bg-glow-layer"></div>
+    <div class="login-container">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <h2>Admin Login</h2>
+            <p class="subtitle">EduPulse Hub Management Portal</p>
+        </div>
 
-<!-- Top Bar containing Back Button and Theme Toggle -->
-<div class="top-actions">
-  <a href="index.html" class="action-btn" title="Return to Home">
-    <i class="fa-solid fa-arrow-left"></i> Home
-  </a>
-  <button class="action-btn theme-toggle-top" id="themeBtn" title="Toggle Theme">
-    <i class="fa-solid fa-sun"></i>
-  </button>
-</div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="username" placeholder="Enter admin username" autocomplete="off">
+            </div>
+        </div>
 
-<div class="login-card">
-  <div class="card-header">
-    <div class="brand-logo">
-      <i class="fa-solid fa-graduation-cap"></i>
-      <div>
-        <div class="brand-name">EduPulse</div>
-        <div class="brand-tag">Admin Studio</div>
-      </div>
-    </div>
-    <p class="card-subtitle">Enter credentials to unlock vault administration tools</p>
-  </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-key"></i>
+                <input type="password" id="password" placeholder="Enter password" autocomplete="off">
+            </div>
+        </div>
 
-  <form id="adminLoginForm">
-    <!-- Username Field -->
-    <div class="field">
-      <label for="username">Admin Username</label>
-      <div class="input-wrapper">
-        <i class="fa-solid fa-user field-icon"></i>
-        <input type="text" id="username" placeholder="Enter username" autocomplete="off">
-      </div>
-    </div>
-
-    <!-- Password Field -->
-    <div class="field">
-      <label for="password">Password</label>
-      <div class="input-wrapper">
-        <i class="fa-solid fa-lock field-icon"></i>
-        <input type="password" id="password" placeholder="Enter password">
-        <i class="fa-solid fa-eye toggle-pwd" id="togglePwd" title="Show/Hide Password"></i>
-      </div>
-    </div>
-
-    <!-- Captcha Section -->
-    <div class="field">
-      <label>Security Verification</label>
-      <div class="captcha-box">
-        <canvas id="captchaCanvas" width="170" height="42" title="Click to reload Captcha"></canvas>
-        <button type="button" class="refresh-btn" id="refreshCaptchaBtn" title="Reload Captcha">
-          <i class="fa-solid fa-rotate-right"></i>
+        <button class="btn-login" id="loginBtn">
+            <i class="fa-solid fa-right-to-bracket"></i> &nbsp;Secure Login
         </button>
-      </div>
+
+        <div class="error-msg" id="errorMsg"></div>
+
+        <a href="index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> &nbsp;Back to Student Portal
+        </a>
+
+        <div class="credential-hint">
+            <i class="fa-solid fa-info-circle"></i> &nbsp;Default credentials:<br>
+            Username: <strong>admin</strong> | Password: <strong>edupulse2026</strong>
+        </div>
     </div>
 
-    <div class="field">
-      <div class="input-wrapper">
-        <i class="fa-solid fa-key field-icon"></i>
-        <input type="text" id="captchaInput" placeholder="Type security code here" autocomplete="off">
-      </div>
-    </div>
+    <script>
+        // Admin credentials (stored in localStorage for demo)
+        const ADMIN_CREDENTIALS = {
+            username: 'admin',
+            password: 'edupulse2026'
+        };
 
-    <button type="submit" class="login-btn" id="submitBtn">
-      <i class="fa-solid fa-right-to-bracket"></i> Authenticate
-    </button>
+        const SESSION_DURATION = 2 * 60 * 60 * 1000; // 2 hours
 
-    <!-- Error/Success Complete Status Box -->
-    <div class="status-msg" id="statusMsg"></div>
+        // Check if already logged in
+        function checkExistingSession() {
+            const auth = sessionStorage.getItem("edupulse_admin_auth");
+            const loginTime = sessionStorage.getItem("edupulse_login_timestamp");
+            
+            if (auth === "true" && loginTime) {
+                const elapsed = Date.now() - parseInt(loginTime);
+                if (elapsed < SESSION_DURATION) {
+                    window.location.href = "admin.html";
+                    return true;
+                } else {
+                    // Session expired
+                    sessionStorage.removeItem("edupulse_admin_auth");
+                    sessionStorage.removeItem("edupulse_login_timestamp");
+                }
+            }
+            return false;
+        }
 
-    <!-- 3-Second Redirection Loader -->
-    <div class="loader-container" id="loaderContainer">
-      <div class="loader-bar-bg">
-        <div class="loader-bar-fill" id="loaderFill"></div>
-      </div>
-    </div>
-  </form>
-</div>
+        // Don't check on login page itself
+        if (window.location.pathname.includes('login.html')) {
+            // Allow access to login page
+        }
 
-<script>
-let currentCaptcha = "";
+        document.getElementById('loginBtn').addEventListener('click', handleLogin);
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleLogin();
+        });
 
-function generateColouredCaptcha() {
-  const canvas = document.getElementById("captchaCanvas");
-  const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function handleLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
 
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  ctx.fillStyle = isDark ? "#080b11" : "#f1f5f9";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // Reset errors
+            errorMsg.classList.remove('show');
+            usernameInput.classList.remove('error');
+            passwordInput.classList.remove('error');
 
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  currentCaptcha = "";
-  for (let i = 0; i < 5; i++) {
-    currentCaptcha += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
+            // Validation
+            if (!username) {
+                showError('Please enter username');
+                usernameInput.classList.add('error');
+                usernameInput.focus();
+                return;
+            }
 
-  for (let i = 0; i < 4; i++) {
-    ctx.strokeStyle = `hsl(${Math.random() * 360}, 70%, 55%)`;
-    ctx.beginPath();
-    ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
-    ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
-    ctx.lineWidth = 1.2;
-    ctx.stroke();
-  }
+            if (!password) {
+                showError('Please enter password');
+                passwordInput.classList.add('error');
+                passwordInput.focus();
+                return;
+            }
 
-  const colors = ["#6366f1", "#14b8a6", "#f59e0b", "#f43f5e", "#a855f7"];
-  ctx.font = "bold 20px 'JetBrains Mono', monospace";
-  ctx.textBaseline = "middle";
+            // Check credentials
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                // Success - Create session
+                sessionStorage.setItem("edupulse_admin_auth", "true");
+                sessionStorage.setItem("edupulse_login_timestamp", Date.now().toString());
+                sessionStorage.setItem("edupulse_admin_username", username);
+                
+                // Redirect to admin panel
+                window.location.href = "admin.html";
+            } else {
+                showError('❌ Invalid credentials. Please try again.');
+                passwordInput.value = '';
+                passwordInput.classList.add('error');
+                passwordInput.focus();
+            }
+        }
 
-  for (let i = 0; i < currentCaptcha.length; i++) {
-    const char = currentCaptcha[i];
-    ctx.save();
-    ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-    const x = 18 + i * 28;
-    const y = canvas.height / 2 + (Math.random() * 4 - 2);
-    const angle = (Math.random() - 0.5) * 0.3;
-    
-    ctx.translate(x, y);
-    ctx.rotate(angle);
-    ctx.fillText(char, 0, 0);
-    ctx.restore();
-  }
-}
+        function showError(message) {
+            const errorMsg = document.getElementById('errorMsg');
+            errorMsg.textContent = message;
+            errorMsg.classList.add('show');
+            
+            // Auto hide after 4 seconds
+            setTimeout(() => {
+                errorMsg.classList.remove('show');
+            }, 4000);
+        }
 
-document.getElementById('themeBtn').addEventListener('click', ()=>{
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
-  generateColouredCaptcha();
-});
-
-document.getElementById("togglePwd").addEventListener("click", function() {
-  const pwdInput = document.getElementById("password");
-  if(pwdInput.type === "password"){
-    pwdInput.type = "text";
-    this.classList.replace("fa-eye", "fa-eye-slash");
-  } else {
-    pwdInput.type = "password";
-    this.classList.replace("fa-eye-slash", "fa-eye");
-  }
-});
-
-document.getElementById("captchaCanvas").addEventListener("click", generateColouredCaptcha);
-document.getElementById("refreshCaptchaBtn").addEventListener("click", generateColouredCaptcha);
-
-/* REMOVE ERROR HIGHLIGHTS DYNAMICALLY UPON TYPING */
-['username', 'password', 'captchaInput'].forEach(id => {
-  document.getElementById(id).addEventListener('input', () => {
-    document.getElementById(id).classList.remove('error-input');
-  });
-});
-
-document.getElementById("adminLoginForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const status = document.getElementById("statusMsg");
-  const loaderBox = document.getElementById("loaderContainer");
-  const loaderFill = document.getElementById("loaderFill");
-  const submitBtn = document.getElementById("submitBtn");
-
-  const userInput = document.getElementById("username");
-  const passInput = document.getElementById("password");
-  const captchaInput = document.getElementById("captchaInput");
-
-  const user = userInput.value.trim();
-  const pass = passInput.value;
-  const captcha = captchaInput.value.trim();
-
-  // Reset Previous Status & Error Classes
-  status.className = "status-msg";
-  status.style.display = "none";
-  loaderBox.style.display = "none";
-  loaderFill.style.width = "0%";
-  userInput.classList.remove('error-input');
-  passInput.classList.remove('error-input');
-  captchaInput.classList.remove('error-input');
-
-  // 1. Comprehensive Validation Checks
-  if (!user) {
-    userInput.classList.add('error-input');
-    status.className = "status-msg error";
-    status.style.display = "flex";
-    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Validation Error:</strong> Please provide your admin username to proceed.`;
-    userInput.focus();
-    return;
-  }
-
-  if (!pass) {
-    passInput.classList.add('error-input');
-    status.className = "status-msg error";
-    status.style.display = "flex";
-    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Validation Error:</strong> Password field cannot be left blank.`;
-    passInput.focus();
-    return;
-  }
-
-  if (!captcha) {
-    captchaInput.classList.add('error-input');
-    status.className = "status-msg error";
-    status.style.display = "flex";
-    status.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Validation Error:</strong> Please input the security verification code.`;
-    captchaInput.focus();
-    return;
-  }
-
-  // 2. Verify Captcha Validation
-  if (captcha.toUpperCase() !== currentCaptcha.toUpperCase()) {
-    captchaInput.classList.add('error-input');
-    status.className = "status-msg error";
-    status.style.display = "flex";
-    status.innerHTML = `<i class="fa-solid fa-shield-halved"></i> <strong>Security Failure:</strong> Invalid security captcha code entered. Please try again!`;
-    generateColouredCaptcha();
-    captchaInput.value = "";
-    captchaInput.focus();
-    return;
-  }
-
-  // 3. Credential Verification (Default: admin / admin123)
-  if (user === "admin" && pass === "admin123") {
-    status.className = "status-msg success";
-    status.style.display = "flex";
-    status.innerHTML = `<i class="fa-solid fa-circle-check"></i> <strong>Access Granted!</strong> Redirecting securely to Admin Studio...`;
-    
-    sessionStorage.setItem("edupulse_admin_auth", "true");
-    submitBtn.disabled = true;
-
-    loaderBox.style.display = "block";
-    setTimeout(() => { loaderFill.style.width = "100%"; }, 50);
-
-    setTimeout(() => {
-      window.location.href = "admin.html";
-    }, 3000);
-
-  } else {
-    userInput.classList.add('error-input');
-    passInput.classList.add('error-input');
-    status.className = "status-msg error";
-    status.style.display = "flex";
-    status.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <strong>Authentication Failed:</strong> Incorrect username or password combination. Access denied.`;
-    generateColouredCaptcha();
-    captchaInput.value = "";
-    passInput.value = "";
-    passInput.focus();
-  }
-});
-
-generateColouredCaptcha();
-</script>
+        // Prevent going back to admin after logout
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                checkExistingSession();
+            }
+        });
+    </script>
 </body>
 </html>
