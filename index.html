@@ -755,7 +755,8 @@
 
   <div class="footer-bottom">
     <div class="footer-bottom-left">
-      <p>© 2026 EduPulse Hub. All rights reserved.<a href="whatnew.html">Last updated: 27-07-2026</a></p>
+      <a href="whatnew.html">Last updated: 27-07-2026
+      <p>© 2026 EduPulse Hub. All rights reserved.</a></p>
       <span class="footer-badge-pill"><i class="fa-solid fa-shield-halved"></i> Verified Vault</span>
     </div>
     <div class="footer-bottom-right">
@@ -820,10 +821,7 @@ function saveBookmarks(list){
   try { localStorage.setItem('edupulse_bookmarks', JSON.stringify(list)); return true; } catch(e){ return false; }
 }
 
-const seedData = () => ([
-  {id:1001,type:'Syllabus',title:'B.Tech CSE — Full Syllabus Outline',desc:'Comprehensive curriculum roadmap and semester credit breakdown.',subject:'Curriculum',branch:'Computer Science',year:'BTech 1st Year',semester:'Session 2026',adminName:'Dept. Office',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-3600000},
-  {id:1002,type:'Notes',title:'Data Structures — Trees & Graph Traversal',desc:'Complete notes on BST, AVL Trees, BFS, DFS and graph algorithms.',subject:'Data Structures',branch:'Computer Science',year:'',semester:'Session 2025',adminName:'Prof. R. Sharma',pdfData:'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',timestamp:Date.now()-86400000}
-]);
+
 
 function timeAgo(ts) {
   const s = Math.floor((Date.now() - ts) / 1000);
